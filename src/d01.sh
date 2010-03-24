@@ -1,7 +1,10 @@
 #!/bin/sh
-PATH_SEPARATOR=":"
+# Count the files in each directory on your system.
+#
 
-for dir in `echo $PATH | sed "s/$PATH_SEPARATOR/ /g"`
+# 'IFS' is Internal Field Separator of shell
+IFS=:
+for dir in $PATH
 do
     if [ -e $dir ]
     then
