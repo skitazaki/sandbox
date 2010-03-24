@@ -1,2 +1,4 @@
+d04.sh : tar か unzip でアーカイブを展開する。
+d03.sh : Google Data Protocol で天気予報を取得して表示する。http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263
 d02.sh : 引数で指定した CSV ファイルから iCalendar 形式のデータを生成する。
 d01.sh : パスの通っているディレクトリごとのファイル数を表示する。(cygwin だと空白が展開されてしまう)
