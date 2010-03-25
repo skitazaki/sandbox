@@ -1,3 +1,4 @@
+d06.sh : PHP をソースからビルドする。
 d05.sh : Python をソースからビルドする。
 d04.sh : tar か unzip でアーカイブを展開する。
 d03.sh : Google Data Protocol で天気予報を取得して表示する。http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263
