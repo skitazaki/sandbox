@@ -1,5 +1,11 @@
+d11.sh : RFC をページごとに分割する。
+d10.sh : Subversion で管理されていないファイルを追加する。
+d09.py : ReportLab を使って PDF を生成する。
+d08.sh : ReportLab をインストールする。
+d07.py : Python の sitecustomize.py を置く。
 d06.sh : PHP をソースからビルドする。
 d05.sh : Python をソースからビルドする。
 d04.sh : tar か unzip でアーカイブを展開する。
 d03.sh : Google Data Protocol で天気予報を取得して表示する。http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263
 d01.sh : パスの通っているディレクトリごとのファイル数を表示する。
+
