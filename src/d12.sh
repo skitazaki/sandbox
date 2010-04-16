@@ -1,21 +1,39 @@
 #!/bin/sh
-# Build Python from source package
+# Build MariaDB from source package
 # example:
-# $ WORKSPACE=/usr/local/src sh d05.sh 2.6.5 3.1.2
+# $ PROGRAM=mariadb WORKSPACE=/usr/local/src sh d12.sh 5.1.44
 
+if [ -z $PROGRAM ]; then
+    echo "set 'PROGRAM'."
+    exit 1
+fi
 if [ $# -lt 1 ]; then
     cat <<EOT
-usage: sh $0 version [version...]
+This is a simple build script of MariaDB.
+
+usage: PROGRAM=mariadb sh $0 version [version...]
+
+options: set by environment variables.
+  PROGRAM (mandatory)
+    - program name such as 'mariadb'
+  WORKSPACE (default:\$PWD=$PWD)
+    - directory where packages are downloaded
+  BINDIR (default:/usr/local/bin)
+    - directory to suggest create a symbolic link of program file
+  CONFIG
+    - build option passing to 'configure' script
 EOT
-    exit 1
+    exit 0
 fi
 
 # file specific settings
-site="http://www.python.org/ftp/python"
-archive_type="tar.bz2"
+site="http://askmonty.org/downloads"
+mirror="http://maria.llarian.net/download"
+aux="distro/kvm-tarbake-jaunty-x86"
+archive_type="tar.gz"
 
 # general build script settings
-program=${PROGRAM-python}
+program=${PROGRAM}
 workspace=${WORKSPACE-$PWD}
 bin_dir=${BINDIR-/usr/local/bin}
 config=$CONFIG
@@ -30,10 +48,10 @@ pushd $workspace
 for v in $@; do
     major=${v:0:1}
     minor=${v:2:1}
-    package="Python-$v"
+    package=$program-$v
     archive=$package.$archive_type
     if [ ! -e $archive ]; then
-        wget -O $archive $site/$v/$archive
+        wget -O $archive $site/r/$mirror/$package/$aux/$archive
         if [ $? -gt 0 ]; then exit $?; fi
     fi
     if [ ! -e $package ]; then
@@ -43,14 +61,10 @@ for v in $@; do
     pushd $package
     ./configure --prefix=$prefix $config && make
     if [ $? -gt 0 ]; then exit $?; fi
-    if [ $major == "3" ]; then
-        bin="python3"
-    else
-        bin="python"
-    fi
     cat >>$tmp_file <<EOT
     pushd $PWD && sudo make install && popd
-    sudo ln -s $prefix/bin/$bin $bin_dir/$program$major$minor
+    #sudo ln -s $prefix/bin/$program $bin_dir/$program$major$minor
+    sudo $PWD/bin/mysql_install_db --basedir=$PWD --datadir=$PWD/data
 EOT
     popd
 done
@@ -62,3 +76,4 @@ cat $tmp_file
 echo "########################################"
 
 rm $tmp_file
+
