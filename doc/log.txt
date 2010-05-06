@@ -1,3 +1,13 @@
+d30.py : 一週間分の tweet を表示する。
+d29.py : Google Spreadsheets のファイル一覧を取得する。
+d28.py : 拡張子ごとのファイル数を集計する。
+d27.py : YAML を JSON に変換する。
+d26.py : 空のディレクトリ (隠しファイルひとつのものも含む) を削除する。
+d25.sh : MySQLdb をインストールする。
+d24.py : Google Data API のクライアントライブラリでログインする。
+d23.py : Gmail のラベル一覧と INBOX の中身一覧を取得する。設定ファイル必要。
+d22.sh : PyYAML と ssl モジュールをインストールする。
+d21.sh : "goo.gl" で URL を短縮する。
 d20.sh : Subversion の直近一ヶ月のコミッタごとのコミット数を表示する。
 d19.sh : MacOSX の Java のバージョンを変更する。
 d18.sh : ssh のクライアント側の設定をする。
@@ -15,7 +25,7 @@ d07.py : Python の sitecustomize.py を置く。
 d06.sh : PHP をソースからビルドする。
 d05.sh : Python をソースからビルドする。
 d04.sh : tar か unzip でアーカイブを展開する。
-d03.sh : Google Data Protocol で天気予報を取得して表示する。http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263
+d03.sh : Google Data Protocol で天気予報を取得して表示する。
 d02.sh : 引数で指定した CSV ファイルから iCalendar 形式のデータを生成する。
 d01.sh : パスの通っているディレクトリごとのファイル数を表示する。
 

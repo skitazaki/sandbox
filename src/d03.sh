@@ -1,6 +1,6 @@
 #!/bin/sh
-
-# Usage:
+# [http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263]
+# example:
 # $ location=Tokyo sh d03.sh
 #
 # Output is UTF-8 by 'nkf' command.
@@ -30,3 +30,4 @@ $1 == "forecast_conditions" {
     else if ($2 == "condition")
         print "\tCondition: " substr($3, 7)
 }' | nkf -w
+

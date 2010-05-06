@@ -35,17 +35,14 @@ for v in $@; do
     minor=${v:2:1}
     package=$program-$v
     archive=$package.$archive_type
-    if [ ! -e $archive ]; then
+    [ -f $archive ] ||
         wget -O $archive $site/$archive/from/$mirror
-        if [ $? -gt 0 ]; then exit $?; fi
-    fi
-    if [ ! -e $package ]; then
-        $archive_util $archive
-    fi
+    [ $? -eq 0 ] || exit $?
+    [ -d $package ] || $archive_util $archive
     prefix="/usr/local/$package"
     pushd $package
     ./configure --prefix=$prefix $config && make
-    if [ $? -gt 0 ]; then exit $?; fi
+    [ $? -eq 0 ] || exit $?
     cat >>$tmp_file <<EOT
     pushd $PWD && sudo make install && popd
     sudo ln -s $prefix/bin/php $bin_dir/$program$major$minor
@@ -54,9 +51,10 @@ EOT
 done
 popd
 
-echo "########################################"
-echo "Install them and create symbolic link!!"
-cat $tmp_file
-echo "########################################"
-
+cat <<EOT
+########################################
+Install them and create symbolic link!!
+`cat $tmp_file`
+########################################
+EOT
 rm $tmp_file
