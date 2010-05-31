@@ -1,3 +1,13 @@
+d40.cpp: 関数ポインタを使ってみる。
+d39.cpp: コンソールに色づけする。
+d38.py : iCalendar を hCalendar に変換してみる。
+d37.py : ReportLab で表を生成する。
+d36.py : CSV から HTML の <ul> と <table> を作る。
+d35.py : SQLite を使ってみる。
+d34.py : 差し込み印刷のように PDF を生成する。
+d33.py : iCalendar から指定した期間のイベントを抽出する。
+d32.py : CSV ファイルから Web サイト用のメニューを作る。
+d31.sh : パッチファイルを分割する。
 d30.py : 一週間分の tweet を表示する。
 d29.py : Google Spreadsheets のファイル一覧を取得する。
 d28.py : 拡張子ごとのファイル数を集計する。

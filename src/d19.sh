@@ -1,11 +1,11 @@
 #!/bin/sh
-# switches java version on MacOSX.
+# switches JDK version on MacOSX.
 # example
-# $ VERSION=1.6 sh d19.sh
+# $ sh d19.sh 1.6
 
 [ `uname` = "Darwin" ] || exit 1
 basedir=/System/Library/Frameworks/JavaVM.framework
-version=${VERSION-1.6}
+version=${1-1.6}
 echo "[INFO] current java settings:"
 for path in `which java` `which javac`
 do
@@ -15,16 +15,17 @@ echo "[INFO] available java versions:"
 ls -l $basedir/Versions |awk 'NF > 10 {print $9,$10,$11}'
 echo "[INFO] change current version to $version:"
 cat <<EOT
-cd $basedir/Versions
-rm Current && ln -s $version Current
-rm CurrentJDK && ln -s $version CurrentJDK
+------------------------------------------------------------
+    cd $basedir/Versions
+    rm CurrentJDK && ln -s $version CurrentJDK
 EOT
-read -t 10 -p "run them:[y/n]"
+read -t 10 -p "run them? [y/N]:"
+
+[ -z $REPLY ] && exit 1
 
 if [ $REPLY = "y" ]
 then
     cd $basedir/Versions
-    rm Current && ln -s $version Current
     rm CurrentJDK && ln -s $version CurrentJDK
 fi
 
