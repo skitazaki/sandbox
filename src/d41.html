@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Canvas test</title>
+<style type="text/css">
+canvas {border:solid 1px black;}
+</style>
+</head><body>
+<canvas id="canvas-example" width="240" height="240">
+Your browser does not support &gt;canvas&lt; element.
+</canvas>
+<ul>
+<li><a href="https://developer.mozilla.org/en/canvas_tutorial">Canvas tutorial - MDC</a></li>
+<li><a href="http://dev.opera.com/articles/view/html5-canvas-painting/">Creating an HTML 5 canvas painting application - Opera Developer Community</a></li>
+<li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#text-0">4.8.11 The canvas element - HTML5 (including next generation additions still in development)</a></li>
+</ul>
+<script type="text/javascript">
+var canvas = document.getElementById("canvas-example");
+if (canvas.getContext) {
+    var context = canvas.getContext("2d");
+
+    context.fillStyle = "rgb(255,0,0)";
+    context.fillRect(60, 60, 70, 70);
+    context.fillStyle = "rgba(0,0,255, 0.5)";
+    context.fillRect(110, 110, 70, 70);
+
+    context.beginPath();
+    context.arc(120, 120, 60, 0, Math.PI*2, true);
+    context.stroke();
+
+    context.fillText("abcde", 10, 10);
+    context.fillStyle = "rgba(0,255,255, 0.5)";
+    context.fillText("Hello", 200, 220);
+    context.font = "20px";
+    context.strokeText("こんにちは", 95, 120);
+} else {
+    document.write("'canvas.getContext' is not supported");
+}
+</script>
+</body></html>

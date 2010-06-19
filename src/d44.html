@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Image test</title>
+<style type="text/css">
+#slideshow {background-color:#CCCCFE;}
+</style>
+</head><body>
+<div id="slideshow"><img id="slideshow-image" width="640" height="640" /><br /><p id="slideshow-caption"></p></div>
+<script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+var SWITCH_INTERVAL = 1000;
+var IMAGES_JSON = "picture.json";
+/* check jQuery is loaded or not. */
+if (Object.prototype.hasOwnProperty.call(window, "$") || window['$']) {
+    $(document).ready(function() {
+        $.getJSON(IMAGES_JSON, function(images) {
+            updateImage(images, 0);
+        });
+    });
+    var image = $("#slideshow-image"),
+        caption = $("#slideshow-caption");
+} else {
+    document.getElementById("slideshow").style.display = "none";
+    var a = document.createElement("a");
+    a.href="http://code.jquery.com/jquery-1.4.2.min.js";
+    a.innerHTML = "Get \"jquery-1.4.2.min.js\" and place it in this directory.";
+    document.body.appendChild(a);
+}
+function updateImage(images, targetIndex) {
+    /* each data object must have "path", "name", and "size". */
+    var img = images[targetIndex++];
+    try { console.log(img); } catch (ignore) {}
+    image.attr({"src":img.path, "title":img.name});
+    if (img.caption)
+        caption.text(img.caption);
+    else
+        caption.text(img.name + " (" + img.size[0] + ", " + img.size[1] + ")");
+    if (targetIndex >= images.length) // unlimited cycle
+        targetIndex = 0;
+    setTimeout(function() { updateImage(images, targetIndex); }, SWITCH_INTERVAL);
+}
+</script>
+</body></html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Script test</title>
+<style type="text/css">
+textarea {border:solid 1px black;}
+textarea.caution {background-color:#fecccc;}
+</style>
+</head><body>
+<form>
+<textarea name="snippet" cols="120" rows="20"></textarea><br />
+<input type="submit" name="Run" value="Run" />
+</form>
+<script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+var form = document.forms[0];
+/* check jQuery is loaded or not. */
+if (window.hasOwnProperty("$")) {
+    /* use a live element to give feedback for user. */
+    var result = document.createElement("span");
+    form.appendChild(result);
+    var sandbox = form.snippet;
+    $(form).bind("submit", function(ev) {
+        var start = +new Date(),
+            stop;
+        try {
+            eval(sandbox.value);
+            stop = +new Date();
+            result.innerHTML = "Time: " + (stop - start);
+        } catch (e) {
+            $(sandbox).addClass("caution");
+            setTimeout(function() { $(sandbox).removeClass("caution"); }, 1000);
+            if (console && console.log)
+                console.log(e);
+            result.innerHTML = e;
+        }
+        return false;
+    });
+    /* set default label text. */
+    var textLabel = 'alert("Paste JavaScript code snippet.");';
+    sandbox.value = textLabel;
+    $(sandbox).bind("click", function(ev) {
+        if (this.value == textLabel) this.value = "";
+    });
+    $(sandbox).bind("blur", function(ev) {
+        if (this.value == "") this.value = textLabel;
+    });
+} else {
+    form.style.display = "none";
+    var a = document.createElement("a");
+    a.href="http://code.jquery.com/jquery-1.4.2.min.js";
+    a.innerHTML = "Get \"jquery-1.4.2.min.js\" and place it in this directory.";
+    document.body.appendChild(a);
+}
+</script>
+</body></html>

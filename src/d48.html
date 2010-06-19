@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="ja"><head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-script-type" content="text/javascript" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<link rel="stylesheet" type="text/css" href="d48.css" />
+	<title>Duff's Device</title>
+</head><body>
+<div id="wrapper">
+<form method="GET">
+Count: <input type="text" name="count" size="8" maxlength="7" value="500000" /><br />
+<input type="radio" name="loop-type" value="naive" checked="checked" />Naive
+<input type="radio" name="loop-type" value="dd" />Duff's Device <br />
+<input type="submit" name="Execute" value="Execute" />
+</form>
+<div id="contents" />
+</div>
+<script type="text/javascript" src="d48.js"></script>
+<script type="text/javascript">
+var TestPatterns = {
+	"naive": naiveLoop,
+	"dd":    duffsDevice
+};
+document.forms[0].onsubmit = function() {
+	var elements = this.elements,
+		  count = parseInt(elements["count"].value),
+			loopTypeInput = elements["loop-type"],
+			testType, result;
+	if (isNaN(count)) {
+		alert("Input interger for count value.");
+		return false;
+	}
+	Loopy.count = count;
+	for (var i = 0, len = loopTypeInput.length; i < len; i++) {
+		if (loopTypeInput[i].checked)
+			testType = loopTypeInput[i].value;
+	}
+	if (testType in TestPatterns) {
+		result = Loopy.run(TestPatterns[testType]);
+		document.getElementById("contents").innerHTML += count + " " +
+			testType + " " + result + "<br/>";
+	} else
+		alert("Invalid loop type.");
+	return false;
+};
+</script>
+<!-- vim: set noet sw=2 ts=2 fileencoding=utf-8 : -->
+</body></html>

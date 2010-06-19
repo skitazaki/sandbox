@@ -1,3 +1,13 @@
+d50.py : inspect モジュールを使う。
+d49.sh : autotools でプロジェクトを作成する。
+d48.js : Duff's Device でループ処理を扱う。
+d47.py : doctest モジュールを使う。
+d46.js : Blogger のフィードを JSONP を使って表示する。
+d45.xsl: XSLT で XML を HTML に整形する。
+d44.html: JSON の画像情報でスライドショーをする。
+d43.py : 画像の情報を JSON 形式で出力する。
+d42.html: textarea に入力したスクリプトを eval する。
+d41.html: Canvas 要素を使ってみる。
 d40.cpp: 関数ポインタを使ってみる。
 d39.cpp: コンソールに色づけする。
 d38.py : iCalendar を hCalendar に変換してみる。
