@@ -1,3 +1,13 @@
+d60.cpp: コンソールに色を付ける。(curses.h)
+d59.sh : Widget を作ってみる。
+d58.sh : SQLite を使ってみる。
+d57.xml: Ant の xslt タスクで XML を HTML に変換する。
+d56.py : HTTPServer の代わりに twisted.web を使う。
+d55.py : HTTPServer を使って JSONP でデータを送る。
+d54.php: SQLite を使ってみる。
+d53.js : Worker を触ってみる。
+d52.py : zope.interface モジュールを使う。
+d51.py : ループ処理を計測する。
 d50.py : inspect モジュールを使う。
 d49.sh : autotools でプロジェクトを作成する。
 d48.js : Duff's Device でループ処理を扱う。

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<project name="xslt test" default="all" basedir=".">
+    <!--
+      - see "Naming conventions" section
+      - http://wiki.apache.org/ant/TheElementsOfAntStyle
+    -->
+    <target name="all" depends="clean, docs">
+    </target>
+    <!--
+     - http://homepage1.nifty.com/CavalierLab/lab/xml/xslt/processor.html
+    -->
+    <target name="docs">
+        <xslt basedir="." destdir="."
+              in="d45.xml" style="d45.xsl" out="d57.html" />
+    </target>
+    <target name="clean">
+        <delete file="d57.html" />
+    </target>
+</project>
+
