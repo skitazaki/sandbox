@@ -1,0 +1,226 @@
+2010-10-14: d70.py
+	* use `nose` for simple test.
+
+2010-10-11: d69.c
+	* ソケット通信用のクライアントを実装してみる。
+
+2010-10-09: d68.c
+	* スレッドに join しないことでメモリリークを発生させる。
+		use pthread and raise memory leak not to call `pthread_join`
+
+2010-10-08: d67.js
+	* Web ページのタイトルと URL を Twitter にポストできるようにする。
+		bookmarklet to post web page on Twitter.
+
+2010-10-06: d66.py
+	* Twitter の Public API を使って tweet を表示する。
+		fetch tweets via public API.
+
+2010-10-04: d65.c
+	* `gdbm` を使って簡単な key/value を使う。
+		manage simple key/value pair with `gdbm`.
+
+2010-10-03: d64.py [project]
+	* HTML5 boiler plate をダウンロードして `src` に展開する。
+		downloader of HTML5 boiler plate.
+
+2010-09-29: d63.py
+	* Tornado を使って JSON でデータを返す。
+		HTTP server using ``Tornado``.
+
+2010-08-31: d62.py
+	* Twisted の spawnProcess を使ってみる。
+		use ``spawnProcess`` of Twisted.
+
+2010-08-19: d61.py
+	* `MySQLdb` を使ってみる。
+		use "MySQLdb" on Python.
+
+2010-07-20: d60.cpp
+	* コンソールに色を付ける。(requires curses.h)
+
+2010-07-13: d59.sh
+	* Widget を作ってみる。
+
+2010-07-05: d58.sh
+	* SQLite を使ってみる。
+
+2010-07-03: d57.xml
+	* Ant の xslt タスクで XML を HTML に変換する。
+
+2010-07-01: d56.py
+	* HTTPServer の代わりに twisted.web を使う。
+
+2010-06-29: d55.py
+	* HTTPServer を使って JSONP でデータを送る。
+
+2010-06-28: d54.php
+	* SQLite を使ってみる。
+
+2010-06-27: d53.js
+	* Worker を触ってみる。
+
+2010-06-25: d52.py
+	* `zope.interface` モジュールを使う。
+
+2010-06-25: d51.py
+	* ループ処理を計測する。
+
+2010-06-19: d50.py
+	* inspect モジュールを使う。
+
+2010-06-18: d49.sh [project]
+	* autotools でプロジェクトを作成する。
+
+2010-06-17: d48.js
+	* Duff's Device の考えでループ処理を実行する。
+
+2010-06-13: d47.py
+	* `doctest` モジュールを使う。
+
+2010-06-12: d46.js
+	* Blogger のフィードを JSONP を使って表示する。
+
+2010-06-10: d45.xsl
+	* XSLT で XML を HTML に整形する。
+
+2010-06-09: d44.html
+	* JSON の画像情報でスライドショーをする。 (requires jQuery)
+
+2010-06-08: d43.py
+	* 画像の情報を JSON 形式で出力する。
+
+2010-06-07: d42.html
+	* textarea に入力したスクリプトを eval する。 (requires jQuery)
+
+2010-06-06: d41.html
+	* Canvas 要素を使ってみる。
+
+2010-05-31: d40.cpp
+	* 関数ポインタを使ってみる。
+
+2010-05-30: d39.cpp
+	* コンソールに色づけする。
+
+2010-05-25: d38.py
+	* iCalendar を hCalendar に変換してみる。
+
+2010-05-24: d37.py
+	* ReportLab で表を生成する。
+
+2010-05-22: d36.py
+	* CSV から HTML の <ul> と <table> を作る。 (use d32.csv)
+
+2010-05-21: d35.py
+	* SQLite を使ってみる。
+
+2010-05-18: d34.py
+	* 差し込み印刷のように PDF を生成する。
+
+2010-05-17: d33.py,d33.ics
+	* iCalendar から指定した期間のイベントを抽出する。
+
+2010-05-10: d32.py,d32.csv
+	* CSV ファイルから Web サイト用のメニューを作る。
+
+2010-05-06: d31.sh
+	* パッチファイルを分割する。
+
+2010-05-05: d30.py
+	* 一週間分の tweet を表示する。
+
+2010-05-01: d29.py
+	* Google Spreadsheets のファイル一覧を取得する。
+
+2010-04-29: d28.py
+	* 拡張子ごとのファイル数を集計する。
+
+2010-04-26: d27.py
+	* YAML を JSON に変換する。
+
+2010-04-25: d26.py
+	* 空のディレクトリ (隠しファイルひとつのものも含む) を削除する。
+
+2010-04-22: d25.sh [setup]
+	* MySQLdb をインストールする。
+
+2010-04-21: d24.py
+	* Google Data API のクライアントライブラリでログインする。
+
+2010-04-20: d23.py
+	* Gmail のラベル一覧と INBOX の中身一覧を取得する。設定ファイル必要。
+
+2010-04-19: d22.sh [setup]
+	* PyYAML と ssl モジュールをインストールする。
+
+2010-04-18: d21.sh
+	* "goo.gl" で URL を短縮する。
+
+2010-04-16: d20.sh
+	* Subversion の直近一ヶ月のコミッタごとのコミット数を表示する。
+
+2010-04-15: d19.sh [setup]
+	* MacOSX の Java のバージョンを変更する。
+
+2010-04-14: d18.sh [setup]
+	* ssh のクライアント側の設定をする。
+
+2010-04-13: d17.py
+	* タブを空白４つに変換して末尾の空白文字を取り除く。
+
+2010-04-12: d16.sh [setup]
+	* git を設定する。
+
+2010-04-08: d15.py
+	* サムネイル画像を作成する。
+
+2010-04-06: d14.py
+	* 画像の大きさを表示する。
+
+2010-04-05: d13.sh [setup]
+	* PIL をインストールする。
+		Install PIL, Python Image Library.
+
+2010-04-03: d12.sh [setup]
+	* MariaDB をソースからビルドする。
+		Build 'MariaDB'.
+
+2010-03-30: d11.sh
+	* RFC をページごとに分割する。
+		Split RFC texts page by page
+
+2010-03-29: d10.sh
+	* Subversion で管理されていないファイルを追加する。
+		Add un-versioned files into subversion realm
+
+2010-03-38: d09.py
+	* ReportLab を使って PDF を生成する。
+		Generate pdf file containing Japanese with "ReportLab".
+
+2010-03-27: d08.sh [setup]
+	* ReportLab をインストールする。
+		Install "ReportLab".
+
+2010-03-26: d07.py [setup]
+	* Python の sitecustomize.py を置く。
+		Put "sitecustomize.py".
+
+2010-03-25: d06.sh [setup]
+	* PHP をソースからビルドする。
+
+2010-03-24: d05.sh [setup]
+	* Python をソースからビルドする。
+
+2010-03-23: d04.sh
+	* tar か unzip でアーカイブを展開する。
+
+2010-03-22: d03.sh
+	* Google Data Protocol で天気予報を取得して表示する。
+		http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263
+
+2010-03-19: d02.sh,d02.csv
+	* 引数で指定した CSV ファイルから iCalendar 形式のデータを生成する。
+
+2010-03-18: d01.sh
+	* パスの通っているディレクトリごとのファイル数を表示する。
+
