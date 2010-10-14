@@ -30,11 +30,9 @@
 
 2010-08-31: d62.py
 	* Twisted の spawnProcess を使ってみる。
-		use ``spawnProcess`` of Twisted.
 
 2010-08-19: d61.py
 	* `MySQLdb` を使ってみる。
-		use "MySQLdb" on Python.
 
 2010-07-20: d60.cpp
 	* コンソールに色を付ける。(requires curses.h)
@@ -51,13 +49,13 @@
 2010-07-01: d56.py
 	* HTTPServer の代わりに twisted.web を使う。
 
-2010-06-29: d55.py
+2010-06-29: d55.py,d55.html
 	* HTTPServer を使って JSONP でデータを送る。
 
 2010-06-28: d54.php
 	* SQLite を使ってみる。
 
-2010-06-27: d53.js
+2010-06-27: d53.js,d53.html
 	* Worker を触ってみる。
 
 2010-06-25: d52.py
@@ -67,21 +65,21 @@
 	* ループ処理を計測する。
 
 2010-06-19: d50.py
-	* inspect モジュールを使う。
+	* `inspect` モジュールを使う。
 
 2010-06-18: d49.sh [project]
 	* autotools でプロジェクトを作成する。
 
-2010-06-17: d48.js
+2010-06-17: d48.js,d48.html,d48.css
 	* Duff's Device の考えでループ処理を実行する。
 
 2010-06-13: d47.py
 	* `doctest` モジュールを使う。
 
-2010-06-12: d46.js
+2010-06-12: d46.js,d46.html
 	* Blogger のフィードを JSONP を使って表示する。
 
-2010-06-10: d45.xsl
+2010-06-10: d45.xsl,d45.xml,d45.css
 	* XSLT で XML を HTML に整形する。
 
 2010-06-09: d44.html
@@ -114,7 +112,7 @@
 2010-05-21: d35.py
 	* SQLite を使ってみる。
 
-2010-05-18: d34.py
+2010-05-18: d34.py,d34.csv
 	* 差し込み印刷のように PDF を生成する。
 
 2010-05-17: d33.py,d33.ics
@@ -135,7 +133,7 @@
 2010-04-29: d28.py
 	* 拡張子ごとのファイル数を集計する。
 
-2010-04-26: d27.py
+2010-04-26: d27.py,d27.yaml
 	* YAML を JSON に変換する。
 
 2010-04-25: d26.py
@@ -147,7 +145,7 @@
 2010-04-21: d24.py
 	* Google Data API のクライアントライブラリでログインする。
 
-2010-04-20: d23.py
+2010-04-20: d23.py,d23.json
 	* Gmail のラベル一覧と INBOX の中身一覧を取得する。設定ファイル必要。
 
 2010-04-19: d22.sh [setup]
@@ -193,7 +191,7 @@
 	* Subversion で管理されていないファイルを追加する。
 		Add un-versioned files into subversion realm
 
-2010-03-38: d09.py
+2010-03-38: d09.py,d09.txt
 	* ReportLab を使って PDF を生成する。
 		Generate pdf file containing Japanese with "ReportLab".
 
