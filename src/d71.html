@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="ja"><head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-script-type" content="text/javascript" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<title>expand / collapse list items</title>
+</head><body>
+<div id="wrapper">
+<div id="contents">
+<div class="item">
+	<h3>Item 1</h3>
+	<div><p>lorem ipsum</p></div>
+</div>
+<div class="item">
+	<h3>Item 2</h3>
+	<div><p>いろはにほへと</p></div>
+</div>
+<div class="item">
+	<h3>Item 3</h3>
+	<div><p>JavaScript</p></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+(function(items) {
+    for (var i = 0, size = items.length; i < size; i++) {
+        (function(item) {
+            var title = item.getElementsByTagName("h3")[0],
+                content = item.getElementsByTagName("div")[0];
+            title.addEventListener("click", function(ev) {
+                if (content.style.display == "none")
+                    content.style.display = "block";
+                else
+                    content.style.display = "none";
+            }, false);
+            content.style.display = "none";
+        }(items[i]))
+    }
+}(document.getElementById("contents").getElementsByClassName("item")))
+</script>
+<!-- vim: set noet sw=2 ts=2 fileencoding=utf-8 : -->
+</body></html>

@@ -1,0 +1,10 @@
+{% if texts %}
+<ul>
+{% for text in texts %}
+<li>{{ text }}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>no "texts"</p>
+{% endif %}
+
