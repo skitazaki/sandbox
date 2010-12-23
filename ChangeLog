@@ -1,3 +1,33 @@
+2010-12-23: d89.py
+	* Twitter の search API を使ってみる。
+
+2010-12-22: d88.sh
+	* MySQL-5.5 系をソースからビルドする。
+
+2010-12-21: d87.sh
+	* Python に付属する HTTP サーバモジュールを実行する。
+
+2010-12-12: d86.sh
+	* HTML をダウンロードしたときの画像ファイルをコピーする。
+
+2010-12-10: d85.sh
+	* pep8 と nosetests を bash でまとめて実行させる。
+
+2010-12-06: d84.py
+	* Twitter の user_timeline から JSON を取得する。
+
+2010-12-06: d83.py
+	* Python で Selenium を操作してみる。
+
+2010-12-05: d82.py
+	* `pymongo` で MongoDB に接続してみる。
+
+2010-11-28: d81.py
+	* `twisted.web.html` を使ってみる。
+
+2010-11-25: d80.py
+	* Twisted で WSGI アプリケーションを動かす。
+
 2010-11-16: d79.html,d79.js
 	* jQuery でアンカータグを扱う。
 
