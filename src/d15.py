@@ -11,10 +11,12 @@ import Image
 MINSIZE = (120, 120)
 FILENAMEEXT = "thumbnail"
 
+
 def usage(program):
     print '''usage: python %s image_file [image_file..]
     ''' % (program)
     sys.exit(1)
+
 
 def createthumbnail(fname):
     def writeout(thumbnail, newname):
@@ -41,5 +43,4 @@ if __name__ == '__main__':
     for fname in sys.argv[1:]:
         createthumbnail(fname)
 
-# vim: set et ts=4 sw=4 cindent :
-
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

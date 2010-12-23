@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Generate PDF file using ReportLab
+# Generate PDF file using ReportLab.
 # Usage:
 # $ python d09.py d09.txt d09.pdf
 
@@ -12,17 +12,18 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
 
 PAGE_WIDTH, PAGE_HEIGHT = A4
-PAGE_FONT_SIZE          = 10
-PAGE_TITLE_FONT_SIZE    = PAGE_FONT_SIZE * 1.6
+PAGE_FONT_SIZE = 10
+PAGE_TITLE_FONT_SIZE = PAGE_FONT_SIZE * 1.6
 
-# set Japanese Font metrics
+# Set Japanese Font metrics.
 # @see also http://www.reportlab.com/docs/userguide.pdf
 #           Section 3.6 Asian Font Support
-PAGE_FONT_JP       = "HeiseiMin-W3"
+PAGE_FONT_JP = "HeiseiMin-W3"
 PARAGRAPH_STYLE_JP = ParagraphStyle(name="Normal",
                         fontName=PAGE_FONT_JP,
                         spaceAfter=inch)
 pdfmetrics.registerFont(UnicodeCIDFont(PAGE_FONT_JP))
+
 
 def usage(program):
     print '''Usage:
@@ -30,6 +31,7 @@ def usage(program):
     ''' % (program)
     import sys
     sys.exit(1)
+
 
 def copy2pdf(input, output):
     doc = SimpleDocTemplate(output)

@@ -20,11 +20,12 @@ from twisted.web.wsgi import WSGIResource
 from twisted.internet import reactor
 
 MIMETYPES = {
-  ".html":"text/html",
-  ".json":"application/json",
+  ".html": "text/html",
+  ".json": "application/json",
   ".txt": "text/plain",
   ".xml": "text/xml"
 }
+
 
 def application(environ, start_response):
     query = environ["QUERY_STRING"]
@@ -39,4 +40,3 @@ def application(environ, start_response):
 resource = WSGIResource(reactor, reactor.getThreadPool(), application)
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-

@@ -28,6 +28,7 @@ import sys
 # for MacOSX
 BASEDIR = "/Applications/Adobe/AdobeAIRSDK"
 
+
 def parse_args():
     parser = optparse.OptionParser(__doc__)
     parser.add_option("-d", "--basedir", dest="basedir", default=BASEDIR,
@@ -39,6 +40,7 @@ def parse_args():
         parser.error("I can accept only one argument.")
 
     return opts.basedir, args[0]
+
 
 def project_starter(sdkdir, project):
     os.mkdir(project)
@@ -78,6 +80,7 @@ function appLoad(){
     print "%s -package -certificate sampleCert.pfx -password samplePassword \
             %s.air application.xml %s.html AIRAliases.js" % (adt, project, project)
 
+
 def main():
     sdkdir, project = parse_args()
 
@@ -98,5 +101,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# vim: set expandtab tabstop=4 shiftwidth=4 cindent :
-
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

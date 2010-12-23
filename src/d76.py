@@ -15,6 +15,7 @@ import optparse
 import xml.sax
 from xml.sax.handler import ContentHandler
 
+
 def parse_args():
     parser = optparse.OptionParser(__doc__)
     parser.add_option("-v", "--verbose", dest="verbose",
@@ -31,6 +32,7 @@ def parse_args():
         logging.basicConfig(level=logging.DEBUG)
 
     return args[0]
+
 
 class WikipediaAbstractParser(ContentHandler):
 
@@ -70,6 +72,7 @@ class WikipediaAbstractParser(ContentHandler):
         logging.debug("Add callback, current callbacks are %d." %
                 (len(self.callbacks),))
 
+
 def main():
 
     def handler(doc):
@@ -88,4 +91,3 @@ if __name__ == "__main__":
     main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-

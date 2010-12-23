@@ -20,9 +20,10 @@ or ::
 
 from pymongo import Connection
 
+
 def test_insert_and_find():
     con = Connection()
-    con.db.test.insert({"key":"abc"})
+    con.db.test.insert({"key": "abc"})
     ret = con.db.test.find_one()
     print ret
     assert ret["_id"]
@@ -31,4 +32,4 @@ def test_insert_and_find():
 if __name__ == '__main__':
     test_insert_and_find()
 
-# vim: set expandtab tabstop=4 shiftwidth=4 cindent :
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

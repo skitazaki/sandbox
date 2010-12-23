@@ -22,16 +22,18 @@ import tornado.web
 tornado.options.define(
     "port", default=8080, type=int, help="run on the given port")
 
+
 class JSONHandler(tornado.web.RequestHandler):
 
     def get(self, path):
         data = {
-            "path":path,
-            "request_path":self.request.path,
-            "date":datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+            "path": path,
+            "request_path": self.request.path,
+            "date": datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         }
         self.set_header("Content-Type", "application/json")
         self.write(json.JSONEncoder().encode(data))
+
 
 def main():
 
@@ -59,5 +61,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# vim: set expandtab tabstop=4 shiftwidth=4 cindent :
-
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

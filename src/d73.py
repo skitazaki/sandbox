@@ -42,6 +42,7 @@ def parse_args():
 
     return opts.template, args
 
+
 def main():
     template_file, target_files = parse_args()
 
@@ -59,11 +60,10 @@ def main():
 
         logging.info("start to process: %s" % (file,))
 
-        params = {"texts":[l.strip() for l in open(file)]}
+        params = {"texts": [l.strip() for l in open(file)]}
         sys.stdout.write(template.render(params))
 
 if __name__ == "__main__":
     main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-

@@ -71,4 +71,4 @@ def test():
 if __name__ == '__main__':
     main()
 
-# vim: set expandtab tabstop=4 shiftwidth=4 cindent :
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

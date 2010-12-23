@@ -14,8 +14,9 @@ except IOError:
     print("Permission denied, retry with 'sudo'.")
     sys.exit(1)
 f.write('''import sys
-sys.setdefaultencoding("%s") ''' % encoding);
+sys.setdefaultencoding("%s") ''' % encoding)
 f.close()
 print('''Set system encoding for Python scripts.
 Confirm: %s/sitecustomize.py''' % site_package)
 
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

@@ -7,15 +7,18 @@
 import sys
 import Image
 
+
 def usage(program):
     print '''usage: python %s image_file [image_file..]
     ''' % (program)
     sys.exit(1)
 
+
 def showimagesize(fname):
     try:
         image = Image.open(fname)
-        print "%s: width=%dpx, height=%dpx" % (fname, image.size[0], image.size[1])
+        print "%s: width=%dpx, height=%dpx" % (
+                fname, image.size[0], image.size[1])
     except:
         print "could not find: %s" % fname
 
@@ -26,4 +29,3 @@ if __name__ == '__main__':
         showimagesize(fname)
 
 # vim: set expandtab tabstop=4 shiftwidth=4 cindent :
-

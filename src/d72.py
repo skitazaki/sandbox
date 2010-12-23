@@ -29,6 +29,7 @@ except ImportError:
     print("Install \"MySQLdb\" at first.")
     sys.exit(1)
 
+
 def parse_args():
     parser = optparse.OptionParser(__doc__)
     parser.add_option("-v", "--verbose", dest="verbose",
@@ -44,6 +45,7 @@ def parse_args():
 
     return args
 
+
 def main():
     files = parse_args()
 
@@ -56,6 +58,7 @@ def main():
         return host, port, database, username, password
 
     import d61
+
     def process(database):
         cur = database.cursor()
         d61.createtable(cur)
@@ -94,4 +97,3 @@ if __name__ == "__main__":
     main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-

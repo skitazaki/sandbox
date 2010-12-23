@@ -8,6 +8,7 @@ If you run doctest, give `test` on first argument.
 
 import twisted.web.html
 
+
 def plain_list():
     """
     >>> plain_list()
@@ -21,6 +22,7 @@ def plain_list():
     """
     data = ["one", 2, "さん", True, None]
     print twisted.web.html.UL(data)
+
 
 def anchor_list():
     """
@@ -36,6 +38,7 @@ def anchor_list():
             ("http://microsoft.com", "Microsoft")]
     print twisted.web.html.linkList(data)
 
+
 def main():
     import sys
     if len(sys.argv) > 1 and sys.argv[1] == "test":
@@ -49,4 +52,3 @@ if __name__ == '__main__':
     main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# show image data information as JSON format
+# Show image data information as JSON format.
 # (copy from d14.py and require Python 2.6)
 # example:
 # $ python d43.py a.jpg b.jpg c.jpg
@@ -18,6 +18,7 @@ except ImportError:
     print "Install PIL (Python Imaging Library) at first."
     sys.exit(255)
 
+
 def parse_args():
     usage = """usage: python %s image_file [image_file..]"""
     if len(sys.argv) < 2:
@@ -25,14 +26,16 @@ def parse_args():
         sys.exit(1)
     return sys.argv[1:]
 
+
 def getimageinfo(fname):
     try:
         image = Image.open(fname)
     except:
         sys.stderr.write("invalid image: %s\n" % (fname))
-    return {'name' : os.path.basename(fname),
-            'path' : os.path.abspath(fname),
-            'size' : image.size}
+    return {'name': os.path.basename(fname),
+            'path': os.path.abspath(fname),
+            'size': image.size}
+
 
 def main():
     files = parse_args()
@@ -47,5 +50,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# vim: set expandtab tabstop=4 shiftwidth=4 cindent :
-
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

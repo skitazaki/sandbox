@@ -15,6 +15,7 @@ import sys
 # prior to install using "easy_install" or manually.
 import feedparser
 
+
 def parse_args():
     parser = optparse.OptionParser(__doc__)
     opts, args = parser.parse_args()
@@ -26,16 +27,18 @@ def parse_args():
 
 TWITTER_USER_TIMELINE = "http://api.twitter.com/1/statuses/user_timeline"
 
+
 def fetch_user_timeline(screen_name):
     url = "%s.atom?screen_name=%s" % (TWITTER_USER_TIMELINE, screen_name)
 
     feed = feedparser.parse(url)
 
     for item in feed['items']:
-        y,m,d = item['updated_parsed'][:3]
-        date = datetime.date(y,m,d)
+        y, m, d = item['updated_parsed'][:3]
+        date = datetime.date(y, m, d)
         print "%s: %s" % (date.strftime("%Y/%m/%d"),
                 item['title'].lstrip("%s: " % (screen_name,)))
+
 
 def main():
     screen_name = parse_args()
@@ -49,5 +52,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# vim: set expandtab tabstop=4 shiftwidth=4 cindent :
-
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

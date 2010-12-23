@@ -17,6 +17,7 @@ import urllib2
 import zipfile
 import StringIO
 
+
 def parse_args():
     parser = optparse.OptionParser(__doc__)
     opts, args = parser.parse_args()
@@ -27,6 +28,7 @@ def parse_args():
     return args[0]
 
 PACKAGE = "http://github.com/paulirish/html5-boilerplate/zipball/v0.9.1stripped"
+
 
 def project_starter(project):
     os.mkdir(project)
@@ -52,6 +54,7 @@ the response header is:
 """ % (PACKAGE, response.info())
         raise IOError
 
+
 def main():
     project = parse_args()
     if os.path.exists(project):
@@ -68,5 +71,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# vim: set expandtab tabstop=4 shiftwidth=4 cindent :
-
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

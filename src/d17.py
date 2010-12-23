@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# expands tab to 4-whitespace and removes trailing whitespaces.
+# Expands tab to 4-whitespace and removes trailing whitespaces.
 
 import os
 import os.path
 import re
 import sys
+
 
 def usage(program):
     print '''usage: python %s [file ...]
@@ -14,6 +15,7 @@ def usage(program):
 
 tabs = re.compile("\t")
 WHITESPACE = " " * 4    # 4-whitespace
+
 
 def cleanfile(fname):
     if os.path.isfile(fname):
@@ -32,4 +34,3 @@ if __name__ == '__main__':
         cleanfile(fname)
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-
