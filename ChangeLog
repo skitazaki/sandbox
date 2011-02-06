@@ -1,3 +1,33 @@
+2011-02-07: d99.py
+	* Selenium を使ってユニットテストとスクリーンキャプチャ。
+
+2011-02-03: d98.hs
+	* Haskell で Hello world 。
+
+2011-02-01: d97.py
+	* BeautifulSoup を使って HTML をパースする。
+
+2011-01-26: d96.sh
+	* .pyc ファイルを掃除する。
+
+2011-01-20: d95.py,d95.0.html,d95.1.html,d95.2.html
+	* jinja2 の extends を使ってみる。
+
+2011-01-09: d94.py,d94.0.txt,d94.1.txt [facebook hackers cup]
+	* Peg Game を表示する。
+
+2011-01-09: d93.py [facebook hackers cup]
+	* Double Square を解く。
+
+2011-01-07: d92.py [project]
+	* virtualenv+buildout で開発環境を構築する。
+
+2011-01-07: d91.sh
+	* SVN のコミット数をユーザーごとに集計する。
+
+2010-12-24: d90.py,d90.tpl
+	* reST を HTML に変換するときに自前のテンプレートを使う。
+
 2010-12-23: d89.py
 	* Twitter の search API を使ってみる。
 
