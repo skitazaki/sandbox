@@ -15,6 +15,8 @@ MIMETYPES = {
   '.js': 'text/javascript',
   '.css': 'text/css',
   '.txt': 'text/plain',
+  '.xml': 'application/xml',
+  '.atom': 'application/atom+xml',
 }
 
 BASEDIR = os.path.abspath(os.path.join(__file__, '..', '..'))
@@ -25,6 +27,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     jQuery = os.path.join(LIBDIR, 'jquery.min.js')
     jQueryUI = os.path.join(LIBDIR, 'jquery-ui.min.js')
+    jQueryTmpl = os.path.join(LIBDIR, 'jquery.tmpl.min.js')
     jQueryHistory = os.path.join(LIBDIR, 'jquery.history.min.js')
     DataJS = os.path.join(LIBDIR, 'datajs.min.js')
 
@@ -51,6 +54,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             js = self.jQuery
         elif self.path.startswith('/static/jquery-ui.min.js'):
             js = self.jQueryUI
+        elif self.path.startswith('/static/jquery.tmpl.min.js'):
+            js = self.jQueryTmpl
         elif self.path.startswith('/static/jquery.history.min.js'):
             js = self.jQueryHistory
         elif self.path.startswith('/static/datajs.min.js'):
