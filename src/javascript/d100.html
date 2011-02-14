@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<title>OData sample using datajs</title>
+<style>
+input[type=text] { width: 60%; padding: 3px; }
+header { border-bottom: solid 1px gray; }
+footer { border-top: solid 1px gray; }
+#main li { margin: 5px; }
+#contents li:nth-child(even) { background-color: #DFF; }
+</style>
+</head><body>
+<div id="container">
+<header>
+<h1>OData sample using datajs</h1>
+</header>
+<div id="main">
+Sample OData services.
+<ul>
+<li>http://odata.netflix.com/v1/Catalog/Genres</li>
+<li>https://odata.sqlazurelabs.com/OData.svc/v0.1/frq6joxf0e/DWP</li>
+<li>https://odata.sqlazurelabs.com/OData.svc/v0.1/frq6joxf0e/ONS</li>
+</ul>
+<form method="get" action="#">
+<input type="text" name="url" size="100" value="d100.atom" />
+<input type="submit" value="Load" />
+</form>
+<ul id="contents"></ul>
+</div>
+<footer>
+<ul>
+<li><a>http://blogs.msdn.com/b/astoriateam/archive/2011/02/08/new-javascript-library-for-odata-and-beyond.aspx</a></li>
+<li><a>http://blogs.msdn.com/b/mcsuksoldev/archive/2011/02/03/understanding-and-using-odata-1-of-4.aspx</a></li>
+</ul>
+</footer>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="/static/jquery.min.js"><\/script>')</script>
+<script type="text/javascript" src="/static/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="/static/datajs.min.js"></script>
+<script type="text/javascript" src="d100.js"></script>
+<!-- vim: set noet sw=2 ts=2 fileencoding=utf-8 : -->
+</body></html>
