@@ -16,6 +16,7 @@ MIMETYPES = {
   '.css': 'text/css',
   '.txt': 'text/plain',
   '.xml': 'application/xml',
+  '.png': 'image/png',
   '.atom': 'application/atom+xml',
 }
 
@@ -73,8 +74,12 @@ class RequestHandler(BaseHTTPRequestHandler):
         c = os.path.join(CONTENTSDIR, path[1:])
         if os.path.isfile(c):
             self._send_file(c)
-        else:
-            self.send_error(404, "File not found: %s" % self.path)
+            return
+        c = os.path.join(LIBDIR, path[1:])
+        if os.path.isfile(c):
+            self._send_file(c)
+            return
+        self.send_error(404, "File not found: %s" % self.path)
 
 
 def main():
