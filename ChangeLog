@@ -1,3 +1,6 @@
+2011-02-22: d102.py,d102.csv
+	* CSV の予定を iCalendar に変換する。
+
 2011-02-16: d101.js,d101.html
 	* jQueryUI の DatePicker のサンプル。
 
