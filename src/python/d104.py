@@ -4,6 +4,9 @@
 """
 Convert plain text page to CSV file.
 
+shell> python d104.py d104.J1.txt >J1.csv
+shell> python d104.py d104.J2.txt >J2.csv
+
 Jリーグ公式記録
 * `J1 <http://www.j-league.or.jp/data/2/?league=j1>`_ (d104.J1.txt)
 * `J2 <http://www.j-league.or.jp/data/2/?league=j2>`_ (d104.J2.txt)
@@ -56,7 +59,7 @@ def convert(fname, writer):
     csvwriter = csv.writer(io)
     match = None
     for line in open(fname, 'rb'):
-        row = line.strip().split()
+        row = [r.replace('　', '').strip() for r in line.strip().split()]
         if len(row) == 2:
             match.set_date(row[0])
         elif len(row) == 3:

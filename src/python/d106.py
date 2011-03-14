@@ -3,6 +3,9 @@
 
 """
 Converter script to rename J-League club name.
+
+shell> python d106.py d104.J1.txt >J1.txt
+shell> python d106.py d104.J2.txt >J2.txt
 """
 
 import os.path
