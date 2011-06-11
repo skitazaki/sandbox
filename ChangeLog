@@ -157,7 +157,7 @@
 2010-07-05: simple-usage-sqlite.sh
 	* SQLite を使ってみる。
 
-2010-07-03: d57.xml
+2010-07-03: ant-xml2html.xml
 	* Ant の xslt タスクで XML を HTML に変換する。
 
 2010-07-01: d56.py
@@ -166,7 +166,7 @@
 2010-06-29: d55.py,d55.html
 	* HTTPServer を使って JSONP でデータを送る。
 
-2010-06-28: d54.php
+2010-06-28: simple-usage-sqlite.php
 	* SQLite を使ってみる。
 
 2010-06-27: d53.js,d53.html
@@ -193,7 +193,7 @@
 2010-06-12: d46.js,d46.html
 	* Blogger のフィードを JSONP を使って表示する。
 
-2010-06-10: d45.xsl,d45.xml,d45.css
+2010-06-10: xml2html.xsl,xml2html.xml,xml2html.css
 	* XSLT で XML を HTML に整形する。
 
 2010-06-09: d44.html
