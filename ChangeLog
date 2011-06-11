@@ -25,10 +25,10 @@
 2011-02-22: d102.py,d102.csv
 	* CSV の予定を iCalendar に変換する。
 
-2011-02-16: d101.js,d101.html
+2011-02-16: simple-usage-jqueryui-datepicker.js,simple-usage-jqueryui-datepicker.html
 	* jQueryUI の DatePicker のサンプル。
 
-2011-02-15: d100.js,d100.html,d100.atom
+2011-02-15: simple-usage-datajs.js,simple-usage-datajs.html,simple-usage-datajs.atom
 	* datajs を使って OData のサンプル。
 
 2011-02-14: http-server.py
@@ -94,7 +94,7 @@
 2010-11-25: d80.py
 	* Twisted で WSGI アプリケーションを動かす。
 
-2010-11-16: d79.html,d79.js
+2010-11-16: simple-usage-jquery-hover.html,simple-usage-jquery-hover.js
 	* jQuery でアンカータグを扱う。
 
 2010-11-15: simple-usage-curl.c
@@ -118,7 +118,7 @@
 2010-10-16: d72.py,d72.json
 	* `MySQLdb` の接続情報を JSON から取得する。 (see d61.py)
 
-2010-10-15: d71.html
+2010-10-15: toggle-contents.html
 	* JavaScript でタイトルをクリックすると本文が開閉する処理を実装してみる。
 
 2010-10-14: d70.py
@@ -131,9 +131,8 @@
 	* スレッドに join しないことでメモリリークを発生させる。
 		use pthread and raise memory leak not to call `pthread_join`
 
-2010-10-08: d67.js
-	* Web ページのタイトルと URL を Twitter にポストできるようにする。
-		bookmarklet to post web page on Twitter.
+2010-10-08: twitlet.js
+	* Web ページのタイトルと URL を Twitter にポストするブックマークレット。
 
 2010-10-06: d66.py
 	* Twitter の Public API を使って tweet を表示する。
@@ -177,7 +176,7 @@
 2010-06-28: simple-usage-sqlite.php
 	* SQLite を使ってみる。
 
-2010-06-27: d53.js,d53.html
+2010-06-27: simple-usage-worker.js,simple-usage-worker.html
 	* Worker を触ってみる。
 
 2010-06-25: d52.py
@@ -192,28 +191,28 @@
 2010-06-18: newprj-autotools.sh
 	* autotools でプロジェクトを作成する。
 
-2010-06-17: d48.js,d48.html,d48.css
+2010-06-17: loop-test.js,loop-test.html,loop-test.css
 	* Duff's Device の考えでループ処理を実行する。
 
 2010-06-13: d47.py
 	* `doctest` モジュールを使う。
 
-2010-06-12: d46.js,d46.html
+2010-06-12: blogger-feed.js,blogger-feed.html,blogger-feed.css
 	* Blogger のフィードを JSONP を使って表示する。
 
 2010-06-10: xml2html.xsl,xml2html.xml,xml2html.css
 	* XSLT で XML を HTML に整形する。
 
-2010-06-09: d44.html
+2010-06-09: slideshow.html
 	* JSON の画像情報でスライドショーをする。 (requires jQuery)
 
 2010-06-08: d43.py
 	* 画像の情報を JSON 形式で出力する。
 
-2010-06-07: d42.html
+2010-06-07: eval-input-text.html
 	* textarea に入力したスクリプトを eval する。 (requires jQuery)
 
-2010-06-06: d41.html
+2010-06-06: simple-usage-canvas.html
 	* Canvas 要素を使ってみる。
 
 2010-05-31: simple-usage-function-ptr.cpp
