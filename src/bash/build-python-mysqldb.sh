@@ -26,7 +26,7 @@ config=$CONFIG
 
 # utility
 src_dir=`cd $(dirname $0) && pwd`
-archive_util=$src_dir/d04.sh
+archive_util=$src_dir/extract-archive.sh
 
 pushd $workspace
 if [ $? -gt 0 ]; then

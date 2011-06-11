@@ -54,7 +54,7 @@ archive=$package.$archive_type
 
 # Utility
 src_dir=`cd $(dirname $0) && pwd`
-archive_util=$src_dir/d04.sh
+archive_util=$src_dir/extract-archive.sh
 tmp_file="/tmp/`basename $0`.txt"
 
 # Start build.

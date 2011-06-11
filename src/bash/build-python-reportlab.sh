@@ -13,7 +13,7 @@ site="http://www.reportlab.com/ftp"
 archive_type="tar.gz"
 
 src_dir=$PWD/$(dirname $0)
-archive_util=$src_dir/d04.sh
+archive_util=$src_dir/extract-archive.sh
 
 pushd $workspace
 if [ $? -gt 0 ]; then

@@ -40,7 +40,7 @@ config=$CONFIG
 
 # utility
 src_dir=`cd $(dirname $0) && pwd`
-archive_util=$src_dir/d04.sh
+archive_util=$src_dir/extract-archive.sh
 tmp_file="/tmp/`basename $0`.txt"
 echo "Just Do It:" >$tmp_file
 
