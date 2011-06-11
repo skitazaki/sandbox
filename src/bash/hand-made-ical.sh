@@ -1,9 +1,9 @@
 #!/bin/sh
+# Hand-made iCal file.
 #
 # CAUTION: The end of line must be CRLF.
 # NOTE: This does not manage timezone feature.
 # See http://tools.ietf.org/html/rfc2445
-#
 
 if [ $# -lt 1 ]; then
     echo "Give me CSV file(s)."
@@ -11,9 +11,8 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 file=$@
-#file="d02.csv"
 
-uid=`whoami`"@"`hostname`
+uid=$USERNAME
 
 cat <<EOT
 BEGIN:VCALENDAR
@@ -28,7 +27,7 @@ awk 'BEGIN { FS="," } {
     print "DTSTART:"$1
     print "DESCRIPTION:"$3
     print "CLASS:PRIVATE"
-    print "DTSTAMP:'`date "+%Y%m%dT%H%M%SZ"`'"
+    print "DTSTAMP:'`date --utc "+%Y%m%dT%H%M%SZ"`'"
     print "END:VEVENT"
 }'
 cat <<EOT

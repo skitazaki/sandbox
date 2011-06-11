@@ -1,8 +1,7 @@
 #!/bin/sh
-# Count the files in each directory on your system.
-#
+# Count the files in each directory on your $PATH.
 
-# 'IFS' is Internal Field Separator of shell
+# 'IFS' is Internal Field Separator of shell.
 IFS=:
 for dir in $PATH
 do

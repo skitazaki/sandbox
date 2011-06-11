@@ -1,5 +1,6 @@
 #!/bin/sh
-# [http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263]
+# Get weather information via Google API.
+# <http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263>
 # example:
 # $ location=Tokyo sh d03.sh
 #
@@ -30,4 +31,3 @@ $1 == "forecast_conditions" {
     else if ($2 == "condition")
         print "\tCondition: " substr($3, 7)
 }' | nkf -w
-

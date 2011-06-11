@@ -1,30 +1,34 @@
 #!/bin/sh
-# prepare a project for Widgets
-# example: sh d59.sh sampleproj
-# (http://www.w3.org/TR/widgets/)
+# Create a project for HTML5 Widget.
+#
+# <http://www.w3.org/TR/widgets/>
+# <http://satoshi.blogs.com/life/2010/05/widget_entry.html>
 
-DEVELOPER_NAME="Shigeru Kitazaki"
-DEVELOPER_URL="http://skitazaki.appspot.com"
+DEVELOPER_NAME="YOUR NAME"
+DEVELOPER_URL="http://example.com"
 
 project=$1
-mainfile=$project.js
 
 die() { echo $1; exit 1; }
 [ -z $project ] && die "specify project name."
 [ -d $project ] && die "project \"$project\" already exists."
 
-# check "ant" is available.
-ant=ant
-$ant -version >/dev/null;   [ $? -eq 0 ] || exit 1
+mkdir -p $project/src
+mkdir -p $project/lib
+mkdir -p $project/test
+mkdir -p $project/images
 
-currentdir=`pwd`
-mkdir $project; cd $project
+ant_build_xml=$project/build.xml
+base_html=$project/src/index.html
+config_xml=$project/src/config.xml
+style_css=$project/src/$project.css
+script_js=$project/src/$project.js
 
-cat <<EOF >build.xml
+cat <<EOF >$ant_build_xml
 <?xml version="1.0"?>
 <project name="$project - Widget" default="default" basedir=".">
 
-    <property name="build.dir" location="build"/>
+    <property name="build.dir" location="_build"/>
     <property name="src.dir" location="src"/>
 
     <target name="all" depends="clean, default">
@@ -46,10 +50,10 @@ cat <<EOF >build.xml
     </target>
 
     <target name="copy">
-        <copy file="\${src.dir}/config.xml" todir="\${build.dir}"/>
-        <copy file="\${src.dir}/index.html" todir="\${build.dir}"/>
-        <copy file="\${src.dir}/style.css"  todir="\${build.dir}"/>
-        <copy file="\${src.dir}/$mainfile"  todir="\${build.dir}"/>
+        <copy file="\${src.dir}/config.xml"   todir="\${build.dir}"/>
+        <copy file="\${src.dir}/index.html"   todir="\${build.dir}"/>
+        <copy file="\${src.dir}/$project.css" todir="\${build.dir}"/>
+        <copy file="\${src.dir}/$project.js"  todir="\${build.dir}"/>
     </target>
 
     <target name="clean">
@@ -59,22 +63,21 @@ cat <<EOF >build.xml
 </project>
 EOF
 
-mkdir src
-cat <<EOF >src/index.html
+cat <<EOF >$base_html
 <!DOCTYPE html>
 <html><head>
 <meta charset="utf-8"/>
 <meta name="viewport"
       content="width=device-width,user-scalable=no,initial-scale=1.0"/>
 <title>$project</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="$project.css" />
 </head><body>
 <h1>Hello $project</h1>
-<script type="text/javascript" src="$mainfile"></script>
+<script type="text/javascript" src="$project.js"></script>
 </body></html>
 EOF
 
-cat <<EOF >src/config.xml
+cat <<EOF >$config_xml
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
         id="http://example.org/exampleWidget" version="0.1"
@@ -85,10 +88,11 @@ cat <<EOF >src/config.xml
     <author href="$DEVELOPER_URL">$DEVELOPER_NAME</author>
 </widget>
 EOF
-cat <<EOF >src/style.css
+
+cat <<EOF >$style_css
 EOF
 
-cat <<EOF >src/$mainfile
+cat <<EOF >$script_js
 (function(d) {
     var space = d.createElement("div");
     setInterval(function(){
@@ -98,7 +102,4 @@ cat <<EOF >src/$mainfile
 }(document));
 EOF
 
-$ant
-
-cd $currentdir
-
+echo "Created \"$project\", build it using Ant."

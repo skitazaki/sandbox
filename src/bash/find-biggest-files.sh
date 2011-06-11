@@ -8,9 +8,8 @@ target=${1-$PWD}
 
 echo "Target directory: $target"
 
-find $target -type f -exec du {} \; 2>/dev/null |
-sort -n | tail -n 10 |
-xargs -n 1 du -h 2>/dev/null
+find $target -type f |xargs du 2>/dev/null |
+    sort -nr |head -10 |
+    xargs -n 1 du -h 2>/dev/null
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-

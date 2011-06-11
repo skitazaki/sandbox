@@ -1,13 +1,11 @@
 #!/bin/sh
-# prepare a project using autotools.
-# example:
-# $ sh d49.sh sampleproj
-# links:
-# * http://www.spa.is.uec.ac.jp/~kinuko/slidemaker/autotools/
-# * http://module.jp/blog/autotoolize_spidermonkey.html
+# Create a project using autotools.
+#
+# <http://www.spa.is.uec.ac.jp/~kinuko/slidemaker/autotools/>
+# <http://module.jp/blog/autotoolize_spidermonkey.html>
 
-DEVELOPER_NAME="Shigeru Kitazaki"
-DEVELOPER_EMAIL="skitazaki@gmail.com"
+DEVELOPER_NAME="YOUR_NAME"
+DEVELOPER_EMAIL="you@example.com"
 
 project=$1
 mainfile=$project.cpp
@@ -68,4 +66,3 @@ echo "**********************************************************************"
 ./$project
 
 cd $currentdir
-

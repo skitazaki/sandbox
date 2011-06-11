@@ -1,15 +1,13 @@
 #!/bin/sh
-# Remove all dead symbolic links in a directory
+# Remove all dead symbolic links in a directory.
+#
 # <http://www.commandlinefu.com/commands/view/6939/remove-all-dead-symbolic-links-in-a-directory>
-#
-# usage: sh d75.sh {pattern}
-#
 
 pattern=$1
 dir=$2
 if [ -z "$pattern" ]
 then
-    echo "Which pattern?"
+    echo "Which pattern? 1 or 2."
     exit 1
 fi
 if [ -z "$dir" ]
@@ -33,4 +31,3 @@ then
     echo "Do pattern 2."
     find -L $dir -type l -delete
 fi
-

@@ -1,14 +1,12 @@
 #!/bin/sh
-#
-# Serve contents in current directory via HTTP by Python.
-#
+# Serve contents in current directory via Python HTTP server module.
 
 python=${1-python}
 
 version=`$python -c "import sys; sys.stdout.write(str(sys.version_info[0]))"`
 [ $? -gt 0 ] && exit $?
 
-echo "Your interpreter major version is $version."
+echo "Your interpreter's major version is $version."
 
 case "$version" in
 2)

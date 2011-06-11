@@ -1,11 +1,11 @@
 #!/bin/sh
 # -*- coding: utf-8 -*-
-#
 # Run `pep8` and `nosetests` for given scripts.
 
 files=$*
 
-[ -n "$files" ] || files=`ls *.py`
+[ -n "$files" ] || files=`ls *.py 2>/dev/null`
+[ -z "$files" ] && exit 1
 
 echo "Target files are:"
 line=""
@@ -37,4 +37,3 @@ done
 echo "See \`error\` file."
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-
