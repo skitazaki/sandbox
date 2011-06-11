@@ -170,7 +170,7 @@
 2010-07-01: d56.py
 	* HTTPServer の代わりに twisted.web を使う。
 
-2010-06-29: d55.py,d55.html
+2010-06-29: simple-usage-jsonp.html
 	* HTTPServer を使って JSONP でデータを送る。
 
 2010-06-28: simple-usage-sqlite.php

@@ -5,6 +5,7 @@
 Simple HTTP Server to serve sandbox contents.
 """
 
+import anyjson as json
 import os
 import os.path
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
@@ -13,6 +14,8 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 MIMETYPES = {
   '.html': 'text/html',
   '.js': 'text/javascript',
+  '.json': 'application/json',
+  '.jsonp': 'application/javascript',
   '.css': 'text/css',
   '.txt': 'text/plain',
   '.xml': 'application/xml',
@@ -45,9 +48,15 @@ class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
             self.send_response(200)
-            self.send_header('Content-Type', 'text/plain')
+            self.send_header('Content-Type', 'text/html')
             self.end_headers()
-            self.wfile.write('\n'.join(os.listdir(CONTENTSDIR)))
+            self.wfile.write('<ul>')
+            for f in os.listdir(CONTENTSDIR):
+                if f.endswith('.html'):
+                    self.wfile.write('<li><a href="%s">%s</a></li>' % (f, f))
+                else:
+                    self.wfile.write('<li>%s</li>' % (f,))
+            self.wfile.write('</ul>')
             return
 
         js = None
@@ -66,8 +75,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
 
         pos = self.path.find('?')
-        if pos > 0:
-            path, query = self.path[:pos], self.path[pos:]
+        if pos > 0 and len(self.path) > pos + 1:
+            path, query = self.path[:pos], self.path[pos + 1:]
         else:
             path, query = self.path, None
 
@@ -78,6 +87,31 @@ class RequestHandler(BaseHTTPRequestHandler):
         c = os.path.join(LIBDIR, path[1:])
         if os.path.isfile(c):
             self._send_file(c)
+            return
+        # handle JSONP call.
+        callback = None
+        data = {}
+        if query:
+            for t in query.split('&'):
+                _ = t.split('=')
+                if len(_) == 1:
+                    k, v = t, None
+                elif len(_) == 2:
+                    k, v = _
+                else:
+                    # Invalid query.
+                    continue
+                if k == 'callback':
+                    callback = v
+                else:
+                    data[k] = v
+        if callback:
+            self.send_response(200)
+            self.send_header('Content-Type', MIMETYPES['.jsonp'])
+            self.end_headers()
+            self.wfile.write(callback + "(")
+            self.wfile.write(json.dumps(data))
+            self.wfile.write(");")
             return
         self.send_error(404, "File not found: %s" % self.path)
 
