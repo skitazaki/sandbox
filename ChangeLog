@@ -97,7 +97,7 @@
 2010-11-16: d79.html,d79.js
 	* jQuery でアンカータグを扱う。
 
-2010-11-15: d78.c
+2010-11-15: simple-usage-curl.c
 	* C 言語で cURL を使ってみる。
 
 2010-11-14: find-biggest-files.sh
@@ -124,10 +124,10 @@
 2010-10-14: d70.py
 	* use `nose` for simple test.
 
-2010-10-11: d69.c
+2010-10-11: socket-client.c
 	* ソケット通信用のクライアントを実装してみる。
 
-2010-10-09: d68.c
+2010-10-09: cause-memory-leak-pthread.c
 	* スレッドに join しないことでメモリリークを発生させる。
 		use pthread and raise memory leak not to call `pthread_join`
 
@@ -139,9 +139,8 @@
 	* Twitter の Public API を使って tweet を表示する。
 		fetch tweets via public API.
 
-2010-10-04: d65.c
+2010-10-04: simple-usage-gdbm-key-value.c
 	* `gdbm` を使って簡単な key/value を使う。
-		manage simple key/value pair with `gdbm`.
 
 2010-10-03: d64.py [project]
 	* HTML5 boiler plate をダウンロードして `src` に展開する。
@@ -157,7 +156,7 @@
 2010-08-19: d61.py
 	* `MySQLdb` を使ってみる。
 
-2010-07-20: d60.cpp
+2010-07-20: color-console-with-curses.cpp
 	* コンソールに色を付ける。(requires curses.h)
 
 2010-07-13: newprj-html5widget.sh
@@ -217,10 +216,10 @@
 2010-06-06: d41.html
 	* Canvas 要素を使ってみる。
 
-2010-05-31: d40.cpp
+2010-05-31: simple-usage-function-ptr.cpp
 	* 関数ポインタを使ってみる。
 
-2010-05-30: d39.cpp
+2010-05-30: color-console.cpp
 	* コンソールに色づけする。
 
 2010-05-25: d38.py

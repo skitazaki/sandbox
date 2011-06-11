@@ -1,5 +1,5 @@
 /**
- * @brief set color on your console
+ * @brief set color on your console.
  * @see /usr/share/terminfo for TERM environmental variable
  * $ g++ d60.cpp -lcurses && TERM=xterm-xfree86 a./out a b c
  */

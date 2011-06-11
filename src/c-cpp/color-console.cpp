@@ -1,5 +1,5 @@
 /**
- * @brief set color on your console
+ * @brief set color on your console.
  */
 #include <iostream>
 #include <ctime>
