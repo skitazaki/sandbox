@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ == """\
+__doc__ = """\
 python %prog {manuscript}
 
 Convert reST into HTML text with default template and custom one.
-
-:Usage:
-    $ python article.rst
 """
 
 import logging
@@ -17,9 +14,9 @@ import sys
 
 from docutils.core import publish_cmdline
 
-HTML_PREVIEW = "d90.html"
-HTML_SOURCE = "d90.txt"
-RST_TEMPLATE_SOURCE = "d90.tpl"
+HTML_PREVIEW = 'preview.html'
+HTML_SOURCE = 'preview.txt'
+RST_TEMPLATE_SOURCE = 'rst2html-custom-tpl.tpl'
 
 
 def parse_args():
@@ -51,7 +48,7 @@ def main():
 
 
 def test():
-    manuscript = "../ChangeLog"
+    manuscript = "../../ChangeLog"
     publish_restructured_text(manuscript)
 
     assert os.path.exists(HTML_PREVIEW)

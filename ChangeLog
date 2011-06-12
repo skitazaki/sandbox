@@ -10,19 +10,19 @@
 2011-03-16: conv-jleague-stadium-name.hs
 	* CSV のフィールドの文字列を書き換える。
 
-2011-03-14: d106.py
+2011-03-14: convert-jleague-club-name.py
 	* J リーグのクラブ名を変換する。
 
 2011-03-13: cat.hs
 	* Haskell で cat コマンド。
 
-2011-03-12: d104.py,d104.J1.txt,d104.J2.txt
+2011-03-12: convert-jleague-calendar.py,calendar-J1.txt,calendar-J2.txt
 	* J リーグの日程表を CSV に変換する。
 
-2011-03-11: d103.py
+2011-03-11: simple-usage-twisted-dbapi.py
 	* Twisted の dbapi を使ってみる。
 
-2011-02-22: d102.py,d102.csv
+2011-02-22: csv2icalendar.py,csv2icalendar.csv
 	* CSV の予定を iCalendar に変換する。
 
 2011-02-16: simple-usage-jqueryui-datepicker.js,simple-usage-jqueryui-datepicker.html
@@ -34,37 +34,37 @@
 2011-02-14: http-server.py
 	* テスト用の静的コンテンツ配信 HTTP サーバ。
 
-2011-02-07: d99.py
+2011-02-07: simple-usage-selenium-screen-capture.py
 	* Selenium を使ってユニットテストとスクリーンキャプチャ。
 
 2011-02-03: hello.hs
 	* Haskell で Hello world 。
 
-2011-02-01: d97.py
+2011-02-01: simple-usage-beautifulsoup.py
 	* BeautifulSoup を使って HTML をパースする。
 
 2011-01-26: remove-pyc-files.sh
 	* .pyc ファイルを掃除する。
 
-2011-01-20: d95.py,d95.0.html,d95.1.html,d95.2.html
+2011-01-20: simple-usage-jinja2-extends.py,base.html,page1.html,page2.html
 	* jinja2 の extends を使ってみる。
 
-2011-01-09: d94.py,d94.0.txt,d94.1.txt [facebook hackers cup]
+2011-01-09: peg-game.py,peg-game-1.txt,peg-game-2.txt [facebook hackers cup]
 	* Peg Game を表示する。
 
-2011-01-09: d93.py [facebook hackers cup]
+2011-01-09: solve-double-square.py [facebook hackers cup]
 	* Double Square を解く。
 
-2011-01-07: d92.py [project]
+2011-01-07: newprj-python.py [project]
 	* virtualenv+buildout で開発環境を構築する。
 
 2011-01-07: svncounts-commits-per-user.sh
 	* SVN のコミット数をユーザーごとに集計する。
 
-2010-12-24: d90.py,d90.tpl
+2010-12-24: rst2html-custom-tpl.py,rst2html-custom-tpl.tpl
 	* reST を HTML に変換するときに自前のテンプレートを使う。
 
-2010-12-23: d89.py
+2010-12-23: twitter-search-api.py
 	* Twitter の search API を使ってみる。
 
 2010-12-22: build-mysql55.sh
@@ -79,19 +79,19 @@
 2010-12-10: python-checker.sh
 	* pep8 と nosetests を bash でまとめて実行させる。
 
-2010-12-06: d84.py
+2010-12-06: twitter-user-tl-json.py
 	* Twitter の user_timeline から JSON を取得する。
 
-2010-12-06: d83.py
+2010-12-06: simple-usage-selenium.py
 	* Python で Selenium を操作してみる。
 
-2010-12-05: d82.py
+2010-12-05: simple-usage-mongodb.py
 	* `pymongo` で MongoDB に接続してみる。
 
-2010-11-28: d81.py
+2010-11-28: simple-usage-twisted-web-html.py
 	* `twisted.web.html` を使ってみる。
 
-2010-11-25: d80.py
+2010-11-25: simple-usage-twisted-web-wsgi.py
 	* Twisted で WSGI アプリケーションを動かす。
 
 2010-11-16: simple-usage-jquery-hover.html,simple-usage-jquery-hover.js
@@ -103,25 +103,25 @@
 2010-11-14: find-biggest-files.sh
 	* 指定したディレクトリ配下にある大きなファイルを10個まで表示する。
 
-2010-11-11: d76.py
+2010-11-11: process-wikipedia-abstract.py
 	* Wikipedia のダンプデータ (abstract) を処理する。
 
 2010-11-06: remove-deadlinks.sh
 	* 壊れているシンボリックリンクを削除する。
 
-2010-10-25: d74.py [project]
+2010-10-25: newprj-adobe-air.py [project]
 	* Adobe AIR SDK のプロジェクトを生成する。
 
-2010-10-23: d73.py,d73.html,d73.txt
+2010-10-23: simple-usage-jinja2.py,simple-usage-jinja2.html,simple-usage-jinja2.txt
 	* `jinja2` で if 文と for 文を使ってみる。
 
-2010-10-16: d72.py,d72.json
-	* `MySQLdb` の接続情報を JSON から取得する。 (see d61.py)
+2010-10-16: load-mysql-connection-info.py,load-mysql-connection-info.json
+	* `MySQLdb` の接続情報を JSON から取得する。
 
 2010-10-15: toggle-contents.html
 	* JavaScript でタイトルをクリックすると本文が開閉する処理を実装してみる。
 
-2010-10-14: d70.py
+2010-10-14: simple-usage-nose-test.py
 	* use `nose` for simple test.
 
 2010-10-11: socket-client.c
@@ -134,25 +134,22 @@
 2010-10-08: twitlet.js
 	* Web ページのタイトルと URL を Twitter にポストするブックマークレット。
 
-2010-10-06: d66.py
+2010-10-06: tweets-fetcher.py
 	* Twitter の Public API を使って tweet を表示する。
-		fetch tweets via public API.
 
 2010-10-04: simple-usage-gdbm-key-value.c
 	* `gdbm` を使って簡単な key/value を使う。
 
-2010-10-03: d64.py [project]
+2010-10-03: newprj-html5site.py [project]
 	* HTML5 boiler plate をダウンロードして `src` に展開する。
-		downloader of HTML5 boiler plate.
 
-2010-09-29: d63.py
+2010-09-29: simple-usage-tornado.py
 	* Tornado を使って JSON でデータを返す。
-		HTTP server using ``Tornado``.
 
-2010-08-31: d62.py
+2010-08-31: simple-usage-twisted-process.py
 	* Twisted の spawnProcess を使ってみる。
 
-2010-08-19: d61.py
+2010-08-19: simple-usage-mysqldb.py
 	* `MySQLdb` を使ってみる。
 
 2010-07-20: color-console-with-curses.cpp
@@ -167,7 +164,7 @@
 2010-07-03: ant-xml2html.xml
 	* Ant の xslt タスクで XML を HTML に変換する。
 
-2010-07-01: d56.py
+2010-07-01: simple-usage-twisted-web.py
 	* HTTPServer の代わりに twisted.web を使う。
 
 2010-06-29: simple-usage-jsonp.html
@@ -179,13 +176,13 @@
 2010-06-27: simple-usage-worker.js,simple-usage-worker.html
 	* Worker を触ってみる。
 
-2010-06-25: d52.py
+2010-06-25: simple-usage-zope-interface.py
 	* `zope.interface` モジュールを使う。
 
-2010-06-25: d51.py
+2010-06-25: loop-test.py
 	* ループ処理を計測する。
 
-2010-06-19: d50.py
+2010-06-19: simple-usage-inspect.py
 	* `inspect` モジュールを使う。
 
 2010-06-18: newprj-autotools.sh
@@ -194,7 +191,7 @@
 2010-06-17: loop-test.js,loop-test.html,loop-test.css
 	* Duff's Device の考えでループ処理を実行する。
 
-2010-06-13: d47.py
+2010-06-13: simple-usage-doctest.py
 	* `doctest` モジュールを使う。
 
 2010-06-12: blogger-feed.js,blogger-feed.html,blogger-feed.css
@@ -206,7 +203,7 @@
 2010-06-09: slideshow.html
 	* JSON の画像情報でスライドショーをする。 (requires jQuery)
 
-2010-06-08: d43.py
+2010-06-08: slideshow-metainfo-generator.py
 	* 画像の情報を JSON 形式で出力する。
 
 2010-06-07: eval-input-text.html
@@ -221,52 +218,52 @@
 2010-05-30: color-console.cpp
 	* コンソールに色づけする。
 
-2010-05-25: d38.py
+2010-05-25: icalendar2hcalendar.py
 	* iCalendar を hCalendar に変換してみる。
 
-2010-05-24: d37.py
+2010-05-24: simple-usage-reportlab-table.py
 	* ReportLab で表を生成する。
 
-2010-05-22: d36.py
+2010-05-22: csv2htmllist2.py
 	* CSV から HTML の <ul> と <table> を作る。 (use d32.csv)
 
-2010-05-21: d35.py
+2010-05-21: simple-usage-sqlite.py
 	* SQLite を使ってみる。
 
-2010-05-18: d34.py,d34.csv
+2010-05-18: simple-usage-reportlab-template.py,simple-usage-reportlab-template.csv,simple-usage-reportlab-template.txt
 	* 差し込み印刷のように PDF を生成する。
 
-2010-05-17: d33.py,d33.ics
+2010-05-17: extract-events-from-icalendar.py,extract-events-from-icalendar.ics
 	* iCalendar から指定した期間のイベントを抽出する。
 
-2010-05-10: d32.py,d32.csv
+2010-05-10: csv2htmllist.py,csv2htmllist.csv
 	* CSV ファイルから Web サイト用のメニューを作る。
 
 2010-05-06: patch-split.sh
 	* パッチファイルを分割する。
 
-2010-05-05: d30.py
+2010-05-05: tweets-one-week.py
 	* 一週間分の tweet を表示する。
 
-2010-05-01: d29.py
+2010-05-01: gdata-spredsheets-list.py
 	* Google Spreadsheets のファイル一覧を取得する。
 
-2010-04-29: d28.py
+2010-04-29: count-files-per-suffix.py
 	* 拡張子ごとのファイル数を集計する。
 
-2010-04-26: d27.py,d27.yaml
+2010-04-26: yaml2json.py,yaml2json.yaml
 	* YAML を JSON に変換する。
 
-2010-04-25: d26.py
+2010-04-25: remove-empty-dir.py
 	* 空のディレクトリ (隠しファイルひとつのものも含む) を削除する。
 
 2010-04-22: build-python-mysqldb.sh [setup]
 	* MySQLdb をインストールする。
 
-2010-04-21: d24.py
+2010-04-21: gdata-client-login.py
 	* Google Data API のクライアントライブラリでログインする。
 
-2010-04-20: d23.py,d23.json
+2010-04-20: gmail-messages-and-labels.py,gmail-messages-and-labels.json
 	* Gmail のラベル一覧と INBOX の中身一覧を取得する。設定ファイル必要。
 
 2010-04-19: setup-python-modules.sh [setup]
@@ -284,16 +281,16 @@
 2010-04-14: setup-sshkey.sh
 	* ssh のクライアント側の設定をする。
 
-2010-04-13: d17.py
+2010-04-13: clean-source-expand-tab.py
 	* タブを空白４つに変換して末尾の空白文字を取り除く。
 
 2010-04-12: setup-gitconfig.sh [setup]
 	* git を設定する。
 
-2010-04-08: d15.py
+2010-04-08: simple-usage-pil-thumbnail.py
 	* サムネイル画像を作成する。
 
-2010-04-06: d14.py
+2010-04-06: simple-usage-pil-image-size.py
 	* 画像の大きさを表示する。
 
 2010-04-05: build-python-pil.sh [setup]
@@ -311,16 +308,15 @@
 	* Subversion で管理されていないファイルを追加する。
 		Add un-versioned files into subversion realm
 
-2010-03-38: d09.py,d09.txt
+2010-03-38: simple-usage-reportlab.py,simple-usage-reportlab.txt
 	* ReportLab を使って PDF を生成する。
 		Generate pdf file containing Japanese with "ReportLab".
 
 2010-03-27: build-python-reportlab.sh [setup]
 	* ReportLab をインストールする。
 
-2010-03-26: d07.py [setup]
+2010-03-26: setup-sitecustomize.py [setup]
 	* Python の sitecustomize.py を置く。
-		Put "sitecustomize.py".
 
 2010-03-25: build-php.sh [setup]
 	* PHP をソースからビルドする。
