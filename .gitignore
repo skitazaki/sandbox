@@ -1,5 +1,6 @@
 a.out
 *.exe
 *.o
+*.so
 *.pyc
 *.hi
