@@ -1,3 +1,7 @@
+2011-06-26: mysql-schema-dumper.py,config.ini
+
+	* MySQL のテーブル情報を HTML に書き出す。
+
 2011-06-17: compare-linkage.cpp,compare-linkage.makefile,helloworld.cpp,helloworld.h
 
 	* 共有ライブラリと静的リンクの違いを確認する。
