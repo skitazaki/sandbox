@@ -1,3 +1,6 @@
+2011-07-20  solr-document-indexer.py
+	* Solr にインデクス生成リクエストを投げる。
+
 2011-06-26: mysql-schema-dumper.py,config.ini
 
 	* MySQL のテーブル情報を HTML に書き出す。
