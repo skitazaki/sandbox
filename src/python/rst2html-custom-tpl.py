@@ -28,7 +28,7 @@ def parse_args():
     if not args:
         parser.error("no arguments found.")
 
-    return args[0]
+    return args
 
 
 def publish_restructured_text(manuscript):
@@ -50,12 +50,13 @@ def publish_restructured_text(manuscript):
 
 
 def main():
-    manuscript = parse_args()
+    manuscripts = parse_args()
 
-    if not os.path.exists(manuscript):
-        raise SystemExit("%s is not found." % (manuscript,))
-
-    publish_restructured_text(manuscript)
+    for manuscript in manuscripts:
+        if os.path.exists(manuscript):
+            publish_restructured_text(manuscript)
+        else:
+            print "%s is not found." % (manuscript,)
 
 
 def test():
