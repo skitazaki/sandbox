@@ -33,7 +33,7 @@ def parse_args():
     elif not opts.quiet:
         logging.basicConfig(level=logging.INFO)
 
-    return args
+    return opts, args
 
 ZERO = datetime.timedelta(0)
 
