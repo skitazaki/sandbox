@@ -1,5 +1,13 @@
-2011-06-26: mysql-schema-dumper.py,config.ini
+2011-08-09: solr-show-fields.py
+	* Solr のスキーマの XML から表を作成する。
 
+2011-07-22: doc-wrapper.py
+	* rst2html で生成した HTML の中身を他のテンプレートシステムにポーティング。
+
+2011-07-20: solr-document-indexer.py
+	* Solr にインデクス生成リクエストを投げる。
+
+2011-06-26: mysql-schema-dumper.py,config.ini
 	* MySQL のテーブル情報を HTML に書き出す。
 
 2011-06-17: compare-linkage.cpp,compare-linkage.makefile,helloworld.cpp,helloworld.h
