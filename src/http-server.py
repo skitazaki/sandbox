@@ -5,9 +5,9 @@
 Simple HTTP Server to serve sandbox contents.
 """
 
-import anyjson as json
+#import anyjson as json
+import json
 import os
-import os.path
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 
