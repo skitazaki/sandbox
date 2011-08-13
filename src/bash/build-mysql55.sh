@@ -7,15 +7,15 @@
 # Notice that MySQL uses `CMake` on build system since version 5.5.
 # See also `INSTALL-SOURCE` in the source package.
 #
-# Similar script is available as `d12.sh`, which builds mariadb-5.1 series.
+# Similar script is available as `build-mariadb.sh`, which builds mariadb-5.1 series.
 # Of course, that uses `configure` not `cmake` yet.
 #
 # Example:
-# $ WORKSPACE=/usr/local/src VERSION=5.5.8 sh d88.sh
+# $ WORKSPACE=/usr/local/src VERSION=5.5.15 sh build-mysql55.sh
 #
 
 PROGRAM=mysql
-VERSION=${VERSION-5.5.8}
+VERSION=${VERSION-5.5.15}
 DAEMON_USER=mysql
 DAEMON_GROUP=mysql
 
@@ -57,20 +57,21 @@ src_dir=`cd $(dirname $0) && pwd`
 archive_util=$src_dir/extract-archive.sh
 tmp_file="/tmp/`basename $0`.txt"
 
-# Start build.
 pushd $workspace
+# Check source archive exists.
 if [ ! -f $archive ]
 then
-    echo "$archive archive not found on your working directory."
+    echo "\"$archive\" archive not found on your working directory."
     exit 1
 fi
+# Start build.
 if [ ! -e $package ]
 then
     echo "Extract $archive."
     $archive_util $archive
 fi
 
-prefix="/usr/local/$package"
+prefix="/usr/local/mysql/$package"
 pushd $package
 
 cmake . \

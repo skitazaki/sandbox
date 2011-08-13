@@ -87,7 +87,7 @@
 2010-12-23: twitter-search-api.py
 	* Twitter の search API を使ってみる。
 
-2010-12-22: build-mysql55.sh
+2010-12-22: build-mysql55.sh [setup]
 	* MySQL-5.5 系をソースからビルドする。
 
 2010-12-21: python-httpd.sh

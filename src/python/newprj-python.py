@@ -31,7 +31,7 @@ parts =
 develop = ./src
 
 [versions]
-pymongo = 1.9
+pymongo = 2.0
 
 [depends]
 recipe = minitage.recipe:egg
