@@ -3,12 +3,14 @@
  */
 
 $(function() {
+    var $log = $('#idb-log');
+
+    // Install action handler for user-interface.
     $('form[action="#set"]').submit(function(event) {
         event.preventDefault();
         var $key = $('input[name=key]', this),
             $val = $('input[name=val]', this);
         if (!$key.val() || !$val.val()) {
-            var $log = $('#idb-log');
             $log.text("Input key and value.");
             $log.addClass('error');
             setTimeout(function() { $log.removeClass('error'); }, 5000);
@@ -17,6 +19,39 @@ $(function() {
         indexedDbUtil.idbSet($key.val(), $val.val());
         $key.val('').blur();
         $val.val('').blur();
+    });
+
+    $('#idb-remove').hide();
+    $('#idb-create').click(function(e) {
+        indexedDbUtil.idbCreate();
+        $(this).toggle();
+        $('#idb-remove').toggle();
+    });
+    $('#idb-remove').click(function(e) {
+        indexedDbUtil.idbRemove();
+        $(this).toggle();
+        $('#idb-create').toggle();
+    });
+    $('.idb-key').live('blur', function(e) {
+        var key = $(this).data('key'),
+            newKey = $(this).text();
+        if (!newKey) {
+            $log.text("Empty key is prohibited.");
+            $log.addClass('error');
+            setTimeout(function() { $log.removeClass('error'); }, 5000);
+            $(this).text(key);
+            return;
+        }
+        indexedDbUtil.updateKey(key, newKey);
+    });
+    $('.idb-value').live('blur', function(e) {
+        var key = $(this).data('key'),
+            value = $(this).text();
+        indexedDbUtil.updateValue(key, value);
+    });
+    $('.idb-delete').live('click', function(e) {
+        var key = $(this).data('key');
+        indexedDbUtil.deleteKey(key);
     });
 });
 
@@ -144,16 +179,7 @@ var indexedDbUtil = (function() {
         request.onsuccess = idbShow_;
     }
 
-    function updateKey_(element) {
-        var key = $(element).data('key'),
-            newKey = $(element).text();
-        if (!newKey) {
-            $log.text("Empty key is prohibited.");
-            $log.addClass('error');
-            setTimeout(function() { $log.removeClass('error'); }, 5000);
-            $(element).text(key);
-            return;
-        }
+    function updateKey_(key, newKey) {
         // Create a transaction that locks the world.
         var transaction = idb_.transaction([], IDBTransaction.READ_WRITE),
             objectStore = transaction.objectStore(STORAGE_NAME),
@@ -178,9 +204,7 @@ var indexedDbUtil = (function() {
         };
     }
 
-    function updateValue_(element) {
-        var key = $(element).data('key'),
-            value = $(element).text();
+    function updateValue_(key, value) {
         // Create a transaction that locks the world.
         var transaction = idb_.transaction([], IDBTransaction.READ_WRITE),
             objectStore = transaction.objectStore(STORAGE_NAME),
@@ -189,8 +213,7 @@ var indexedDbUtil = (function() {
         request.onsuccess = idbShow_;
     }
 
-    function deleteKey_(element) {
-        var key = $(element).data('key');
+    function deleteKey_(key) {
         // Create a transaction that locks the world.
         var transaction = idb_.transaction([], IDBTransaction.READ_WRITE),
             objectStore = transaction.objectStore(STORAGE_NAME);

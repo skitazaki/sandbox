@@ -1,3 +1,6 @@
+2011-08-14: simple-usage-indexeddb.html,simple-usage-indexeddb.js
+	* IndexedDB を使ってみる。
+
 2011-08-09: solr-show-fields.py
 	* Solr のスキーマの XML から表を作成する。
 
@@ -11,11 +14,9 @@
 	* MySQL のテーブル情報を HTML に書き出す。
 
 2011-06-17: compare-linkage.cpp,compare-linkage.makefile,helloworld.cpp,helloworld.h
-
 	* 共有ライブラリと静的リンクの違いを確認する。
 
 2011-06-13: sandboxlib.py
-
 	* Utility script, argument parser and timezone config.
 
 2011-05-06: yaml2config.py,config.yaml

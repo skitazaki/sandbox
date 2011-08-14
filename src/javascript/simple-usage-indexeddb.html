@@ -40,12 +40,12 @@ Then you can set key/value pair one by one, and edit them seeing editable sequen
 After play around, remove object store.
 </p>
 <p>
-  <button onclick="indexedDbUtil.idbCreate()">Create object Store</button>
-  <button onclick="indexedDbUtil.idbRemove()">Remove object Store</button>
+  <button id="idb-create">Create object Store</button>
+  <button id="idb-remove">Remove object Store</button>
 </p>
 <form method="post" action="#set">
-	<input type="text" placeholder="key" name="key" size="10" />
-	<input type="text" placeholder="value" name="val" size="10" />
+	<input type="text" placeholder="key" name="key" size="20" />
+	<input type="text" placeholder="value" name="val" size="20" />
 	<input type="submit" value="Set" />
 </form>
 <div id="idb-log"></div>
@@ -71,17 +71,15 @@ All data (all data is editable):
 {{/if}}
 </script>
 <script id="idb-data-child" type="text/x-jquery-tmpl">
-<li><span class="keyval" contenteditable="true" data-key="${Key}"
-          onblur="indexedDbUtil.updateKey(this)">${Key}</span>
-    => <span class="keyval" contenteditable="true" data-key="${Key}"
-             onblur="indexedDbUtil.updateValue(this)">${Value}</span>&nbsp
-    [<a href="javascript:void(0)" data-key="${Key}" onclick="indexedDbUtil.deleteKey(this)">Delete</a>]
+<li><span class="idb-key" contenteditable="true" data-key="${Key}">${Key}</span>
+    => <span class="idb-value" contenteditable="true" data-key="${Key}">${Value}</span>&nbsp
+    [<a href="#delete-${Key}" class="idb-delete" data-key="${Key}">Delete</a>]
 </li>
 </script>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="/static/jquery.min.js"><\/script>')</script>
 <script type="text/javascript" src="/static/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="simple-usage-indexdb.js"></script>
+<script type="text/javascript" src="simple-usage-indexeddb.js"></script>
 <!-- vim: set noet sw=2 ts=2 fileencoding=utf-8 : -->
 </body></html>
