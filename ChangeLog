@@ -1,3 +1,6 @@
+2011-08-16: wscript-solr
+	* Waf から Solr を使ってみる。
+
 2011-08-14: simple-usage-indexeddb.html,simple-usage-indexeddb.js
 	* IndexedDB を使ってみる。
 

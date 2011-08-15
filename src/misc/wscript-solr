@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+APPNAME = 'solr-test'
+VERSION = '1.0.0'
+
+top = '.'
+out = '_build'
+
+import urllib
+import tarfile
+
+from waflib.Task import Task
+
+SOLR_VERSION = '3.3.0'
+SOLR_PACKAGE = 'apache-solr-%s.tgz' % (SOLR_VERSION,)
+SOLR_MIRROR = 'http://ftp.riken.jp/net/apache/lucene/solr/%s/%s' % (SOLR_VERSION, SOLR_PACKAGE)
+
+
+def configure(ctx):
+    p = ctx.path.find_resource(SOLR_PACKAGE)
+    if p is None:
+        urllib.urlretrieve(SOLR_MIRROR, SOLR_PACKAGE)
+    jar = ctx.path.ant_glob('apache-solr-*/example/start.jar')
+    if not jar:
+        with tarfile.open(SOLR_PACKAGE) as tar:
+            tar.extractall()
+
+
+def run_solr(ctx):
+    jar_dir = ctx.path.find_dir('apache-solr-%s/example' % (SOLR_VERSION,))
+    solr_dir = ctx.path.find_node('solr')
+    ctx.exec_command(['java', '-Dsolf.solr.home=%s' % (solr_dir.abspath(),),
+                      '-jar', 'start.jar'], cwd=jar_dir.abspath())
+
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
