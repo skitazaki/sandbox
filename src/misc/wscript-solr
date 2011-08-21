@@ -10,8 +10,6 @@ out = '_build'
 import urllib
 import tarfile
 
-from waflib.Task import Task
-
 SOLR_VERSION = '3.3.0'
 SOLR_PACKAGE = 'apache-solr-%s.tgz' % (SOLR_VERSION,)
 SOLR_MIRROR = 'http://ftp.riken.jp/net/apache/lucene/solr/%s/%s' % (SOLR_VERSION, SOLR_PACKAGE)
