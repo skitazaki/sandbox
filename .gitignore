@@ -4,3 +4,7 @@ a.out
 *.so
 *.pyc
 *.hi
+bin/
+include/
+lib/
+man/
