@@ -1,3 +1,6 @@
+2011-08-27: simple-usage-raphael-chart.html,simple-usage-raphael-chart.js
+	* Raphael を使ってチャートを表示する。
+
 2011-08-21: wscript-pep8
 	* Waf から pep8 を使ってみる。
 

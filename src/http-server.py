@@ -34,6 +34,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     jQueryTmpl = os.path.join(LIBDIR, 'jquery.tmpl.min.js')
     jQueryHistory = os.path.join(LIBDIR, 'jquery.history.min.js')
     DataJS = os.path.join(LIBDIR, 'datajs.min.js')
+    RaphaelJS = os.path.join(LIBDIR, 'raphael.min.js')
 
     def _send_file(self, fname):
         _, suffix = os.path.splitext(fname)
@@ -54,6 +55,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             for f in os.listdir(CONTENTSDIR):
                 if f.endswith('.html'):
                     self.wfile.write('<li><a href="%s">%s</a></li>' % (f, f))
+                elif f.endswith('~') or f.startswith('.'):
+                    continue
                 else:
                     self.wfile.write('<li>%s</li>' % (f,))
             self.wfile.write('</ul>')
@@ -70,6 +73,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             js = self.jQueryHistory
         elif self.path.startswith('/static/datajs.min.js'):
             js = self.DataJS
+        elif self.path.startswith('/static/raphael.min.js'):
+            js = self.RaphaelJS
         if js:
             self._send_file(js)
             return
