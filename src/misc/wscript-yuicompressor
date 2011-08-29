@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+APPNAME = 'yuicompress-test'
+VERSION = '1.0.0'
+
+top = '.'
+out = '_build'
+
+
+def configure(ctx):
+    ctx.find_program('yuicompressor')
+
+
+from waflib.Task import Task
+
+class yuicompressor(Task):
+    def run(self):
+        return self.exec_command('yuicompressor %s >%s' % (
+                self.inputs[0].abspath(), self.outputs[0].abspath()
+            ))
+
+
+def build(bld):
+    assets = bld.path.ant_glob(['**/*.js', '**/*.css'])
+    for src in assets:
+        dst = src.change_ext('-min' + src.suffix())
+        t = yuicompressor(env=bld.env)
+        t.set_inputs(src)
+        t.set_outputs(dst)
+        bld.add_to_group(t)
+
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
