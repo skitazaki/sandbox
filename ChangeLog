@@ -1,3 +1,6 @@
+2011-09-20: javascriptmvc-update.sh
+	* JavaScriptMVC の submodule を更新する。
+
 2011-08-29: wscript-yuicompressor
 	* Waf から YUI Compressor を使ってみる。
 
