@@ -1,3 +1,6 @@
+2011-10-02: solr-search.html,solr-search.js
+	* Solr の簡易 HTML コンソール。
+
 2011-09-20: javascriptmvc-update.sh
 	* JavaScriptMVC の submodule を更新する。
 
