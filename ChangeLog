@@ -1,3 +1,7 @@
+2011-10-21: ec2setenv.sh nodejs-setenv.sh
+
+	* EC2 と Node.JS のアクティベーションスクリプト。
+
 2011-10-17: fnameconv.py
 
 	* ファイル名を日付文字列に変換する。
