@@ -1,39 +1,30 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ == """\
-python %prog {hashtag-name-except-hash}
+"""python %prog {keyword}
 
 Fetches tweets via search API using JSON format.
-see also `d84.py`, which uses user timeline.
 """
 
 import datetime
-import logging
-import optparse
-import sys
-import urllib2
+import urllib, urllib2
 
 try:
     import simplejson as json
 except ImportError:
-    import json
+    try:
+        import json
+    except ImportError:
+        raise SystemExit("Use Python 2.6 or higher.")
 
-TWITTER_SEARCH = "http://search.twitter.com/search.json"
+from sandboxlib import parse_args, ArgumentError
 
-
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    opts, args = parser.parse_args()
-
-    if len(args) != 1:
-        parser.error("I can accept only one argument.")
-
-    return args[0]
+TWITTER_SEARCH = "http://search.twitter.com/search"
 
 
-def fetch_channel(channel):
-    url = "%s?q=%%23%s" % (TWITTER_SEARCH, channel)
+def search_tweets(keyword):
+    param = {"q": keyword}
+    url = "%s.json?%s" % (TWITTER_SEARCH, urllib.urlencode(param))
 
     ret = urllib2.urlopen(url)
     if ret.code != 200:
@@ -56,17 +47,14 @@ def fetch_channel(channel):
 
 
 def main():
-    channel = parse_args()
+    opts, args = parse_args(doc=__doc__, minargc=1, maxargc=1)
+    keyword = args[0]
 
-    try:
-        fetch_channel(channel)
-    except Exception, e:
-        logging.error(e)
-        sys.exit(1)
+    search_tweets(keyword)
 
 
 def test():
-    fetch_channel("fctokyo")
+    search_tweets("#fctokyo")
 
 if __name__ == '__main__':
     main()

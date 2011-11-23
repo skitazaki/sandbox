@@ -1,39 +1,31 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ == """
-python %prog {screen_name}
+"""python %prog screen_name [screen_name [ ... ]]
 
 Fetches tweets via public timeline using JSON format.
-see also `d66.py`, which uses Atom data.
 """
 
 import datetime
 import logging
-import optparse
-import sys
-import urllib2
+import urllib, urllib2
 
 try:
     import simplejson as json
 except ImportError:
-    import json
+    try:
+        import json
+    except ImportError:
+        raise SystemExit("Use Python 2.6 or higher.")
+
+from sandboxlib import parse_args, ArgumentError
 
 TWITTER_USER_TIMELINE = "http://api.twitter.com/1/statuses/user_timeline"
 
 
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    opts, args = parser.parse_args()
-
-    if len(args) != 1:
-        parser.error("I can accept only one argument.")
-
-    return args[0]
-
-
 def fetch_user_timeline(screen_name):
-    url = "%s.json?screen_name=%s" % (TWITTER_USER_TIMELINE, screen_name)
+    param = {"screen_name": screen_name}
+    url = "%s.json?%s" % (TWITTER_USER_TIMELINE, urllib.urlencode(param))
 
     ret = urllib2.urlopen(url)
     if ret.code != 200:
@@ -48,13 +40,13 @@ def fetch_user_timeline(screen_name):
 
 
 def main():
-    screen_name = parse_args()
+    opts, args = parse_args(doc=__doc__, minargc=1)
 
-    try:
-        fetch_user_timeline(screen_name)
-    except Exception, e:
-        logging.error(e)
-        sys.exit(1)
+    for screen_name in args:
+        try:
+            fetch_user_timeline(screen_name)
+        except:
+            logging.error("Could not fetch %s's timeline.", screen_name)
 
 
 def test():

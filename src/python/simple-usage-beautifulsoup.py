@@ -1,59 +1,55 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ = """\
-python %prog [options] file
+"""python %prog [options] file
 
 Parses HTML file downloaded from Google Bookmarks.
 Since the file is invalid XML, I use `BeautifulSoup` to parse it.
 """
 
+import csv
 import logging
-import optparse
-import os.path
 import sys
 
-from BeautifulSoup import BeautifulSoup
+try:
+    from BeautifulSoup import BeautifulSoup
+except ImportError:
+    raise SystemExit("`BeautifulSoup` module is not found on your system.")
+
+from sandboxlib import parse_args, check_file_path
 
 
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    parser.add_option("-v", "--verbose", dest="verbose",
-            default=False, action="store_true", help="verbose mode")
-    parser.add_option("-q", "--quiet", dest="verbose",
-            default=True, action="store_false", help="quiet mode")
+class HTMLProcessor(object):
 
-    opts, args = parser.parse_args()
+    def __init__(self, writer=None):
+        w = writer or sys.stdout
+        self.writer = csv.writer(w)
 
-    if not args:
-        parser.error("no parsing file is specified.")
+    def process_file(self, fname):
+        logging.info("Start processing: %s", fname)
+        self.process(open(fname))
+        logging.info("End processing: %s", fname)
 
-    if opts.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-
-    return args[0]
-
-
-def process(stream, writer=sys.stdout):
-    soup = BeautifulSoup(stream)
-
-    for title in soup.findAll('h3'):
-        #print >>writer, title.text
-        items = title.nextSibling.nextSibling
-        for item in items.findAll('a'):
-            if item.text:
-                print >>writer, '"%s","%s"' % (item.text, item['href'])
+    def process(self, stream):
+        soup = BeautifulSoup(stream)
+        for title in soup.findAll('h3'):
+            #print title.text
+            items = title.nextSibling.nextSibling
+            for item in items.findAll('a'):
+                if item.text:
+                    row = (item.text.encode('utf-8'), item['href'])
+                    self.writer.writerow(row)
 
 
 def main():
-    fname = parse_args()
-
-    process(open(fname))
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    p = HTMLProcessor(opts.output)
+    for fname in files:
+        p.process_file(fname)
 
 
 def test():
-    sample = '''\
-<!DOCTYPE NETSCAPE-Bookmark-file-1>
+    sample = '''<!DOCTYPE NETSCAPE-Bookmark-file-1>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 <TITLE>Bookmarks</TITLE>
 <H1>Bookmarks</H1>
@@ -78,16 +74,16 @@ def test():
 <DT><A HREF="http://www.nurs.or.jp/~sug/soft/super/bash.htm" ADD_DATE="1231218879947769">Super Technique 講座〜bash 超プログラム術</A>
 <DT><A HREF="http://nanika.osonae.com/" ADD_DATE="1218497870324031">C / C++ / C#</A>
 </DL><p>'''
-    from StringIO import StringIO
-    import csv
+    from cStringIO import StringIO
     io = StringIO()
-    process(sample, io)
+    p = HTMLProcessor(io)
+    p.process(sample)
     io.seek(0)
     for row in csv.reader(io):
         print row
         assert len(row) == 2
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

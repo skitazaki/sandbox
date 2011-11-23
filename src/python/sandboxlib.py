@@ -17,7 +17,7 @@ class ArgumentError(Exception):
     pass
 
 
-def parse_args(doc=None, prefook=None, postfook=None):
+def parse_args(doc=None, minargc=0, maxargc=None, prefook=None, postfook=None):
     """Sets up logging verbosity.
 
     :rtype: normal arguments except options.
@@ -39,11 +39,21 @@ def parse_args(doc=None, prefook=None, postfook=None):
 
     opts, args = parser.parse_args()
 
+    if len(args) < minargc:
+        parser.error("Lacking argument(s).")
+    if maxargc and len(args) > maxargc:
+        parser.error("Too many arguments.")
+
     if postfook:
         try:
             postfook(opts, args)
         except ArgumentError, e:
             parser.error(e)
+
+    if opts.filename and not os.path.exists(opts.filename):
+        parser.error("Configuration file was not found.")
+    if opts.output and os.path.exists(opts.output):
+        logging.warn("\"%s\" already exists.", opts.output)
 
     if opts.verbose:
         logging.basicConfig(level=logging.DEBUG)
@@ -54,11 +64,6 @@ def parse_args(doc=None, prefook=None, postfook=None):
 
 
 def check_file_path(opts, files):
-    if opts.filename and not os.path.exists(opts.filename):
-        raise ArgumentError("Configuration file was not found.")
-    if opts.output and os.path.exists(opts.output):
-        logging.warn("\"%s\" already exists.", opts.output)
-
     if not files:
         raise ArgumentError("No input file.")
     notfound = filter(lambda f: not os.path.exists(f), files)
@@ -82,5 +87,56 @@ class UTC(datetime.tzinfo):
         return ZERO
 
 NOW = datetime.datetime.now(UTC())
+
+if __name__ == '__main__':
+    boilerplate = '''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""python %prog [options] file1 [file2 [ ... ]]
+
+Description is here.
+"""
+
+import logging
+import sys
+
+from sandboxlib import parse_args, check_file_path
+
+
+class Processor(object):
+
+    def __init__(self, writer=None):
+        self.writer = writer or sys.stdout
+
+    def process_file(self, fname):
+        logging.info("Start processing: %s", fname)
+        self.process(open(fname))
+        logging.info("End processing: %s", fname)
+
+    def process(self, stream):
+        pass
+
+
+def main():
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    p = Processor(opts.output)
+    for fname in files:
+        p.process(fname)
+
+
+def test():
+    sample = """SAMPLE"""
+    from cStringIO import StringIO
+    io = StringIO()
+    p = Processor(io)
+    p.process(sample)
+    io.seek(0)
+
+if __name__ == '__main__':
+    main()
+
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
+'''
+    print boilerplate
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
