@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Creates thumbnail image(s), to require PIL.
-# example:
-# $ python d15.py a.jpg
 
-import os.path
-import sys
-import Image
+"""python %prog image1 [image2 [ ... ]]
+
+Creates thumbnail image(s), to require PIL.
+"""
+
+import logging
+import os
+try:
+    import Image
+except ImportError:
+    raise SystemExit("Install PIL (Python Imaging Library) at first.")
+
+from sandboxlib import parse_args, check_file_path
 
 MINSIZE = (120, 120)
 FILENAMEEXT = "thumbnail"
-
-
-def usage(program):
-    print '''usage: python %s image_file [image_file..]
-    ''' % (program)
-    sys.exit(1)
 
 
 def createthumbnail(fname):
@@ -37,10 +38,13 @@ def createthumbnail(fname):
     except IOError:
         print "could not find: %s" % fname
 
-if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        usage(sys.argv[0])
-    for fname in sys.argv[1:]:
+
+def main():
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    for fname in files:
         createthumbnail(fname)
+
+if __name__ == '__main__':
+    main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

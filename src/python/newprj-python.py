@@ -5,10 +5,9 @@
 # <http://blog.teemu.im/2009/02/08/using-zcbuildout-in-a-twisted-project/>
 # <http://code.google.com/p/typhoonae/source/browse/buildout.cfg>
 
-"""
-Usage: python %prog [options] ${project_name}
+"""python %prog [options] project_name
 
-Creates Python project using `virtualenv` and `buildout`.
+Creates a Python project using `virtualenv` and `buildout`.
 Sample project contains `mongodb`.
 """
 
@@ -18,7 +17,7 @@ import subprocess
 import urllib2
 from string import Template
 
-from sandboxlib import parse_args
+from sandboxlib import parse_args, ArgumentError
 
 BUILDOUT_BOOTSTRAP = \
   "http://svn.zope.org/*checkout*/zc.buildout/trunk/bootstrap/bootstrap.py"
@@ -61,6 +60,19 @@ setup(
 """)
 
 
+def postfook(opts, args):
+    if len(args) != 1:
+        raise ArgumentError("No project name was given.")
+    project = args[0]
+
+    if os.path.exists(project):
+        msg = "project named \"%s\" already exists." % (project,)
+        raise ArgumentError(msg)
+
+    if "." in project or "/" in project:
+        raise ArgumentError("Invalid project name.")
+
+
 def project_starter(project):
     argv = ['virtualenv', '--distribute', project]
     subprocess.call(argv)
@@ -76,7 +88,8 @@ def project_starter(project):
         with open('bootstrap.py', 'wb') as bootstrap:
             bootstrap.write(r.read())
     except urllib2.URLError, e:
-        raise
+        logging.error("Could not get %s", BUILDOUT_BOOTSTRAP)
+        raise SystemExit("Network problem.")
 
     argv = [os.path.join('bin', 'python'), 'bootstrap.py']
     subprocess.call(argv)
@@ -96,21 +109,8 @@ def project_starter(project):
 
 
 def main():
-    opts, projects = parse_args()
-    if len(projects) != 1:
-        raise SystemExit(__doc__)
-    project = projects[0]
-
-    if os.path.exists(project):
-        raise SystemExit('''project named "%s" already exists.''' % (project,))
-
-    if "." in project or "/" in project:
-        raise SystemError("Invalid project name.")
-
-    try:
-        project_starter(project)
-    except Exception, e:
-        raise SystemError(e)
+    opts, projects = parse_args(doc=__doc__, postfook=postfook)
+    project_starter(projects[0])
 
 
 def test():

@@ -1,32 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Removes all empty directories.
 
+"""python %prog [options] [dir1 [dir2 [ ... ]]]
+
+Removes all empty directories.
+"""
+
+import logging
 import os
-import os.path
 
-
-def usage(program):
-    print '''usage: python %s [directory..]
-    ''' % (program)
+from sandboxlib import parse_args
 
 
 def removeemptydir(root):
+    """removes directory which is empty or has only one hidden file."""
     for dirname, dirs, files in os.walk(root):
-        """removes directory which is empty or has only one hidden file."""
         if len(dirs) == 0 and (len(files) == 0 or
               (len(files) == 1 and files[0].startswith("."))):
-            answer = raw_input("remove: '%s' [y/n] " % dirname)
+            answer = raw_input("remove: '%s' [y/N] " % dirname)
             if answer == "y":
                 [os.unlink(os.path.join(dirname, f)) for f in files]
                 os.rmdir(dirname)
-                print("[INFO] removed")
+                logging.info("removed %s", dirname)
+
+
+def main():
+    opts, dirs = parse_args(doc=__doc__)
+    if dirs:
+        [removeemptydir(d) for d in dirs]
+    else:
+        removeemptydir(os.getcwd())
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) == 1:
-        removeemptydir(os.getcwd())
-    else:
-        [removeemptydir(d) for d in sys.argv[1:]]
+    main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

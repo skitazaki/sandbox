@@ -1,38 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ = """\
-python %prog [options] {solr-schema.xml}
+"""python %prog [options] solr-schema.xml
 
 Parse schema file of Solr.
 """
 
-import collections
 import logging
-import optparse
-import os.path
-import sys
 import xml.sax
 
 from string import Template
 from xml.sax.handler import ContentHandler
 
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    parser.add_option("-q", "--quiet", dest="verbose",
-            default=True, action="store_false", help="quiet mode")
-    parser.add_option("-v", "--verbose", dest="verbose",
-            default=False, action="store_true", help="verbose mode")
+from sandboxlib import parse_args, check_file_path
 
-    opts, args = parser.parse_args()
-
-    if len(args) != 1:
-        parser.error("Give me a Solr schema xml.")
-
-    if opts.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-
-    return args[0]
 
 class SolrSchemaParser(ContentHandler):
 
@@ -62,7 +43,6 @@ class SolrSchemaParser(ContentHandler):
                 (len(self.callbacks),))
 
 def main():
-
     # This is a Confuluence table style.
     header = Template("""\
 ||Attribute Name ||Field Name ||Field Type ||Indexed ||Stored ||Multi Valued |""")
@@ -94,10 +74,7 @@ $indexed | $stored | $multiValued |""")
             if self.style["body"]:
                 print self.style["body"].safe_substitute(doc)
 
-    target_file = parse_args()
-    if not os.path.exists(target_file):
-        logging.fatal("%s is not found." % (target_file,))
-        sys.exit(1)
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
 
     processor = Processor()
     processor.style["header"] = header
@@ -105,7 +82,8 @@ $indexed | $stored | $multiValued |""")
     parser = SolrSchemaParser()
     parser.add_callback(processor.process)
     processor.leading()
-    xml.sax.parse(target_file, parser)
+    for fname in files:
+        xml.sax.parse(fname, parser)
     processor.trailing()
 
 if __name__ == "__main__":

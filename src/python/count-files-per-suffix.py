@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Get a count of how many file types a project has.
-# See <http://www.commandlinefu.com/commands/view/5386>
+
+"""python %prog [dir1 [dir2 [ ... ]]]
+
+Get a count of how many file types a project has.
+See <http://www.commandlinefu.com/commands/view/5386>
+"""
 
 import collections
 import os
-import os.path
-import sys
 
-
-def usage(program):
-    print('''usage: python %s [dir ..] ''' % (program))
+from sandboxlib import parse_args
 
 IGNORE_LIST = [".svn", ".git"]
 
@@ -29,10 +29,15 @@ def filetypes(proj):
         for t in types:
             print("%16s%4d" % (t, types.get(t)))
 
-if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        filetypes(os.getcwd())
+
+def main():
+    opts, args = parse_args(doc=__doc__)
+    if args:
+        [filetypes(d) for d in args]
     else:
-        [filetypes(d) for d in sys.argv[1:]]
+        filetypes(os.getcwd())
+
+if __name__ == '__main__':
+    main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

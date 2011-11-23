@@ -1,50 +1,41 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Show image data information as JSON format.
-# (copy from d14.py and require Python 2.6)
-# example:
-# $ python d43.py a.jpg b.jpg c.jpg
 
-import os.path
-import sys
+"""python %prog image1 [image2 [ ... ]]
+
+Show image data information as JSON format.
+require Python 2.6 or higher and PIL module.
+"""
+
+import os
+import logging
 try:
     import json
 except ImportError:
-    print "Use Python 2.6 or higher."
-    sys.exit(255)
+    raise SystemExit("Use Python 2.6 or higher.")
 try:
     import Image
 except ImportError:
-    print "Install PIL (Python Imaging Library) at first."
-    sys.exit(255)
+    raise SystemExit("Install PIL (Python Imaging Library) at first.")
 
-
-def parse_args():
-    usage = """usage: python %s image_file [image_file..]"""
-    if len(sys.argv) < 2:
-        print usage % (sys.argv[0])
-        sys.exit(1)
-    return sys.argv[1:]
+from sandboxlib import parse_args, check_file_path
 
 
 def getimageinfo(fname):
     try:
         image = Image.open(fname)
+        size = image.size
     except:
-        sys.stderr.write("invalid image: %s\n" % (fname))
+        logging.error('"%s" is invalid image file.', fname)
+        size = None
     return {'name': os.path.basename(fname),
             'path': os.path.abspath(fname),
-            'size': image.size}
+            'size': size}
 
 
 def main():
-    files = parse_args()
-    images = []
-    for f in files:
-        if os.path.exists(f):
-            images.append(getimageinfo(f))
-        else:
-            sys.stderr.write('"%s" is not found.\n' % (f))
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    images = [getimageinfo(f) for f in files]
     print json.dumps(images)
 
 if __name__ == '__main__':

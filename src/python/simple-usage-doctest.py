@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Use "doctest" module.
-# more test modules are listed [here](http://packages.python.org/testing/)
-# usage:
-# $ python d47.py -v
+
+"""python %prog [options]
+
+Use "doctest" module.
+More test modules are listed at <http://packages.python.org/testing/>
+"""
 
 
 def recursive(query):
-    """print from backward.
+    """Print from backward.
     >>> recursive("hoge")
     e
     ge
@@ -20,7 +22,7 @@ def recursive(query):
 
 
 def generative(query):
-    """print from forward.
+    """Print from forward.
     >>> generative("hoge")
     h
     ho

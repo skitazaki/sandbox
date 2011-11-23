@@ -1,41 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Convert from csv to html list or json.
-# $ python d32.py -t html d32.csv
+
+"""python %prog [options] csv_file
+
+Convert from csv to html list or json.
+"""
 
 import csv
-import getopt
-import json
-import sys
+
+from sandboxlib import parse_args, check_file_path, ArgumentError
 
 
-def parse_args():
-    usage = """usage: python %s -t html|json csv-file-name
-    """
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "t:")
-    except getopt.GetoptError:
-        print usage % (sys.argv[0])
-        sys.exit(1)
-    format = None
-    for o, v in opts:
-        if o == "-t":
-            format = v
-    if not format:
-        print 'specify "-t" option'
-        sys.exit(1)
-    if not format in ("html", "json"):
-        print 'available formats are "html" or "json"'
-        sys.exit(1)
-    if len(args) != 1:
-        print 'invalid argument count: %d' % (len(args))
-        sys.exit(1)
-    fname = args[0]
-    try:
-        return (format, csv.reader(open(fname, "r")))
-    except IOError:
-        print 'invalid file name: %s' % (fname)
-        sys.exit(1)
+def prefook(parser):
+    parser.add_option("-t", dest="outtype",
+        help="output type html|json", default="html")
+
+
+def postfook(opts, args):
+    check_file_path(opts, args)
+    if not opts.outtype in ("html", "json"):
+        raise ArgumentError('Available types are "html" or "json".')
 
 
 def print_html(reader):
@@ -51,14 +35,20 @@ def print_html(reader):
 
 
 def print_json(reader):
+    try:
+        import json
+    except ImportError:
+        raise SystemExit("Use Python 2.6 or higher.")
     data = [{"item":r[0], "href":r[1]} for r in reader if len(r) == 2]
     print json.dumps(data, indent=2)
 
 
 def main():
+    opts, files = parse_args(doc=__doc__,
+                    prefook=prefook, postfook=postfook)
     handler = {"html": print_html, "json": print_json}
-    format, reader = parse_args()
-    handler[format](reader)
+    reader = csv.reader(open(files[0], "r"))
+    handler[opts.outtype](reader)
 
 if __name__ == '__main__':
     main()

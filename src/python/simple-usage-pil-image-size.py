@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Show image size, to require PIL.
-# example:
-# $ python d14.py a.jpg
 
-import sys
-import Image
+"""python %prog image1 [image2 [ ... ]]
 
+Show image size, to require PIL.
+"""
 
-def usage(program):
-    print '''usage: python %s image_file [image_file..]
-    ''' % (program)
-    sys.exit(1)
+import logging
+try:
+    import Image
+except ImportError:
+    raise SystemExit("Install PIL (Python Imaging Library) at first.")
+
+from sandboxlib import parse_args, check_file_path
 
 
 def showimagesize(fname):
@@ -20,12 +21,14 @@ def showimagesize(fname):
         print "%s: width=%dpx, height=%dpx" % (
                 fname, image.size[0], image.size[1])
     except:
-        print "could not find: %s" % fname
+        logging.error('"%s" is invalid image file.', fname)
+
+def main():
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    for fname in files:
+        showimagesize(fname)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        usage(sys.argv[0])
-    for fname in sys.argv[1:]:
-        showimagesize(fname)
+    main()
 
 # vim: set expandtab tabstop=4 shiftwidth=4 cindent :

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 """\
 Try MongoDB with `pymongo`.
 
@@ -11,11 +12,11 @@ The installation is ::
 
 After running server daemon, try it out ::
 
-    $ python d82.py
+    $ python simple-usage-mongodb.py
 
 or ::
 
-    $ nosetests d82.py
+    $ nosetests simple-usage-mongodb.py
 """
 
 from pymongo import Connection

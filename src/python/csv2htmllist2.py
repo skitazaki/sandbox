@@ -1,11 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Convert from csv to html list or table.
-# $ python d36.py -s table d32.csv
+
+"""python %prog [options] csv_file
+
+Convert from csv to html list or table.
+"""
 
 import csv
-import getopt
-import sys
+
+from sandboxlib import parse_args, check_file_path, ArgumentError
+
+STYLES = ("list", "table")
+
+
+def prefook(parser):
+    parser.add_option("-s", dest="style",
+        help="output style list|table", default="list")
+
+
+def postfook(opts, args):
+    check_file_path(opts, args)
+    if not opts.style in STYLES:
+        raise ArgumentError('Available styles are "list" or "table".')
 
 
 class HtmlTuplePrinter:
@@ -49,37 +65,8 @@ PRINTERS = {"list": HtmlListPrinter, "table": HtmlTablePrinter}
 DEFAULT_PRINTER = "list"
 
 
-def parse_args():
-    usage = """usage: python %s [-s style] csv-file-name
-Options:
-  -s  style either of "list" or "table" (default:list)
-    """
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "s:")
-    except getopt.GetoptError:
-        print usage % (sys.argv[0])
-        sys.exit(1)
-    style = None
-    for o, v in opts:
-        if o == "-s":
-            style = v
-    if len(args) != 1:
-        print 'invalid argument count: %d' % (len(args))
-        sys.exit(1)
-    fname = args[0]
-    try:
-        return (style, csv.reader(open(fname, "r")))
-    except IOError:
-        print 'invalid file name: %s' % (fname)
-        sys.exit(1)
-
-
-def print_html(reader, **kwargs):
-    style = kwargs.get("style", None) or DEFAULT_PRINTER
-    if style in PRINTERS:
-        printer = PRINTERS[style]()
-    else:
-        raise IOError("invalid printer style: %s" % (style))
+def print_html(reader, style=DEFAULT_PRINTER):
+    printer = PRINTERS[style]()
     printer.print_header()
     for row in reader:
         if len(row) == 2:
@@ -92,8 +79,10 @@ def print_html(reader, **kwargs):
 
 
 def main():
-    style, reader = parse_args()
-    print_html(reader, style=style)
+    opts, files = parse_args(doc=__doc__,
+                    prefook=prefook, postfook=postfook)
+    reader = csv.reader(open(files[0], "r"))
+    print_html(reader, style=opts.style)
 
 if __name__ == '__main__':
     main()

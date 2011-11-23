@@ -1,58 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ = """\
-python %prog [options] file [,file ...]
+"""python %prog [options] file1 [file2 [ ... ]]
 
 Use "template inheritance" feature provided by jinja2.
 This is similar to Django's one.
 """
 
 import logging
-import optparse
-import os.path
-import sys
+import os
 
 try:
     import jinja2
 except ImportError:
-    logging.fatal("`jinja2` module is not found on your system.")
-    sys.exit(1)
+    raise SystemExit("`jinja2` module is not found on your system.")
 
-
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    parser.add_option("-v", "--verbose", dest="verbose",
-            default=False, action="store_true", help="verbose mode")
-    parser.add_option("-q", "--quiet", dest="verbose",
-            default=True, action="store_false", help="quiet mode")
-
-    opts, args = parser.parse_args()
-
-    if not args:
-        parser.error("no parsing file is specified.")
-
-    if opts.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-
-    return args
+from sandboxlib import parse_args, check_file_path
 
 
 def main():
-    files = parse_args()
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
 
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(opts.basedir))
 
-    for file in files:
-        if not os.path.exists(file):
-            logging.error("%s is not found." % (file,))
-            continue
-
-        logging.info("start to process: %s" % (file,))
-        writer = sys.stdout
-
-        template = env.get_template(file)
-        writer.write(template.render())
+    for fname in files:
+        logging.info("Start to process: %s" % (fname,))
+        template = env.get_template(fname)
+        print template.render()
 
 
 def test():

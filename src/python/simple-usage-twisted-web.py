@@ -1,21 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Simple HTTP Server with "twisted.web"
-# usage: python d56.py --port 8080
+
+"""python %prog [options]
+
+Simple HTTP Server with "twisted.web".
+"""
 
 import datetime
 import json
-import optparse
-import os.path
+import os
+
 from twisted.web import resource
 
+from sandboxlib import parse_args
 
-def parse_args():
-    parser = optparse.OptionParser()
-    parser.add_option("-p", "--port", dest="port", type="int", default=8080,
-            help="port number to listen")
-    opts, args = parser.parse_args()
-    return opts.port
+
+def prefook(parser):
+    parser.add_option("-p", "--port", dest="port",
+        type="int", default=8080, help="port number to listen")
 
 MIMETYPES = {
   ".html": "text/html",
@@ -51,7 +53,8 @@ class SiteHome(resource.Resource):
 
 
 def main():
-    port = parse_args()
+    opts, args = parse_args(doc=__doc__, prefook=prefook)
+    port = opts.port
     from twisted.internet import reactor
     from twisted.web import server
     reactor.listenTCP(port, server.Site(SiteHome()))
