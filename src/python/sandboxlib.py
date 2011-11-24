@@ -12,14 +12,25 @@ import logging
 import os
 import optparse
 
+DEFAULT_ENCODING = 'utf-8'
+
 
 class ArgumentError(Exception):
     pass
 
 
-def parse_args(doc=None, minargc=0, maxargc=None, prefook=None, postfook=None):
-    """Sets up logging verbosity.
+def parse_args(doc=None, minargc=0, maxargc=None,
+                prefook=None, postfook=None):
+    """Generic command line argument parser.
+    * Handle configuration file and base directory.
+    * Handle input and output encoding.
+    * Sets up logging verbosity.
 
+    :param doc string:
+    :param minargc int:
+    :param maxargc int:
+    :param prefook function:
+    :param postfook function:
     :rtype: normal arguments except options.
     """
     parser = optparse.OptionParser(doc)
@@ -29,6 +40,10 @@ def parse_args(doc=None, minargc=0, maxargc=None, prefook=None, postfook=None):
         help="output file", metavar="FILE")
     parser.add_option("--basedir", dest="basedir",
         help="base directory", default=os.getcwd())
+    parser.add_option("--input-encoding", dest="enc_in",
+        help="encoding of input source", default=DEFAULT_ENCODING)
+    parser.add_option("--output-encoding", dest="enc_out",
+        help="encoding of output destination", default=DEFAULT_ENCODING)
     parser.add_option("-v", "--verbose", dest="verbose",
         default=False, action="store_true", help="verbose mode")
     parser.add_option("-q", "--quiet", dest="quiet",
@@ -97,6 +112,7 @@ if __name__ == '__main__':
 Description is here.
 """
 
+import codecs
 import logging
 import sys
 
@@ -108,9 +124,12 @@ class Processor(object):
     def __init__(self, writer=None):
         self.writer = writer or sys.stdout
 
-    def process_file(self, fname):
+    def process_file(self, fname, encoding):
         logging.info("Start processing: %s", fname)
-        self.process(open(fname))
+        try:
+            self.process(codecs.open(fname, encoding=encoding))
+        except Exception, e:
+            logging.error(e)
         logging.info("End processing: %s", fname)
 
     def process(self, stream):
@@ -119,9 +138,14 @@ class Processor(object):
 
 def main():
     opts, files = parse_args(doc=__doc__, postfook=check_file_path)
-    p = Processor(opts.output)
+    writer = None
+    if opts.output:
+        writer = codecs.open(opts.output, 'w', opts.enc_out)
+    p = Processor(writer)
     for fname in files:
-        p.process(fname)
+        p.process_file(fname, opts.enc_in)
+    if writer:
+        writer.close()
 
 
 def test():
