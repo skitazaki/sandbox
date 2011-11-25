@@ -174,7 +174,7 @@
 2010-10-23: simple-usage-jinja2.py,simple-usage-jinja2.txt
 	* `jinja2` で if 文と for 文を使ってみる。
 
-2010-10-16: load-mysql-connection-info.py,load-mysql-connection-info.json
+2010-10-16: load-mysql-connection-info.py
 	* `MySQLdb` の接続情報を JSON から取得する。
 
 2010-10-15: toggle-contents.html
@@ -310,7 +310,7 @@
 2010-04-29: count-files-per-suffix.py
 	* 拡張子ごとのファイル数を集計する。
 
-2010-04-26: yaml2json.py,yaml2json.yaml
+2010-04-26: yaml2json.py
 	* YAML を JSON に変換する。
 
 2010-04-25: remove-empty-dir.py

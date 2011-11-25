@@ -1,34 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ = """
-python %prog {manuscript}
+"""python %prog {manuscript}
 
 Parse a reST manuscript and write out it in two way HTML formats.
 A file whose suffix is ".html" is for preview, and a file whose suffix
 is ".txt" is for blogger's article.
 """
 
-import optparse
 import os
 import tempfile
 
 from docutils.core import publish_cmdline
 
+from sandboxlib import parse_args, check_file_path
+
 # see: lib/python2.7/site-packages/docutils/writers/html4css1/template.txt
 RST_TEMPLATE_SOURCE = '''
 %(body)s
 '''
-
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-
-    opts, args = parser.parse_args()
-
-    if not args:
-        parser.error("no arguments found.")
-
-    return args
 
 
 def publish_restructured_text(manuscript):
@@ -50,13 +40,10 @@ def publish_restructured_text(manuscript):
 
 
 def main():
-    manuscripts = parse_args()
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
 
-    for manuscript in manuscripts:
-        if os.path.exists(manuscript):
-            publish_restructured_text(manuscript)
-        else:
-            print "%s is not found." % (manuscript,)
+    for fname in files:
+        publish_restructured_text(fname)
 
 
 def test():

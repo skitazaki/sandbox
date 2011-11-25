@@ -1,20 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Sample usage of sqlite.
-# example:
-# $ python d35.py -f d35.sqlite
-# links:
-# <http://docs.python.org/library/sqlite3.html>
-# <http://net-newbie.com/sqlite/sqlite.html>
 
-import getopt
+"""python %prog [options]
+
+Sample usage of sqlite.
+* <http://docs.python.org/library/sqlite3.html>
+* <http://net-newbie.com/sqlite/sqlite.html>
+"""
+
+import logging
 import random
-import sys
 try:
     import sqlite3
 except ImportError:
-    print("Python 2.5 or higher required.")
-    sys.exit(1)
+    raise SystemExit("Python 2.5 or higher required.")
+
+from sandboxlib import parse_args
 
 # NOTE: set this value from command line argument.
 DATA_AMOUNT = 50
@@ -24,39 +25,18 @@ TRANS_TYPE = ("BUY", "SELL")
 SYMBOL_TYPE = ("Apple", "Google", "Microsoft", "Sony")
 
 
-def parse_args():
-    usage = """usage: python %s [-f database file]
-Options:
-  -f database file name (if none, use :memory:)
-    """
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "f:h")
-    except getopt.GetoptError:
-        print(usage % (sys.argv[0]))
-        sys.exit(1)
-    fname = ":memory:"
-    for o, v in opts:
-        if o == "-f":
-            fname = v
-        if o == "-h":
-            print(usage % (sys.argv[0]))
-            sys.exit(0)
-    return fname
-
-
 def createtable(cur):
     cur.execute("""SELECT sql FROM sqlite_master
         WHERE type='table' AND tbl_name='stocks'""")
     r = cur.fetchone()
-    # NOTE: output should be printed only when verbose mode.
     if r:
-        print('"stocks" is already created: %s' % r)
+        loggng.info('"stocks" is already created: %s', r)
     else:
         # it's okay to use "IF NOT EXISTS", but checking current status is more
         # user-friendly to avoid to overwrite current data.
         cur.execute("""CREATE TABLE stocks (
           date TEXT, trans TEXT, symbol TEXT, qty REAL, price REAL)""")
-        print('create a table: "stocks"')
+        logging.info('create a table: "stocks"')
 
 
 def addrecords(cur):
@@ -77,7 +57,8 @@ def showrecords(cur):
 
 
 def main():
-    fname = parse_args()
+    opts, _ = parse_args(doc=__doc__, maxargc=0)
+    fname = opts.output or ':memory:'
     database = sqlite3.connect(fname)
     cur = database.cursor()
     createtable(cur)

@@ -10,7 +10,6 @@ You can download XML file from `here
 
 import collections
 import logging
-import optparse
 import xml.sax
 from xml.sax.handler import ContentHandler
 

@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Sample usage of MySQLdb.
-# example: $ python d61.py
+
+"""python %prog [options]
+
+Sample usage of MySQLdb.
+"""
 
 import random
-import sys
 try:
     import MySQLdb
 except ImportError:
-    print("Install \"MySQLdb\" at first.")
-    sys.exit(1)
+    raise SystemExit("`MySQLdb` module is not found on your system.")
 
 # NOTE: set this value from command line argument.
 DATA_AMOUNT = 50

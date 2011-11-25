@@ -56,7 +56,7 @@ def parse_args(doc=None, minargc=0, maxargc=None,
 
     if len(args) < minargc:
         parser.error("Lacking argument(s).")
-    if maxargc and len(args) > maxargc:
+    if maxargc is not None and len(args) > maxargc:
         parser.error("Too many arguments.")
 
     if postfook:

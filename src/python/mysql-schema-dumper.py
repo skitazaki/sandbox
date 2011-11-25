@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Dump all tables information from MySQL.
+"""python %prog [options] {database_setting_file.ini}
+
+Dump all tables information from MySQL and write out as HTML format.
 """
 
 import logging
-import optparse
-import os.path
-import sys
+import os
 import ConfigParser
 from string import Template
 
@@ -19,14 +19,9 @@ except:
 try:
     import MySQLdb
 except ImportError:
-    raise SystemError("sudo apt-get install python2.6-mysqldb")
+    raise SystemExit("`MySQLdb` module is not found on your system.")
 
-
-__doc__ = """\
-python %prog [options] {database_setting_file.ini}
-
-Show all databases schema as HTML format.
-"""
+from sandboxlib import parse_args, check_file_path
 
 IGNORE_DATABASES = ('information_schema', 'mysql', 'test', 'performance_schema')
 
@@ -98,21 +93,6 @@ $(function() {
     });
 });
 """
-
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    parser.add_option("-v", "--verbose", dest="verbose",
-            default=False, action="store_true", help="verbose mode")
-
-    opts, args = parser.parse_args()
-
-    if opts.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-
-    if len(args) != 1:
-        parser.error("Give me setting file.")
-
-    return args[0]
 
 
 class DBManager(object):
@@ -224,7 +204,8 @@ def load_setting(fname):
 
 
 def main():
-    fname = parse_args()
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    fname = files[0]
     setting = load_setting(fname) if os.path.exists(fname) else {}
 
     writer = StringIO()
