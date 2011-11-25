@@ -1,34 +1,33 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Convert data from YAML to JSON.
 
+"""python %prog [options] yaml1 [yaml2 [ ... ]]
+
+Convert data from YAML to JSON.
+"""
+
+import logging
 import json
-import sys
 
 import yaml
-import yaml.scanner
 
-
-def usage(program):
-    print '''usage: python %s YAML[ YAML..]
-    ''' % (program)
+from sandboxlib import parse_args, check_file_path
 
 
 def yaml2json(fname):
     try:
-        print(json.loads(str(yaml.load(open(fname))).replace("'", '"')))
-    except yaml.scanner.ScannerError:
-        sys.stderr.write("Invalid YAML file: %s\n" % fname)
+        cfg = yaml.load(open(fname))
+        print json.dumps(cfg, indent=2)
+    except:
+        logging.error("Invalid YAML file: %s", fname)
+
+
+def main():
+    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    for fname in files:
+        yaml2json(fname)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        usage(sys.argv[0])
-        sys.exit(1)
-    import os.path
-    for fname in sys.argv[1:]:
-        if os.path.exists(fname):
-            yaml2json(fname)
-        else:
-            sys.stderr.write("No such file: %s\n" % fname)
+    main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

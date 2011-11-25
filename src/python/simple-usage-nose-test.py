@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-__doc__ = """\
-nosetests d70.py
+
+"""nosetests %prog
 
 Simple test using `nose` and raise ``AssertionError`` intentionally.
 """

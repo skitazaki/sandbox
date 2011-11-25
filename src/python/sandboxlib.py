@@ -155,12 +155,12 @@ def test():
     p = Processor(io)
     p.process(sample)
     io.seek(0)
+    assert False
 
 if __name__ == '__main__':
     main()
 
-# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-'''
+# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :'''
     print boilerplate
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

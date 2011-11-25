@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ = """\
-python %prog [options] {wikipedia-abstract.xml}
+"""python %prog [options] {wikipedia-abstract.xml}
 
 Parse dumped XML data from Wikipedia.
 You can download XML file from `here
@@ -15,23 +14,7 @@ import optparse
 import xml.sax
 from xml.sax.handler import ContentHandler
 
-
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    parser.add_option("-v", "--verbose", dest="verbose",
-            default=False, action="store_true", help="verbose mode")
-    parser.add_option("-q", "--quiet", dest="verbose",
-            default=True, action="store_false", help="quiet mode")
-
-    opts, args = parser.parse_args()
-
-    if len(args) != 1:
-        parser.error("Give me a wikipedia abstract xml.")
-
-    if opts.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-
-    return args[0]
+from sandboxlib import parse_args, check_file_path
 
 
 class WikipediaAbstractParser(ContentHandler):
@@ -74,17 +57,19 @@ class WikipediaAbstractParser(ContentHandler):
 
 
 def main():
+    opts, files = parse_args(doc=__doc__, maxargc=1,
+                                postfook=check_file_path)
 
-    def handler(doc):
+    def render(doc):
         title = doc["title"] or ""
         url = doc["url"] or ""
         abstract = doc["abstract"] or ""
         print """<div class="article">
 <a href="%s">%s</a><p>%s</p></div>""" % (url, title, abstract)
 
-    target_file = parse_args()
+    target_file = files[0]
     parser = WikipediaAbstractParser()
-    parser.add_callback(handler)
+    parser.add_callback(render)
     xml.sax.parse(target_file, parser)
 
 if __name__ == "__main__":

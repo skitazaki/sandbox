@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__doc__ = """
+"""python %prog [options] {yaml_file} {section_name}
+
 Parse a configuration file written in YAML, and extract given section.
 The output is Python script so that you can use it as Python module.
 
@@ -10,19 +11,15 @@ Usage::
     $ python yaml2config.py ../../etc/config.yaml production
 """
 
-import optparse
-import os.path
+import logging
+import os
 from pprint import pprint
 
 import yaml
 
+from sandboxlib import parse_args, ArgumentError
+
 DEFAULT_CONFIG_VARIABLE = 'CONFIG'
-
-
-def parse_args():
-    parser = optparse.OptionParser(__doc__)
-    opts, args = parser.parse_args()
-    return opts, args
 
 
 def dumps(name, s):
@@ -40,27 +37,28 @@ def dumps(name, s):
         pprint(s)
 
 
-def main():
-    _, args = parse_args()
-
+def postfook(opts, args):
     if len(args) != 2:
-        msg = "ERROR: Invalid argument(s).\n" + __doc__
-        raise SystemExit(msg)
-
+        raise ArgumentError("Missing arguments.")
     fname, section = args
     if not os.path.exists(fname):
         msg = "%s is not found." % (fname,)
-        raise SystemExit(msg)
+        raise ArgumentError(msg)
+
+
+def main():
+    opts, args = parse_args(doc=__doc__, postfook=postfook)
+
+    fname, section = args
     try:
         config = yaml.load(open(fname))
     except yaml.scanner.ScannerError, e:
-        print e
-        msg = "%s is invalid YAML format file." % (fname,)
-        raise SystemExit(msg)
+        logging.error("%s is invalid YAML format file.", fname)
+        return
 
     if not section in config:
-        msg = "%s is not defined in %s." % (section, fname)
-        raise SystemExit(msg)
+        logging.error("%s is not defined in %s.", section, fname)
+        return
 
     print "#"
     print "# Configuration for %s environment." % (section,)

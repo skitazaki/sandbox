@@ -15,7 +15,6 @@ Input file must contain following header line:
 import codecs
 import csv
 import logging
-import sys
 
 try:
     import jinja2
@@ -49,7 +48,7 @@ class Renderer(object):
             if encoding:
                 self.writer = codecs.open(output, 'w', encoding)
             else:
-                self.writer = open(output, 'w', encoding)
+                self.writer = open(output, 'w')
 
     def render(self, points):
         template = jinja2.Template(TEMPLATE)
@@ -107,4 +106,3 @@ if __name__ == '__main__':
     main()
 
 # vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
-
