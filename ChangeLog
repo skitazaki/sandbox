@@ -1,3 +1,7 @@
+2011-12-05: simple-usage-fileapi.html
+
+	* ブラウザの File API を使ってみる。
+
 2011-11-24: csv2kml.py
 
 	* CSV から KML に変換するスクリプト。

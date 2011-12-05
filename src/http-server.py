@@ -35,6 +35,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     jQueryHistory = os.path.join(LIBDIR, 'jquery.history.min.js')
     DataJS = os.path.join(LIBDIR, 'datajs.min.js')
     RaphaelJS = os.path.join(LIBDIR, 'raphael.min.js')
+    BootstrapCSS = os.path.join(LIBDIR, 'bootstrap.min.css')
 
     def _send_file(self, fname):
         _, suffix = os.path.splitext(fname)
@@ -62,21 +63,23 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write('</ul>')
             return
 
-        js = None
+        asset = None
         if self.path.startswith('/static/jquery.min.js'):
-            js = self.jQuery
+            asset = self.jQuery
         elif self.path.startswith('/static/jquery-ui.min.js'):
-            js = self.jQueryUI
+            asset = self.jQueryUI
         elif self.path.startswith('/static/jquery.tmpl.min.js'):
-            js = self.jQueryTmpl
+            asset = self.jQueryTmpl
         elif self.path.startswith('/static/jquery.history.min.js'):
-            js = self.jQueryHistory
+            asset = self.jQueryHistory
         elif self.path.startswith('/static/datajs.min.js'):
-            js = self.DataJS
+            asset = self.DataJS
         elif self.path.startswith('/static/raphael.min.js'):
-            js = self.RaphaelJS
-        if js:
-            self._send_file(js)
+            asset = self.RaphaelJS
+        elif self.path.startswith('/static/bootstrap.min.css'):
+            asset = self.BootstrapCSS
+        if asset:
+            self._send_file(asset)
             return
 
         pos = self.path.find('?')

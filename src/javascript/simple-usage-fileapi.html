@@ -1,0 +1,175 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="content-script-type" content="text/javascript" />
+  <meta http-equiv="content-style-type" content="text/css" />
+
+  <title>File API Sample</title>
+  <meta name="description" content="">
+  <meta name="author" content="Shigeru Kitazaki">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+<style type="text/css">
+#drop-zone {
+    border: 2px dashed #BBBBBB;
+    border-radius: 5px 5px 5px 5px;
+    color: #BBBBBB;
+    padding: 25px;
+    text-align: center;
+}
+</style>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <header>
+      <div class="page-header">
+        <h1>File API Sample <small>convert CSV into JSON</small></h1>
+      </div>
+    </header>
+
+    <div class="content" role="main">
+      <div class="row">
+        <form>
+        Select CSV files: <input type="file" id="files" name="files[]" multiple="multiple" />
+        </form>
+        <div id="drop-zone">Drop CSV files here</div>
+      </div>
+      <div class="row">
+        <ul id="file-list"></ul>
+        <span id="progress-bar"></span>
+        <div id="screen"></div>
+        <pre id="dump"></pre>
+      </div>
+    </div>
+
+    <footer>
+    Created by Shigeru Kitazaki -
+      <a href="http://twitter.com/kshigeru">@kshigeru</a>
+    </footer>
+  </div>
+
+  <script id="file-list-template" type="text/x-jquery-tmpl">
+    <li>${Name} (${Type}) - ${Size} bytes, last modified: ${LastModified}</li>
+  </script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+  <script>window.jQuery || document.write('<script src="/static/jquery-1.7.min.js">\x3C/script>')</script>
+  <script src="/static/jquery.tmpl.min.js"></script>
+  <script>
+    var FileApiSample = function(parse, opts) {
+
+        var opts = opts || {};
+
+        function readFile(readFile) {
+            var reader = new FileReader();
+            // Handle progress, success, and errors
+            reader.onprogress = opts.progress || function(e) {};
+            reader.onerror = opts.error || function(e) {};
+            reader.onload = opts.load || function(e) {};
+            reader.readAsText(readFile, "UTF-8");
+        }
+
+        function handleFiles(files) {
+            for (var i = 0, f; f = files[i]; i++) {
+                if (parse(f)) {
+                    readFile(f);
+                }
+            }
+        }
+
+        return {
+            change: function(selector) {
+                $(selector).bind("change", function(e) {
+                    var files = e.target.files;
+                    handleFiles(files);
+                });
+                return this;
+            },
+            drop: function(selector) {
+                /*
+                 * Drag-n-Drop handler.
+                 * see also: http://boazsender.com/understanding-jquery-events.html
+                 */
+                $(selector)
+                    .bind("dragenter", function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        e.originalEvent.dataTransfer.dropEffect = "copy";
+                    })
+                    .bind("dragover", function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        e.originalEvent.dataTransfer.dropEffect = "copy";
+                    })
+                    .bind("drop", function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        var files = e.originalEvent.dataTransfer.files;
+                        handleFiles(files);
+                    });
+                return this;
+            }
+        };
+    };
+
+    $(function() {
+        function parseFile(f) {
+            var dt = [];
+            dt.push({Name: f.name,
+                     Type: f.type || 'n/a',
+                     Size: f.size,
+                     LastModified: f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a'});
+            $("#file-list-template").tmpl(dt).appendTo('#file-list');
+            $("#screen").empty();
+            $("#dump").text("Unsupported file type for: " + f.name);
+            return f.type && f.type.match("text/csv");
+        }
+        var callback = {
+            progress: function(evt) {
+                if (evt.lengthComputable) {
+                    // evt.loaded and evt.total are ProgressEvent properties
+                    var loaded = Math.round((evt.loaded / evt.total) * 100);
+                    $("#progress-bar").text(loaded + "%");
+                }
+            },
+            error: function(evt) {
+                if (evt.target.error.name == "NOT_READABLE_ERR") {
+                    // The file could not be read
+                }
+            },
+            load: function(evt) {
+                var fileString = evt.target.result,
+                    // very bugy code to handle CSV format.
+                    lines = fileString.split("\n"),
+                    msg = [],
+                    data = [];
+                for (var i = 0, line; line = lines[i]; i++) {
+                    var rows = line.split(",");
+                    data.push(rows);
+                    msg.push("<td>" + rows.join("</td><td>") + "</td>");
+                }
+                $("#screen").html("<table><tr>" + msg.join("</tr><tr>") + "</tr></table>");
+                $("#dump").text(JSON.stringify(data));
+            }
+        };
+        var api = new FileApiSample(parseFile, callback);
+        api.change("#files");
+        api.drop("#drop-zone");
+    });
+  </script>
+
+<!-- vim: set et sw=2 ts=2 fileencoding=utf-8 : -->
+</body>
+</html>
