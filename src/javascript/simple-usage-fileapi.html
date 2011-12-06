@@ -49,8 +49,8 @@
       <div class="row">
         <ul id="file-list"></ul>
         <span id="progress-bar"></span>
-        <div id="screen"></div>
-        <pre id="dump"></pre>
+      </div>
+      <div class="row" id="file-content">
       </div>
     </div>
 
@@ -63,6 +63,17 @@
   <script id="file-list-template" type="text/x-jquery-tmpl">
     <li>${Name} (${Type}) - ${Size} bytes, last modified: ${LastModified}</li>
   </script>
+  <script id="file-content-template" type="text/x-jquery-tmpl">
+    <div class="screen">
+      <table>
+      {{each(i, row) rows}}
+        <tr><th>${i + 1}</th>{{each row}}<td>${$value}</td>{{/each}}</tr>
+      {{/each}}
+      </table>
+    </div>
+    <pre class="dump">${dump}</pre>
+  </script>
+
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
   <script>window.jQuery || document.write('<script src="/static/jquery-1.7.min.js">\x3C/script>')</script>
@@ -132,8 +143,6 @@
                      Size: f.size,
                      LastModified: f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a'});
             $("#file-list-template").tmpl(dt).appendTo('#file-list');
-            $("#screen").empty();
-            $("#dump").text("Unsupported file type for: " + f.name);
             return f.type && f.type.match("text/csv");
         }
         var callback = {
@@ -151,17 +160,18 @@
             },
             load: function(evt) {
                 var fileString = evt.target.result,
-                    // very bugy code to handle CSV format.
                     lines = fileString.split("\n"),
-                    msg = [],
                     data = [];
                 for (var i = 0, line; line = lines[i]; i++) {
+                    // very bugy code to handle CSV format.
                     var rows = line.split(",");
                     data.push(rows);
-                    msg.push("<td>" + rows.join("</td><td>") + "</td>");
                 }
-                $("#screen").html("<table><tr>" + msg.join("</tr><tr>") + "</tr></table>");
-                $("#dump").text(JSON.stringify(data));
+                var dt = [{
+                        rows: data,
+                        dump: JSON.stringify(data, null, " ")
+                    }];
+                $("#file-content-template").tmpl(dt).appendTo("#file-content");
             }
         };
         var api = new FileApiSample(parseFile, callback);
