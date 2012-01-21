@@ -85,7 +85,7 @@
 2011-03-11: simple-usage-twisted-dbapi.py
 	* Twisted の dbapi を使ってみる。
 
-2011-02-22: csv2icalendar.py,csv2icalendar.csv
+2011-02-22: csv2icalendar.py
 	* CSV の予定を iCalendar に変換する。
 
 2011-02-16: simple-usage-jqueryui-datepicker.js,simple-usage-jqueryui-datepicker.html
@@ -287,19 +287,19 @@
 2010-05-24: simple-usage-reportlab-table.py
 	* ReportLab で表を生成する。
 
-2010-05-22: csv2htmllist2.py
-	* CSV から HTML の <ul> と <table> を作る。 (use d32.csv)
+2010-05-22: csv2html.py
+	* CSV から HTML の <ul> と <table> を作る。
 
 2010-05-21: simple-usage-sqlite.py
 	* SQLite を使ってみる。
 
-2010-05-18: simple-usage-reportlab-template.py,simple-usage-reportlab-template.csv,simple-usage-reportlab-template.txt
+2010-05-18: simple-usage-reportlab-template.py,simple-usage-reportlab-template.txt
 	* 差し込み印刷のように PDF を生成する。
 
 2010-05-17: extract-events-from-icalendar.py,extract-events-from-icalendar.ics
 	* iCalendar から指定した期間のイベントを抽出する。
 
-2010-05-10: csv2htmllist.py,csv2htmllist.csv
+2010-05-10: csv2htmllist.py
 	* CSV ファイルから Web サイト用のメニューを作る。
 
 2010-05-06: patch-split.sh
@@ -394,7 +394,7 @@
 	* Google Data Protocol で天気予報を取得して表示する。
 		http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263
 
-2010-03-19: hand-made-ical.sh,simple-calendar.csv
+2010-03-19: hand-made-ical.sh
 	* 引数で指定した CSV ファイルから iCalendar 形式のデータを生成する。
 
 2010-03-18: count-files-in-pathenv.sh
