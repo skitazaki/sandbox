@@ -1,3 +1,7 @@
+2012-01-21: wikipedia-data-config.xml wikipedia-schema.xml wikipedia-solrconfig.xml
+
+	* Wikipedia のデータを Solr にインポートする設定ファイル。
+
 2011-12-05: simple-usage-fileapi.html
 
 	* ブラウザの File API を使ってみる。
