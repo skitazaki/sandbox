@@ -7,6 +7,7 @@ Use "template inheritance" feature provided by jinja2.
 This is similar to Django's one.
 """
 
+import codecs
 import logging
 import os
 
@@ -17,16 +18,25 @@ except ImportError:
 
 from sandboxlib import parse_args, check_file_path
 
+DEFAUT_BUILD_DIR = "_build"
+
 
 def main():
-    opts, files = parse_args(doc=__doc__, postfook=check_file_path)
+    opts, files = parse_args(doc=__doc__, minargc=1)
+    outdir = opts.output or DEFAUT_BUILD_DIR
+    if not os.path.exists(outdir):
+        os.mkdir(outdir)
+        logging.info("Created %s", outdir)
 
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(opts.basedir))
 
     for fname in files:
-        logging.info("Start to process: %s" % (fname,))
+        logging.info("Start to process: %s", fname)
         template = env.get_template(fname)
-        print template.render()
+        out = os.path.join(outdir, fname)
+        with codecs.open(out, "wb", encoding=opts.enc_out) as w:
+            w.write(template.render())
+        logging.info("Wrote to %s", out)
 
 
 def test():
