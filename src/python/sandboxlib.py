@@ -13,6 +13,16 @@ import os
 import optparse
 
 DEFAULT_ENCODING = 'utf-8'
+logger = logging.getLogger('sandbox')
+
+
+def _init_logger():
+    s = logging.StreamHandler()
+    s.setFormatter(logging.Formatter('%(asctime)-15s %(levelname)-8s %(message)s'))
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(s)
+
+_init_logger()
 
 
 class ArgumentError(Exception):
@@ -68,7 +78,7 @@ def parse_args(doc=None, minargc=0, maxargc=None,
     if opts.filename and not os.path.exists(opts.filename):
         parser.error("Configuration file was not found.")
     if opts.output and os.path.exists(opts.output):
-        logging.warn("\"%s\" already exists.", opts.output)
+        logger.warn("\"%s\" already exists.", opts.output)
 
     if opts.verbose:
         logging.basicConfig(level=logging.DEBUG)

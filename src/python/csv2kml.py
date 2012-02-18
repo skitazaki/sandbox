@@ -9,7 +9,7 @@ See KML Tutorial
 
 Input file must contain following header line:
 
-    name,latitude,longitude,description
+    name,longitude,latitude,description
 """
 
 import codecs
@@ -25,6 +25,7 @@ from sandboxlib import parse_args, check_file_path
 
 TEMPLATE = u"""<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
 {% for point in points %}
   <Placemark>
     <name>{{ point.name }}</name>
@@ -32,10 +33,11 @@ TEMPLATE = u"""<?xml version="1.0" encoding="UTF-8"?>
     <description>{{ point.description }}</description>
     {% endif %}
     <Point>
-      <coordinates>{{ point.latitude }},{{ point.longitude }}</coordinates>
+      <coordinates>{{ point.longitude }},{{ point.latitude }}</coordinates>
     </Point>
   </Placemark>
 {% endfor %}
+</Document>
 </kml>"""
 
 
@@ -93,7 +95,7 @@ def main():
 
 
 def test():
-    SAMPLE = u"""name,latitude,longitude,description
+    SAMPLE = u"""name,longitude,latitude,description
 国立霞ヶ丘競技場,139.714941,35.678160,naash.go.jp
 """
     from StringIO import StringIO
