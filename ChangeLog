@@ -1,3 +1,7 @@
+2012-06-19: httpget.groovy
+
+	* groovy で Google 検索 API を使ってみる。
+
 2012-02-18: sabae-landscape.py
 
 	* 鯖江市の百景の XML データを CSV に変換する。
