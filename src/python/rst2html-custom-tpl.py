@@ -25,7 +25,10 @@ def publish_restructured_text(manuscript):
     fname = tempfile.mktemp()
     with open(fname, 'w') as temp:
         temp.write(RST_TEMPLATE_SOURCE)
-    basic_option = ['--strip-comments']
+    basic_option = [
+        '--strip-comments',
+        '--no-toc-backlinks'
+    ]
     basename, _ = os.path.splitext(os.path.basename(manuscript))
     source = '%s.txt' % (basename,)
     preview = '%s.html' % (basename,)
