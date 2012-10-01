@@ -1,0 +1,26 @@
+import os
+
+top = '.'
+out = '_build'
+
+# Sphinx command line usage.
+sphinxcmd = """
+%(builder)s -b %(name)s -d %(doctrees)s %(options)s %(srcdir)s %(targetdir)s
+""".strip()
+
+
+def configure(ctx):
+    ctx.find_program('sphinx-build')
+
+
+def document(ctx):
+    sphinxconf = 'conf.py'
+    builder = 'sphinx-build'
+    name = 'html'
+    builddir = out
+    doctrees = os.path.join(builddir, "doctrees")
+    options = ''
+    srcdir = '.'
+    targetdir = os.path.join(builddir, name)
+    ctx.exec_command(sphinxcmd % locals(), cwd='.')
+
