@@ -1,3 +1,7 @@
+2012-11-05: date-expand.py
+
+	* 日付文字列を展開する。
+
 2012-10-01: SConstruct-sphinx, wscript-sphinx
 
 	* Sphinx のビルドシステム置き換え
