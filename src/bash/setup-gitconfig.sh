@@ -2,7 +2,7 @@
 # Sets up 'git' environments and alias.
 # see https://git.wiki.kernel.org/index.php/Aliases
 # example:
-# $ GIT_NAME="KITAZAKI Shigeru" GIT_MAIL="skitazaki@gmail.com" sh d16.sh
+# $ GIT_NAME="KITAZAKI Shigeru" GIT_MAIL="skitazaki@gmail.com" sh setup-gitconfig.sh
 
 gitconfig="git config --global"
 
@@ -24,6 +24,7 @@ $gitconfig alias.di "diff --color -U1" # show whitespaces
 $gitconfig alias.i "add -p" #interactive
 $gitconfig alias.st status
 $gitconfig alias.unstage "reset HEAD"
+$gitconfig alias.tree "log --graph --decorate --pretty=oneline --abbrev-commit --all"
 
 $gitconfig core.autocrlf false
 $gitconfig core.excludesfile $HOME/.git-excludes
