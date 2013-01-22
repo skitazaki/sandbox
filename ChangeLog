@@ -141,9 +141,6 @@
 2011-01-07: newprj-python.py [project]
 	* virtualenv+buildout で開発環境を構築する。
 
-2011-01-07: svncounts-commits-per-user.sh
-	* SVN のコミット数をユーザーごとに集計する。
-
 2010-12-24: rst2html-custom-tpl.py,rst2html-custom-tpl.tpl
 	* reST を HTML に変換するときに自前のテンプレートを使う。
 

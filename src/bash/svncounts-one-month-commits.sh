@@ -1,5 +1,9 @@
 #!/bin/sh
+#
 # shows commit counts per committer.
+# see `Top SVN committers
+# <http://www.commandlinefu.com/commands/view/7545/top-svn-committers-without-awk>`.
+#
 
 if [ -z "$since" ]
 then
