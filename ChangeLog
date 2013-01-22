@@ -22,10 +22,6 @@
 
 	* ブラウザの File API を使ってみる。
 
-2011-11-24: csv2kml.py
-
-	* CSV から KML に変換するスクリプト。
-
 2011-11-17: buzz-slide.html
 
 	* Google Buzz からエクスポートした HTML のスライドショー。
@@ -211,14 +207,8 @@
 2010-10-08: twitlet.js
 	* Web ページのタイトルと URL を Twitter にポストするブックマークレット。
 
-2010-10-06: tweets-fetcher.py
-	* Twitter の Public API を使って tweet を表示する。
-
 2010-10-04: simple-usage-gdbm-key-value.c
 	* `gdbm` を使って簡単な key/value を使う。
-
-2010-10-03: newprj-html5site.py [project]
-	* HTML5 boiler plate をダウンロードして `src` に展開する。
 
 2010-09-29: simple-usage-tornado.py
 	* Tornado を使って JSON でデータを返す。
@@ -318,9 +308,6 @@
 
 2010-05-06: patch-split.sh
 	* パッチファイルを分割する。
-
-2010-05-05: tweets-one-week.py
-	* 一週間分の tweet を表示する。
 
 2010-05-01: gdata-spredsheets-list.py
 	* Google Spreadsheets のファイル一覧を取得する。
