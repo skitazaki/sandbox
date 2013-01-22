@@ -156,9 +156,6 @@
 2010-12-12: move-images-in-downloaded-html.sh
 	* HTML をダウンロードしたときの画像ファイルをコピーする。
 
-2010-12-10: python-checker.sh
-	* pep8 と nosetests を bash でまとめて実行させる。
-
 2010-12-06: twitter-user-tl-json.py
 	* Twitter の user_timeline から JSON を取得する。
 
@@ -346,9 +343,6 @@
 2010-04-20: gmail-messages-and-labels.py,gmail-messages-and-labels.json
 	* Gmail のラベル一覧と INBOX の中身一覧を取得する。設定ファイル必要。
 
-2010-04-19: setup-python-modules.sh [setup]
-	* PyYAML と ssl モジュールをインストールする。
-
 2010-04-18: url-shortener.sh
 	* "goo.gl" で URL を短縮する。
 
@@ -406,10 +400,6 @@
 
 2010-03-23: extract-archive.sh
 	* tar か unzip でアーカイブを展開する。
-
-2010-03-22: gdata-weather.sh
-	* Google Data Protocol で天気予報を取得して表示する。
-		http://gauc.no-ip.org/awk-users-jp/blis.cgi/DoukakuAWK_263
 
 2010-03-19: hand-made-ical.sh
 	* 引数で指定した CSV ファイルから iCalendar 形式のデータを生成する。
