@@ -1,0 +1,35 @@
+<form class="form-inline">
+    <select name="protocol" class="span2">
+        <option value="http">http://</option>
+        <option value="https">https://</option>
+    </select>
+    <input type="text" name="host" class="span4" placeholder="domain or host">
+    <input type="text" name="path" class="span6" placeholder="/path">
+</form>
+
+<div class="row alert alert-error hide">
+    <button type="button" class="pull-right"><i class="icon-remove"></i></button>
+    <p></p>
+</div>
+
+<div class="row">
+    <div class="span5">
+        <button class="btn btn-success pull-right" id="button-add">Add</button>
+        <ul id="params-headers" class="nav nav-tabs">
+            <li class="active"><a href="#parameters" data-toggle="tab">Parameters</a></li>
+            <li><a href="#headers" data-toggle="tab">Headers</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="parameters"></div>
+            <div class="tab-pane" id="headers"></div>
+        </div>
+    </div>
+    <div class="span7">
+        <p>
+            <button class="btn pull-right" id="button-clear">Clear</button>
+            <h5>HTTP Response</h5>
+        </p>
+        <pre class="prettyprint" id="response"></pre>
+    </div>
+</div>

@@ -6,6 +6,10 @@
 
 	* Dashboard for Apache Access Log based on Django
 
+2013-08-02: parameter-composer
+
+	* HTTP request parameter composer
+
 2013-06-17: simple-doc-search
 
 	* Simple document search with Solr on DotCloud
