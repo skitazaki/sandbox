@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">クリック地点</h3>
+  </div>
+  <div class="panel-body">
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <input name="lat" value="<%- lat %>" placeholder="緯度">
+      </li>
+      <li class="list-group-item">
+        <input name="lng" value="<%- lng %>" placeholder="経度">
+      </li>
+    </ul>
+
+    <table class="table">
+      <tr>
+        <th colspan="2" class="warning">地域区画メッシュ</th>
+      <tr <% if (gridLevel === 'lv1') { %>class="alert-info"<% } %> >
+        <th>第１次</th><td><%- grid.lv1 %></td>
+      </tr>
+      <tr <% if (gridLevel === 'lv2') { %>class="alert-info"<% } %> >
+        <th>第２次</th><td><%- grid.lv2 %></td>
+      </tr>
+      <tr <% if (gridLevel === 'base') { %>class="alert-info"<% } %> >
+        <th>第３次</th><td><%- grid.lv3 %></td>
+      </tr>
+      <tr>
+        <th colspan="2" class="warning">標準地域メッシュ</th>
+      </tr>
+      <tr <% if (gridLevel === 'base') { %>class="alert-info"<% } %> >
+        <th>基準</th><td><%- grid.base %></td>
+      </tr>
+      <tr <% if (gridLevel === 'half') { %>class="alert-info"<% } %> >
+        <th>２分の１</th><td><%- grid.half %></td>
+      </tr>
+      <tr <% if (gridLevel === 'quarter') { %>class="alert-info"<% } %> >
+        <th>４分の１</th><td><%- grid.quarter %></td>
+      </tr>
+      <tr <% if (gridLevel === 'eighth') { %>class="alert-info"<% } %> >
+        <th>８分の１</th><td><%- grid.eighth %></td>
+      </tr>
+    </table>
+
+  </div>
+</div>

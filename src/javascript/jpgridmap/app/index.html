@@ -1,0 +1,94 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Japanese Grid Map</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+        <!--[if lte IE 8]>
+             <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+        <![endif]-->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+        <div class="container">
+
+            <div class="header">
+                <ul class="nav navbar-nav pull-right" role="navigation">
+                    <li><a href="#clear">Clear</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <ul class="nav nav-pills pull-right" id="grid-select">
+                    <li><a href="#grid/lv1">第１次</a></li>
+                    <li><a href="#grid/lv2">第２次</a></li>
+                    <li class="active"><a href="#grid/base">第３次 (基準)</a></li>
+                    <li><a href="#grid/half">２分の１</a></li>
+                    <li><a href="#grid/quarter">４分の１</a></li>
+                    <li><a href="#grid/eighth">８分の１</a></li>
+                </ul>
+                <h3 class="text-muted">Japanese Grid Map</h3>
+            </div>  <!-- /.header -->
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <div id="map"></div>
+                </div>
+
+                <div class="col-xs-6 col-sm-3" id="sidebar" role="navigation">
+                </div> <!-- /#sidebar -->
+
+            </div><!--/row-->
+
+            <div class="footer">
+                <p class="pull-left">
+                    <a href="https://twitter.com/kshigeru" class="twitter-follow-button" data-show-count="false" data-lang="ja">@kshigeruさんをフォロー</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <!-- Place this tag where you want the +1 button to render. -->
+                    <div class="g-plusone" data-annotation="none"></div>
+                </p>
+            </div>
+
+        </div> <!-- /.container -->
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-38063121-3', 'jpgridmap.appspot.com');
+          ga('send', 'pageview');
+
+          <!-- Place this tag after the last +1 button tag. -->
+          window.___gcfg = {lang: 'ja'};
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+
+        </script>
+        <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+        <!-- build:js scripts/main.js -->
+        <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
