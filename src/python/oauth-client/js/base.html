@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="reset-min.css" media="screen" />
+<title>{% block title %}Base Template{% endblock %}</title>
+<style type="text/css">
+h1 { font-size:130%; }
+h3 { padding:10px; border-left:solid 10px #333333; border-bottom:solid 1px #333333; }
+th, td { padding:5px; border:solid 1px #999999; }
+p { text-height:1.5em; padding:5px; }
+a { text-decoration:none; }
+input[type="submit"] { padding:5px 10px; border-radius:5px; }
+form.actionStep { display:none; }
+
+input.warning { background-color:#FF9999; }
+div.warning { background-color:#FFFF99; border-radius:10px; padding:10px; }
+
+#header { border-bottom:solid 1px #333333; margin:10px 10px 10px 3px; }
+#contents { margin:20px; min-height:300px; }
+#footer { border-top:solid 1px #333333; margin:20px 10px 10px 3px; }
+
+#footer ul li { list-style-type:circle; margin:3px 5px 3px 40px; }
+
+#oauth-client-steps { margin:10px auto; padding:10px; }
+#oauth-client-steps li { display:inline; margin:auto 10px; background-color:#FFFFEC; padding:10px; border-radius:20px; border:solid 2px #333333; }
+#oauth-client-steps li.active { background-color:#E0FFE0; }
+#oauth-client-steps a:visited { color:#000000; }
+</style>
+</head><body>
+<div id="wrapper">
+{% block contents %}{% endblock %}
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="jquery.min.js"><\/script>')</script>
+<script type="text/javascript" src="jquery.history-1.5.0.min.js"></script>
+<script type="text/javascript" src="sha1.js"></script>
+<script type="text/javascript" src="oauth.js"></script>
+<script type="text/javascript" src="oauth-client.js"></script>
+<script type="text/javascript" src="oauth-client-ui.js"></script>
+</body></html>

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}OAuth 3-way dance sample{% endblock %}
+
+{% block contents %}
+<div id="header">
+<h1><a href="oauth.html">OAuth 3-way dance sample</a></h1>
+
+<ol id="oauth-client-steps">
+<li><a href="#register">アプリケーションの登録</a></li>
+<li><a href="#initiate">認証の開始</a></li>
+<li><a href="#get">リソースにアクセス</a></li>
+</ol>
+
+</div>
+
+<div id="contents">
+<a name="register"></a>
+<form method="POST" action="#register" class="actionStep">
+<p>アプリケーションに必要な情報を登録してください。</p>
+<h3>サービスプロバイダ</h3>
+<table><tbody>
+<tr><th>ホスト名</th>
+    <td><input type="text" size="60" name="hostname" value="{{ hostname }}" /></td>
+</tr>
+<tr><th>Request Endpoint</th>
+    <td><input type="text" size="60" name="step1" value="{{ requestUrl }}" /></td>
+</tr>
+<tr><th>Authorize Endpoint</th>
+    <td><input type="text" size="60" name="step2" value="{{ authorizeUrl }}" /></td>
+</tr>
+<tr><th>Access Endpoint</th>
+    <td><input type="text" size="60" name="step3" value="{{ tokenUrl }}" /></td>
+</tr>
+</tbody></table>
+<h3>コンシューマー</h3>
+<table><tbody>
+<tr><th>Consumer Key</th>
+    <td><input type="text" size="50" name="key" value="{{ consumerKey }}" /></td>
+</tr>
+<tr><th>Consumer Secret</th>
+    <td><input type="text" size="50" name="secret" value="{{ consumerSecret }}" /></td>
+</tr>
+</tbody></table>
+<input type="submit" name="register" value="登録" />
+</form>
+
+<form method="POST" action="#initiate" class="actionStep">
+<p>
+認証を始めます。開始ボタンを押すと一時トークンを取得します。
+</p>
+<input type="submit" name="initiate" value="開始" />
+</form>
+
+<form method="GET" action="#authorize" class="actionStep">
+<p>
+一時トークンを取得しました。
+</p>
+<table><tbody>
+<tr><th>Response</th><td><input type="text" size="80" name="response" /></td></tr>
+</tbody></table>
+<p>
+サービスのページに移動して、URL をよく確認してから認証してください。
+</p>
+<input type="hidden" name="link" value="" />
+<input type="submit" name="authorize" value="認可の画面へ" />
+</form>
+
+<form method="POST" action="#access" class="actionStep">
+<p>
+確認コードを入力してください。自動で入力された場合はそのままで構いません。
+もう一度データを送り返して、正規の認証トークンを取得します。
+</p>
+<table><tbody>
+<tr><th>Verifier code</th><td><input type="text" size="60" name="verifier" id="oauth_verifier" /></td></tr>
+</tbody></table>
+<input type="submit" name="access" value="取得" />
+</form>
+
+<form method="POST" action="#save" class="actionStep">
+<p>
+認証トークンを取得しました。
+localStorage に保存しました。
+</p>
+<table><tbody>
+<tr><th>Response</th><td><input type="text" size="80" name="response" /></td></tr>
+</tbody></table>
+<input type="submit" name="save" value="完了" />
+</form>
+
+<form method="GET" action="#get" class="actionStep">
+<p>取得したいリソースの URL を入力してください。</p>
+URL: <input type="text" name="url" size="40" value="{{ hostname }}" />
+<input type="submit" name="get" value="Get" />
+<ol id="resources"></ol>
+</form>
+
+</div>
+
+<div id="footer">
+
+<ul>
+<li><a href="#clear">localStorage をクリア</a></li>
+<li><a href="#export">エクスポート</a>
+    <a name="export"><textarea id="service_provider_display" cols="100" rows="6" readonly="readonly"></textarea></a></li>
+</ul>
+
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html lang="ja"><head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-script-type" content="text/javascript" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<title>OAuth Authorization Page</title>
+	<style>
+	.error { background-color: #FFFF99; }
+	</style>
+</head><body>
+<div id="wrapper">
+<form method="POST" id="account">
+Username: <input type="text" name="username" size="60" /><br />
+Password: <input type="password" name="password" size="60" /><br />
+<input type="submit" value="Submit" />
+</form>
+<p id="message"></p>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript" src="/authorize.js"></script>
+<!-- vim: set noet sw=2 ts=2 fileencoding=utf-8 : -->
+</body></html>

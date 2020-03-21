@@ -1,0 +1,2 @@
+*.pyc
+.oauth-client-test.sqlite

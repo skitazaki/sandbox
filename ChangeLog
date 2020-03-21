@@ -79,6 +79,10 @@
 2011-06-17: compare-linkage.cpp,compare-linkage.makefile,helloworld.cpp,helloworld.h
 	* 共有ライブラリと静的リンクの違いを確認する。
 
+2011-06-15: oauth-client
+
+	* OAuth 1.0 Client Samples by Python and JavaScript
+
 2011-06-13: sandboxlib.py
 	* Utility script, argument parser and timezone config.
 
