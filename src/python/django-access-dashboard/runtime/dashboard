@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd /app
+
+# TODO: Consider to use ".pgpass" file.
+# http://www.postgresql.org/docs/9.3/static/libpq-pgpass.html
+PGHOST=${POSTGRES_PORT_5432_TCP_ADDR-localhost}
+PGPORT=${POSTGRES_PORT_5432_TCP_PORT-5432}
+PGDATABASE=dashboard
+PGUSER=dashboard
+PGPASSWORD=dashboard
+DATABASE_URL=postgres://$PGUSER:$PGPASSWORD@$PGHOST:$PGPORT/$PGDATABASE
+export DATABASE_URL=$DATABASE_URL
+
+exec /sbin/setuser nobody \
+    gunicorn --name=dashboard --bind=0.0.0.0:8080 \
+             --user=nobody --group=nogroup --log-level=info --log-file=- \
+             --workers=4 dashboard.wsgi:application >> /var/log/dashboard.log 2>&1
+

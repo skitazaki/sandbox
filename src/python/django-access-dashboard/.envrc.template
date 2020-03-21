@@ -1,0 +1,20 @@
+# Edit these parameters on your environment.
+PYVENV_DIR=$HOME/.pyvenv/`basename $PWD`
+PYVENV=pyvenv-3.4
+
+# Set environmental variables to work.
+
+## Python
+[ -d $PYVENV_DIR ] || $PYVENV $PYVENV_DIR
+source $PYVENV_DIR/bin/activate
+
+## NodeJS
+[ -f $HOME/.nvm/nvm.sh ] && source $HOME/.nvm/nvm.sh
+
+## Directory layout
+
+## Database connection
+SQLITE_FILE=db.sqlite3
+DATABASE_URL=sqlite:///$SQLITE_FILE
+export DATABASE_URL=$DATABASE_URL
+

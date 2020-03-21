@@ -2,6 +2,10 @@
 
 	* Lucene Tutorial in Scala
 
+2014-10-11: django-access-dashboard
+
+	* Dashboard for Apache Access Log based on Django
+
 2013-04-12: tabular-simple.py
 
 	* 行形式のデータを表形式に変換する。
