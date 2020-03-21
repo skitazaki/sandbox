@@ -1,0 +1,22 @@
+---
+
+dependencies: []
+
+galaxy_info:
+  author: skitazaki
+  description: ssh config file generation.
+  license: "MIT"
+  min_ansible_version: 2.2
+  platforms:
+    - name: EL
+      versions:
+        - "7"
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: Amazon
+      versions:
+        - "2016.09"
+  galaxy_tags:
+    - linux
+    - ssh

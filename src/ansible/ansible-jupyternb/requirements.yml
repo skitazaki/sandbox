@@ -1,0 +1,14 @@
+---
+
+- src: geerlingguy.ntp
+  version: "1.5.2"
+- src: geerlingguy.nginx
+  version: "2.5.0"
+- src: andrewrothstein.miniconda
+  version: "v5.1.0"
+- src: bertvv.hosts
+  version: "v1.2.0"
+- src: rvm_io.ruby
+  version: "v2.0.0"
+- src: skitazaki.ssh_config
+  version: "v1.0"

@@ -1,0 +1,11 @@
+[notebook]
+notebook1
+
+[webproxy]
+webproxy1
+
+[controller]
+localhost ansible_connection=local
+
+[all:vars]
+env=staging

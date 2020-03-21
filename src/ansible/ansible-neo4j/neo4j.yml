@@ -1,0 +1,11 @@
+---
+
+- hosts: neo4j
+  roles:
+    - role: ansiblebit.oracle-java
+      oracle_java_set_as_default: yes
+
+- hosts: neo4j
+  become: yes
+  roles:
+    - deimosfr.neo4j

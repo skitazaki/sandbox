@@ -1,0 +1,26 @@
+---
+
+- name: Ensure ssh config directory exists
+  file:
+    path: "{{ ssh_config_dir }}"
+    state: directory
+    mode: 0700
+
+- name: Load AWS variables if enabled
+  include_vars:
+    file: aws.yml
+  when: ssh_config_aws
+
+- name: Generate ssh config file for this project
+  template:
+    src: ssh_config.j2
+    dest: "{{ ssh_config_dir }}/{{ ssh_config_name }}.conf"
+    mode: 0600
+  when: ssh_config_bastion_alias is defined or ssh_config_targets is defined
+
+- name: Generate symlink of ssh_config
+  file:
+    src: "{{ ssh_config_dir }}/{{ ssh_config_name }}.conf"
+    dest: "{{ ssh_config_symlink }}"
+    state: link
+  when: ssh_config_symlink != ""

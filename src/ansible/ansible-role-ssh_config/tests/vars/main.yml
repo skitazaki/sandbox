@@ -1,0 +1,9 @@
+---
+
+# Target hosts configuration
+ssh_config_targets:
+  - alias: "srv1"
+    host: "192.168.0.11"
+    port: 22
+    user: username
+    key: ~/.ssh/keys/secret.pem

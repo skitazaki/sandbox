@@ -1,0 +1,41 @@
+require 'rake'
+require 'rspec/core/rake_task'
+require 'yaml'
+
+ENV['SSH_CONFIG_FILE'] = ".ssh_config"
+
+if ENV['USER'] == "vagrant"
+  inventory = "spec/vagrant.yml"
+elsif ENV['TRAVIS']
+  inventory = "spec/localhost.yml"
+end
+groups = YAML.load_file(inventory)
+
+task :spec    => 'spec:all'
+task :default => :spec
+
+namespace :spec do
+  targets = []
+  Dir.glob('./spec/*').each do |dir|
+    next unless File.directory?(dir)
+    target = File.basename(dir)
+    target = "_#{target}" if target == "default"
+    targets << target
+  end
+
+  task :all     => targets
+  task :default => :all
+
+  targets.each do |target|
+    hosts = groups[target]
+    next unless hosts
+    desc "Run serverspec tests to #{target} composed of #{hosts.length} hosts"
+    hosts.each do |host|
+      RSpec::Core::RakeTask.new(target.to_sym) do |t|
+        ENV['TARGET_HOST'] = host
+        t.pattern = "spec/#{target}/*_spec.rb"
+      end
+    end
+  end
+
+end

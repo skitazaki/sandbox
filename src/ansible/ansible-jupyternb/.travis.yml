@@ -1,0 +1,21 @@
+---
+
+language: python
+sudo: enabled
+python:
+  - "2.7"
+before_install:
+  - |
+    if [ ! -f ~/.ssh/id_rsa ]; then
+      ssh-keygen -f ~/.ssh/id_rsa -N ""
+      cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    fi
+install:
+  - pip install ansible
+before_script:
+  - ansible --version
+  - ansible-galaxy install -r requirements.yml -p roles
+script:
+  - ansible-playbook -i environments/localhost controller.yml
+  - ansible-playbook -i environments/localhost site.yml
+  - rake spec

@@ -1,0 +1,9 @@
+---
+
+ssh_config_aws: yes
+ssh_config_name: ansible-ssh-aws
+ssh_config_symlink: .ssh_config_aws
+
+ssh_config_bastion_host: ip-10-0-0-1.ap-northeast-1.compute.internal
+ssh_config_aws_bastion_key: ~/.ssh/keys/aws-bastion.pem
+ssh_config_aws_target_key: ~/.ssh/keys/aws-target.pem

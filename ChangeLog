@@ -2,6 +2,18 @@
 
 	* Lucene Tutorial in Scala
 
+2018-01-13: ansible-role-ssh_config
+
+	* Ansible role to generate ssh config file
+
+2017-09-24: ansible-neo4j
+
+	* Ansible playbook for Neo4j
+
+2017-08-21: ansible-jupyternb
+
+	* Ansible Playbook to run Jupyter notebook
+
 2014-12-14: docker-python34-ipython
 
 	* IPython Docker image on top of Python 3.4

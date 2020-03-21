@@ -1,0 +1,18 @@
+---
+
+# Server endpoint
+jupyternb_prefix: ""
+jupyternb_port: 8888
+jupyternb_password: no
+
+# User and group on OS
+jupyternb_user: jupyternb
+jupyternb_group: jupyternb
+
+# File and directory locations
+jupyternb_basedir: /opt/jupyternb
+jupyternb_notebooks: notebooks
+jupyternb_notebooks_dir: "{{ jupyternb_basedir }}/{{ jupyternb_notebooks }}"
+jupyternb_envdir: "{{ jupyternb_basedir }}/envs/jupyternb"
+jupyternb_conda: /usr/local/anaconda/bin/conda
+jupyternb_logfile: /var/log/jupyternb.log

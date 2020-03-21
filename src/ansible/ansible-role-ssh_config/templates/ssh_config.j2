@@ -1,0 +1,39 @@
+# {{ ansible_managed }}
+
+{% if ssh_config_bastion_alias is defined %}
+# Bastion configuration
+Host {{ ssh_config_bastion_alias }}
+    HostName              {{ ssh_config_bastion_host }}
+    User                  {{ ssh_config_bastion_user }}
+    IdentityFile          {{ ssh_config_bastion_key }}
+    StrictHostKeyChecking no
+    UserKnownHostsFile    /dev/null
+{% if ssh_config_bastion_sock5_port is defined %}
+    DynamicForward        {{ ssh_config_bastion_sock5_port }}
+{% endif %}
+{% endif %}
+
+{% if ssh_config_targets is defined %}
+# Each target configuration
+{% for target in ssh_config_targets %}
+Host {{ target.alias }}
+{% if target.host is defined %}
+    HostName              {{ target.host }}
+{% endif %}
+{% if target.port is defined %}
+    Port                  {{ target.port }}
+{% endif %}
+{% if target.user is defined %}
+    User                  {{ target.user }}
+{% endif %}
+{% if target.key is defined %}
+    IdentityFile          {{ target.key }}
+{% endif %}
+    StrictHostKeyChecking no
+    UserKnownHostsFile    /dev/null
+{% if ssh_config_bastion_alias is defined %}
+    ProxyCommand          ssh -W %h:%p -F {{ ssh_config_dir }}/{{ ssh_config_name }}.conf {{ ssh_config_bastion_alias }}
+{% endif %}
+
+{% endfor %}
+{% endif %}

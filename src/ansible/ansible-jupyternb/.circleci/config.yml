@@ -1,0 +1,30 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ansible/ansible:ubuntu1604
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: install dependencies
+          command: |
+            sudo pip install ansible==2.4.0
+            sudo pip install ansible-lint
+
+      - run:
+          name: show ansible and ansible-lint version
+          command: |
+            ansible --version
+            ansible-lint --version
+
+      - run:
+          name: lint ansible playbook
+          command: |
+            ansible-lint localdev.yml

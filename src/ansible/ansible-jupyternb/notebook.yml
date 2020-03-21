@@ -1,0 +1,11 @@
+---
+
+- hosts: notebook
+  become: yes
+  roles:
+    - andrewrothstein.miniconda
+
+- hosts: notebook
+  become: yes
+  roles:
+    - jupyternb

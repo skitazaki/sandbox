@@ -1,0 +1,25 @@
+---
+
+language: python
+sudo: enabled
+python:
+  - "2.7"
+before_install:
+  - |
+    if [ ! -f ~/.ssh/id_rsa ]; then
+      ssh-keygen -f ~/.ssh/id_rsa -N ""
+      cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    fi
+install:
+  - pip install ansible
+before_script:
+  - ansible --version
+  - ansible-galaxy install -r requirements.yml -p roles
+  - |
+    if [ ! -d roles/deimosfr.neo4j ]; then
+      git clone https://github.com/deimosfr/ansible-neo4j roles/deimosfr.neo4j
+    fi
+script:
+  - ansible-playbook -i environments/localdev controller.yml
+  - ansible-playbook -i environments/localdev site.yml
+  - rake spec

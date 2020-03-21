@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+
+{% if ssh_config_hosts %}
+{% for h in ssh_config_hosts %}
+Host {{ h.name }}
+{% if h.host is defined %}
+    Hostname              {{ h.host }}
+{% endif %}
+{% if h.user is defined %}
+    User                  {{ h.user }}
+{% endif %}
+{% if h.ssh_private_key_file is defined %}
+    IdentityFile          {{ h.ssh_private_key_file }}
+{% endif %}
+    StrictHostKeyChecking no
+    UserKnownHostsFile    /dev/null
+
+{% endfor %}
+{% endif %}

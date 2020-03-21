@@ -1,0 +1,10 @@
+---
+
+ntp_enabled: yes
+ntp_timezone: Etc/UTC
+ntp_manage_config: yes
+ntp_servers:
+  - "time1.google.com iburst"
+  - "time2.google.com iburst"
+  - "time3.google.com iburst"
+  - "time4.google.com iburst"

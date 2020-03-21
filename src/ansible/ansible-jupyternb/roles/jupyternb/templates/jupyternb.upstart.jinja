@@ -1,0 +1,21 @@
+description "Jupyter Notebook server"
+author  "Shigeru Kitazaki"
+
+start on runlevel [2345]
+stop on runlevel [016]
+
+chdir  {{ jupyternb_notebooks_dir }}
+setuid {{ jupyternb_user }}
+setgid {{ jupyternb_group }}
+
+script
+    exec   {{ jupyternb_envdir }}/bin/jupyter-notebook --config={{ jupyternb_basedir }}/jupyter_notebook_config.py
+end script
+
+pre-start script
+    echo "[`date`] Starting Jupyter Notebook server" >> {{ jupyternb_logfile }}
+end script
+
+pre-stop script
+    echo "[`date`] Stopping Jupyter Notebook server" >> {{ jupyternb_logfile }}
+end script

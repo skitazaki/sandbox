@@ -1,0 +1,8 @@
+---
+
+hosts_entries:
+
+ssh_config_hosts:
+  - name: neo4j1
+    host: 127.0.0.1
+    ssh_private_key_file: ~/.ssh/id_rsa

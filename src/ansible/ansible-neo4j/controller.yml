@@ -1,0 +1,46 @@
+---
+
+- hosts: controller
+  become: yes
+  vars_files:
+    - vars/{{ env }}.yml
+  roles:
+    - role: bertvv.hosts
+      when: hosts_entries
+  tasks:
+    - name: Install ansible-lint
+      command: pip install ansible-lint
+      args:
+        creates: /usr/local/bin/ansible-lint
+
+- hosts: controller
+  vars:
+    ansible_user: "{{ ansible_ssh_user | default(lookup('env', 'USER')) }}"
+  vars_files:
+    - vars/{{ env }}.yml
+  roles:
+    - role: rvm_io.ruby
+      rvm1_user: "{{ ansible_user }}"
+  tasks:
+    - name: Install Serverspec
+      shell: |
+        source "$HOME/.rvm/scripts/rvm"
+        gem install serverspec
+      args:
+        executable: /bin/bash
+        creates: ~/.rvm/gems/$RUBY_VERSION/bin/serverspec-init
+    - name: Ensure ~/.ssh/conf.d directory exists
+      file:
+        path: ~/.ssh/conf.d
+        state: directory
+        mode: 0700
+    - name: Generate ssh-config
+      template:
+        src: ssh-config.jinja
+        dest: ~/.ssh/conf.d/ndbodj.conf
+        mode: 0400
+    - name: Generate symlink of ssh-config
+      file:
+        src: ~/.ssh/conf.d/ndbodj.conf
+        dest: .ssh-config
+        state: link

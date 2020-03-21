@@ -1,0 +1,18 @@
+---
+
+webproxy_server_name: "192.168.50.100"
+
+jupyternb_prefix: ""
+jupyternb_port: 8888
+jupyternb_servers:
+  - "192.168.50.101:{{ jupyternb_port }}"
+jupyternb_password: "sha1:c6358bde2426:209f54b0dbe8b68cea45cc4a6fcbbb8ee67154a0"
+
+ntp_enabled: yes
+ntp_timezone: Etc/UTC
+ntp_manage_config: yes
+ntp_servers:
+  - "time1.google.com iburst"
+  - "time2.google.com iburst"
+  - "time3.google.com iburst"
+  - "time4.google.com iburst"

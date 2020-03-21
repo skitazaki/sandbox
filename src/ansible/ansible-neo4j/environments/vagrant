@@ -1,0 +1,8 @@
+[neo4j]
+neo4j1
+
+[controller]
+localhost ansible_connection=local
+
+[all:vars]
+env=vagrant

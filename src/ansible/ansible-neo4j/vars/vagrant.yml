@@ -1,0 +1,23 @@
+---
+
+hosts_entries:
+  - name: gns1
+    ip: 8.8.8.8
+    aliases:
+      - googledns1
+      - googlens1
+  - name: gns2
+    ip: 8.8.4.4
+    aliases:
+      - googledns2
+      - googlens2
+  - name: neo4j1
+    ip: 192.168.20.20
+    aliases:
+      - neo4j1.internal
+
+ssh_config_hosts:
+  - name: neo4j1
+    host: neo4j1
+    user: vagrant
+    ssh_private_key_file: ~/.ssh/neo4j_id_rsa

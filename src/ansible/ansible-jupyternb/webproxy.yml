@@ -1,0 +1,6 @@
+---
+
+- hosts: webproxy
+  become: yes
+  roles:
+    - geerlingguy.nginx

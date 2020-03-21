@@ -1,0 +1,12 @@
+[notebook]
+notebook1
+notebook2
+
+[webproxy]
+webproxy1
+
+[controller]
+localhost ansible_connection=local
+
+[all:vars]
+env = vagrant

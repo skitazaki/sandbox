@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+cfg = {}
+cfg[:ip] = ENV['VAGRANT_NEO4J_IP'] || '192.168.20.20'
+cfg[:mem] = ENV['VAGRANT_NEO4J_MEMORY'] || '2048'
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.box = "bento/ubuntu-16.04"
+
+  config.vm.define 'neo4j' do |machine|
+    machine.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", cfg[:mem]]
+    end
+    machine.vm.network "private_network", ip: cfg[:ip]
+    machine.vm.hostname = "neo4j1"
+  end
+
+  config.vm.define 'controller' do |machine|
+    machine.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", "256"]
+    end
+    machine.vm.synced_folder ".", "/opt/playbook"
+    for node in ["neo4j"]
+      p1 = File.join(".vagrant", "machines", node, "virtualbox", "private_key")
+      p2 = "$HOME/.ssh/#{node}_id_rsa"
+      machine.vm.provision "file", source: p1, destination: p2
+      machine.vm.provision "shell", privileged: false, inline: "chmod 600 #{p2}"
+    end
+    machine.vm.provision :ansible_local do |ansible|
+      ansible.provisioning_path = "/opt/playbook"
+      ansible.playbook          = "vagrant.yml"
+      ansible.inventory_path    = "environments/vagrant"
+      ansible.limit             = "all"
+      ansible.galaxy_role_file  = "requirements.yml"
+      ansible.verbose           = true
+      ansible.install           = true
+      ansible.install_mode      = "pip"
+      ansible.version           = "2.3.2.0"
+    end
+  end
+
+end

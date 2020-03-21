@@ -1,0 +1,77 @@
+---
+
+- name: Create jupyternb group
+  group:
+    name: "{{ jupyternb_group }}"
+    system: yes
+- name: Create jupyternb user
+  user:
+    name: "{{ jupyternb_user }}"
+    home: "{{ jupyternb_basedir }}"
+    group: "{{ jupyternb_group }}"
+    shell: /usr/sbin/nologin
+    system: yes
+
+- name: Create base directory and notebooks directory
+  file:
+    path: "{{ item }}"
+    owner: "{{ jupyternb_user }}"
+    group: "{{ jupyternb_group }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ jupyternb_basedir }}"
+    - "{{ jupyternb_notebooks_dir }}"
+
+- name: Copy conda environment file
+  template:
+    src: environment.yml.jinja
+    dest: "{{ jupyternb_basedir }}/environment.yml"
+
+- name: Check conda environment exists
+  stat:
+    path: "{{ jupyternb_envdir }}"
+  register: _conda_env
+- name: Install anaconda on Python 3.6 environment.
+  command: |
+    {{ jupyternb_conda }} env create -f {{ jupyternb_basedir }}/environment.yml -p {{ jupyternb_envdir }}
+  args:
+    executable: /bin/bash
+  when: not _conda_env.stat.exists
+
+- name: Put Jupyter Notebook configuration file
+  template:
+    src: jupyter_notebook_config.py.jinja
+    dest: "{{ jupyternb_basedir }}/jupyter_notebook_config.py"
+    owner: "{{ jupyternb_user }}"
+    group: "{{ jupyternb_group }}"
+    mode: 0644
+  notify: restart jupyternb
+
+- name: Ubuntu xenial | Put systemd service descriptor
+  template:
+    src: jupyternb.service.jinja
+    dest: /lib/systemd/system/jupyternb.service
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+  notify: restart jupyternb
+
+- name: Ubuntu trusty | Put systemd service descriptor
+  template:
+    src: jupyternb.upstart.jinja
+    dest: /etc/init/jupyternb.conf
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
+  notify: restart jupyternb
+
+- name: Create log file
+  file:
+    path: "{{ jupyternb_logfile }}"
+    owner: "{{ jupyternb_user }}"
+    group: "{{ jupyternb_group }}"
+    mode: 0640
+    state: touch
+
+- name: Enable and start jupyternb service
+  service:
+    name: jupyternb
+    state: started
+    enabled: yes

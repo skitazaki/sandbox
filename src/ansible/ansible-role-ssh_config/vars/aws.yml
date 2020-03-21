@@ -1,0 +1,14 @@
+---
+
+## Bastion host configuration
+# ssh_config_bastion_host may be defined dynamically or be provided by EIP
+ssh_config_bastion_alias: aws-bastion
+ssh_config_bastion_user: ec2-user
+ssh_config_bastion_key: "{{ ssh_config_aws_bastion_key }}"
+#ssh_config_bastion_sock5_port: 1080
+
+# Target hosts configuration
+ssh_config_targets:
+  - alias: "*.compute.internal"
+    user: ec2-user
+    key: "{{ ssh_config_aws_target_key }}"

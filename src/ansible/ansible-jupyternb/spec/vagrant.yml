@@ -1,0 +1,8 @@
+---
+
+notebook:
+  - notebook1
+  - notebook2
+
+webproxy:
+  - webproxy1

@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: yes
+  vars_files:
+    - vars/{{ env }}.yml
+  roles:
+    - geerlingguy.ntp
+    - role: bertvv.hosts
+      when: hosts_entries
+
+- include: notebook.yml
+- include: webproxy.yml

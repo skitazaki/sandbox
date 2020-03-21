@@ -1,0 +1,39 @@
+---
+
+hosts_entries:
+  - name: gns1
+    ip: 8.8.8.8
+    aliases:
+      - googledns1
+      - googlens1
+  - name: gns2
+    ip: 8.8.4.4
+    aliases:
+      - googledns2
+      - googlens2
+  - name: notebook1
+    ip: 192.168.50.101
+    aliases:
+      - notebook1.vagrant.internal
+  - name: notebook2
+    ip: 192.168.50.102
+    aliases:
+      - notebook2.vagrant.internal
+  - name: webproxy1
+    ip: 192.168.50.100
+    aliases:
+      - webproxy1.vagrant.internal
+
+ssh_config_targets:
+  - alias: notebook1
+    host: notebook1
+    user: vagrant
+    key: /vagrant/.vagrant/machines/notebook/virtualbox/private_key
+  - alias: notebook2
+    host: notebook2
+    user: vagrant
+    key: /vagrant/.vagrant/machines/notebook_mini/virtualbox/private_key
+  - alias: webproxy1
+    host: webproxy1
+    user: vagrant
+    key: /vagrant/.vagrant/machines/webproxy/virtualbox/private_key

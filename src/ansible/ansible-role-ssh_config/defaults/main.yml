@@ -1,0 +1,7 @@
+---
+
+ssh_config_dir: ~/.ssh/conf.d
+ssh_config_name: ansible-ssh
+ssh_config_symlink: .ssh_config
+
+ssh_config_aws: no

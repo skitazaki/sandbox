@@ -1,0 +1,12 @@
+---
+
+- src: geerlingguy.ntp
+  version: "1.5.2"
+- src: bertvv.hosts
+  version: "v1.2.0"
+- src: rvm_io.ruby
+  version: "v2.0.0"
+- src: ansiblebit.oracle-java
+  version: "5.14.12"
+#- src: deimosfr.neo4j
+#  version: "v0.6.4"

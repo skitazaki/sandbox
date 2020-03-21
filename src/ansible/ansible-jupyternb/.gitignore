@@ -1,0 +1,8 @@
+.vscode/
+
+.vagrant/
+
+roles/*.*/
+*.retry
+
+.ssh_config

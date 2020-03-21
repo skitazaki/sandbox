@@ -1,0 +1,40 @@
+---
+
+- name: Common procedures to setup playbook environments
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Load a variable file based on stage
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "{{ env }}.yml"
+
+- hosts: controller
+  become: yes
+  roles:
+    - role: bertvv.hosts
+      when: hosts_entries
+  tasks:
+    - name: Install ansible-lint
+      command: pip install ansible-lint
+      args:
+        creates: /usr/local/bin/ansible-lint
+
+- hosts: controller
+  vars:
+    ansible_user: "{{ ansible_ssh_user | default(lookup('env', 'USER')) }}"
+  roles:
+    - role: rvm_io.ruby
+      rvm1_user: "{{ ansible_user }}"
+  tasks:
+    - name: Install Serverspec
+      shell: |
+        source "$HOME/.rvm/scripts/rvm"
+        gem install serverspec
+      args:
+        executable: /bin/bash
+        creates: ~/.rvm/gems/$RUBY_VERSION/bin/serverspec-init
+
+- hosts: controller
+  roles:
+    - role: skitazaki.ssh_config
