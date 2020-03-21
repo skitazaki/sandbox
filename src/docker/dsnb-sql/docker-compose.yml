@@ -1,0 +1,48 @@
+version: '2'
+services:
+  notebook:
+    build: .
+    ports:
+      - "$EXPOSE_NOTEBOOK_PORT:8888"
+    environment:
+      PGHOST: "$PGHOST"
+      PGPORT: 5432
+      PGUSER: "$PGUSER"
+      PGPASSWORD: "$PGPASSWORD"
+      PGDATABASE: "$PGDATABASE"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+      - data
+    volumes:
+      - ./notebook:/home/jovyan/work
+    volumes_from:
+      - data
+  pgcli:
+    image: postgres:9.5
+    environment:
+      PGHOST: "$PGHOST"
+      PGUSER: "$PGUSER"
+      PGPASSWORD: "$PGPASSWORD"
+      PGDATABASE: "$PGDATABASE"
+    tty: true
+    user: postgres
+    working_dir: /home/postgres
+    command: psql
+    links:
+      - postgres
+    volumes_from:
+      - data
+  postgres:
+    image: postgres:9.5
+    ports:
+      - "$EXPOSE_POSTGRES_PORT:5432"
+    environment:
+      POSTGRES_USER: "$PGUSER"
+      POSTGRES_PASSWORD: "$PGPASSWORD"
+      POSTGRES_DB: "$PGDATABASE"
+  data:
+    image: busybox:latest
+    volumes:
+      - ./data:/data:ro
