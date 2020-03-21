@@ -6,6 +6,10 @@
 
 	* Dashboard for Apache Access Log based on Django
 
+2013-06-17: simple-doc-search
+
+	* Simple document search with Solr on DotCloud
+
 2013-04-12: tabular-simple.py
 
 	* 行形式のデータを表形式に変換する。
