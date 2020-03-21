@@ -1,4 +1,4 @@
-Django==1.7
+Django==1.11.28
 jsonfield==1.0.0
 django-cors-headers
 djangorestframework>=2.4.3
