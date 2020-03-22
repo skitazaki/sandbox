@@ -11,6 +11,7 @@ import argparse
 import datetime
 import logging
 import os
+from pathlib import Path
 
 DEFAULT_ENCODING = "utf-8"
 logger = logging.getLogger("sandbox")
@@ -43,7 +44,7 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(description=doc)
     parser.add_argument(
-        "-f", "--file", dest="filename", help="setting file", metavar="FILE"
+        "-f", "--file", dest="filename", type=Path, help="setting file", metavar="FILE"
     )
     parser.add_argument(
         "--basedir", dest="basedir", help="base directory", default=os.getcwd()
@@ -80,7 +81,7 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
         except ArgumentError as e:
             parser.error(e)
 
-    if args.filename and not os.path.exists(args.filename):
+    if args.filename and not args.filename.exists():
         parser.error("Configuration file was not found.")
 
     if args.quiet:
@@ -99,7 +100,7 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
 
 def setup_fileio(parser: argparse.ArgumentParser):
     parser.add_argument(
-        "-o", "--out", dest="output", help="output file", metavar="FILE"
+        "-o", "--out", dest="output", type=Path, help="output file", metavar="FILE"
     )
     parser.add_argument(
         "--input-encoding",
@@ -114,19 +115,22 @@ def setup_fileio(parser: argparse.ArgumentParser):
         default=DEFAULT_ENCODING,
     )
 
-    parser.add_argument("files", nargs="*", help="input files", metavar="FILE")
+    parser.add_argument(
+        "files", nargs="*", type=Path, help="input files", metavar="FILE"
+    )
 
 
 def check_file_path(args):
-    if args.output and os.path.exists(args.output):
+    if args.output and args.output.exists():
         logger.warn('"%s" already exists.', args.output)
 
     files = args.files
     if not files:
         raise ArgumentError("No input file.")
-    notfound = filter(lambda f: not os.path.exists(f), files)
+    notfound = list(filter(lambda f: not f.exists(), files))
     if notfound:
-        raise ArgumentError("File not found: " + ",".join(notfound))
+        lst = list(map(str, notfound))
+        raise ArgumentError("File not found: " + ",".join(lst))
 
 
 ZERO = datetime.timedelta(0)
