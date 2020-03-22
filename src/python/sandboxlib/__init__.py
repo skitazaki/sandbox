@@ -1,16 +1,17 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """Misc. utilities.
 Use these after copying to your projects.
-
-:Author: KITAZAKI Shigeru
 """
+
+__title__ = 'sandboxlib'
+__version__ = '0.0.1'
+__author__ = 'Shigeru Kitazaki'
 
 import datetime
 import logging
 import os
-import optparse
+import optparse  # TODO: Migrate to argparse
 
 DEFAULT_ENCODING = 'utf-8'
 logger = logging.getLogger('sandbox')
@@ -30,7 +31,7 @@ class ArgumentError(Exception):
 
 
 def parse_args(doc=None, minargc=0, maxargc=None,
-                prefook=None, postfook=None):
+               prefook=None, postfook=None):
     """Generic command line argument parser.
     * Handle configuration file and base directory.
     * Handle input and output encoding.
@@ -72,7 +73,7 @@ def parse_args(doc=None, minargc=0, maxargc=None,
     if postfook:
         try:
             postfook(opts, args)
-        except ArgumentError, e:
+        except ArgumentError as e:
             parser.error(e)
 
     if opts.filename and not os.path.exists(opts.filename):
@@ -169,8 +170,5 @@ def test():
 
 if __name__ == '__main__':
     main()
-
-# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :'''
-    print boilerplate
-
-# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
+'''
+    print(boilerplate)
