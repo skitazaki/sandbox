@@ -10,10 +10,10 @@ __author__ = "Shigeru Kitazaki"
 import argparse
 import datetime
 import logging
-import os
 from pathlib import Path
 
 DEFAULT_ENCODING = "utf-8"
+
 logger = logging.getLogger("sandbox")
 
 
@@ -44,10 +44,12 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(description=doc)
     parser.add_argument(
-        "-f", "--file", dest="filename", type=Path, help="setting file", metavar="FILE"
-    )
-    parser.add_argument(
-        "--basedir", dest="basedir", help="base directory", default=os.getcwd()
+        "-c",
+        "--config",
+        dest="config",
+        help="configuration file",
+        metavar="FILE",
+        type=Path,
     )
 
     loglevel = parser.add_mutually_exclusive_group()
@@ -55,18 +57,18 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
     loglevel.add_argument(
         "-v",
         "--verbose",
-        dest="verbose",
         action="count",
         default=0,
+        dest="verbose",
         help="increase logging verbosity",
     )
 
     loglevel.add_argument(
         "-q",
         "--quiet",
-        dest="quiet",
-        default=False,
         action="store_true",
+        default=False,
+        dest="quiet",
         help="set logging to quiet mode",
     )
 
@@ -81,7 +83,7 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
         except ArgumentError as e:
             parser.error(e)
 
-    if args.filename and not args.filename.exists():
+    if args.config and not args.config.exists():
         parser.error("Configuration file was not found.")
 
     if args.quiet:
@@ -100,23 +102,32 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
 
 def setup_fileio(parser: argparse.ArgumentParser):
     parser.add_argument(
-        "-o", "--out", dest="output", type=Path, help="output file", metavar="FILE"
+        "-o",
+        "--out",
+        dest="output",
+        help="path to output file",
+        metavar="FILE",
+        type=Path,
     )
     parser.add_argument(
         "--input-encoding",
+        default=DEFAULT_ENCODING,
         dest="enc_in",
         help="encoding of input source",
-        default=DEFAULT_ENCODING,
     )
     parser.add_argument(
         "--output-encoding",
+        default=DEFAULT_ENCODING,
         dest="enc_out",
         help="encoding of output destination",
-        default=DEFAULT_ENCODING,
     )
 
     parser.add_argument(
-        "files", nargs="*", type=Path, help="input files", metavar="FILE"
+        "files",
+        help="list of paths of input files",
+        metavar="FILE",
+        nargs="*",
+        type=Path,
     )
 
 
@@ -155,9 +166,7 @@ if __name__ == "__main__":
     boilerplate = '''#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""python %prog [options] file1 [file2 [ ... ]]
-
-Description is here.
+"""Description is here.
 """
 
 import logging
@@ -196,7 +205,7 @@ def main():
         writer.close()
 
 
-def test():
+def test_process():
     sample = """SAMPLE"""
     from cStringIO import StringIO
     io = StringIO()
