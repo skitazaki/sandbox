@@ -103,7 +103,7 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
 def setup_fileio(parser: argparse.ArgumentParser):
     parser.add_argument(
         "-o",
-        "--out",
+        "--output",
         dest="output",
         help="path to output file",
         metavar="FILE",
