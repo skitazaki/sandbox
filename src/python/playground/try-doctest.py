@@ -1,9 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""python %prog [options]
-
-Use "doctest" module.
+"""Use "doctest" module.
 More test modules are listed at <http://packages.python.org/testing/>
 """
 
@@ -18,7 +15,7 @@ def recursive(query):
     """
     if len(query):
         recursive(query[1:])
-        print query
+        print(query)
 
 
 def generative(query):
@@ -38,10 +35,10 @@ def generative(query):
     s = ""
     for i in gen(query):
         s += i
-        print s
+        print(s)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     import doctest
-    doctest.testmod()
 
-# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
+    doctest.testmod()
