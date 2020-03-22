@@ -1,11 +1,4 @@
-bin/
-include/
-lib/
-man/
-_build/
 conf/dotcloud-info.yml
 solr/*/data/
 apache-solr-*/
-**/*.pyc
-.DS_Store
 .lock-waf*
