@@ -83,7 +83,6 @@ class Processor(object):
 
 
 def main():
-
     args = parse_args(doc=__doc__, prehook=setup_fileio, posthook=check_file_path)
 
     processor = Processor(**STYLE)
