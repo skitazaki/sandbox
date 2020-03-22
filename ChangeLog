@@ -58,7 +58,7 @@
 
 	* groovy で Google 検索 API を使ってみる。
 
-2012-02-18: sabae-landscape.py
+2012-02-18: sabae-landscape.py [deleted]
 
 	* 鯖江市の百景の XML データを CSV に変換する。
 
@@ -189,7 +189,8 @@
 2010-12-24: rst2html-custom-tpl.py,rst2html-custom-tpl.tpl
 	* reST を HTML に変換するときに自前のテンプレートを使う。
 
-2010-12-23: twitter-search-api.py
+2010-12-23: twitter-search-api.py [deleted]
+
 	* Twitter の search API を使ってみる。
 
 2010-12-22: build-mysql55.sh [setup]
@@ -201,7 +202,8 @@
 2010-12-12: move-images-in-downloaded-html.sh
 	* HTML をダウンロードしたときの画像ファイルをコピーする。
 
-2010-12-06: twitter-user-tl-json.py
+2010-12-06: twitter-user-tl-json.py [deleted]
+
 	* Twitter の user_timeline から JSON を取得する。
 
 2010-12-06: simple-usage-selenium.py
@@ -231,7 +233,7 @@
 2010-11-06: remove-deadlinks.sh
 	* 壊れているシンボリックリンクを削除する。
 
-2010-10-25: newprj-adobe-air.py [project]
+2010-10-25: newprj-adobe-air.py [deleted]
 	* Adobe AIR SDK のプロジェクトを生成する。
 
 2010-10-23: simple-usage-jinja2.py,simple-usage-jinja2.txt
@@ -243,7 +245,8 @@
 2010-10-15: toggle-contents.html
 	* JavaScript でタイトルをクリックすると本文が開閉する処理を実装してみる。
 
-2010-10-14: simple-usage-nose-test.py
+2010-10-14: simple-usage-nose-test.py [deleted]
+
 	* use `nose` for simple test.
 
 2010-10-11: socket-client.c
@@ -298,7 +301,8 @@
 2010-06-25: loop-test.py
 	* ループ処理を計測する。
 
-2010-06-19: simple-usage-inspect.py
+2010-06-19: try-inspect.py
+
 	* `inspect` モジュールを使う。
 
 2010-06-18: newprj-autotools.sh
@@ -307,7 +311,8 @@
 2010-06-17: loop-test.js,loop-test.html,loop-test.css
 	* Duff's Device の考えでループ処理を実行する。
 
-2010-06-13: simple-usage-doctest.py
+2010-06-13: try-doctest.py
+
 	* `doctest` モジュールを使う。
 
 2010-06-12: blogger-feed.js,blogger-feed.html,blogger-feed.css
@@ -343,7 +348,8 @@
 2010-05-22: csv2html.py
 	* CSV から HTML の <ul> と <table> を作る。
 
-2010-05-21: simple-usage-sqlite.py
+2010-05-21: try-sqlite.py
+
 	* SQLite を使ってみる。
 
 2010-05-18: simple-usage-reportlab-template.py,simple-usage-reportlab-template.txt
