@@ -1,8 +1,6 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""python %prog {module}
-
+"""
 Run profiler, see Chapter 12 of Expert Python Programming.
 """
 
@@ -11,7 +9,7 @@ import cProfile
 
 from sandboxlib import parse_args
 
-RUN_FUNCTION = 'main'
+RUN_FUNCTION = 'test'
 
 
 def run_profiler(func):
@@ -20,17 +18,20 @@ def run_profiler(func):
     profiler.print_stats()
 
 
+def setup_arguments(parser):
+    parser.add_argument("modules", nargs="*", help="module names")
+
+
 def main():
-    options, args = parse_args(doc=__doc__, minargc=1)
-    for m in args:
+    args = parse_args(doc=__doc__, prehook=setup_arguments)
+    modules = args.modules
+    for m in modules:
         module = __import__(m)
         if hasattr(module, RUN_FUNCTION):
             func = getattr(module, RUN_FUNCTION)
             run_profiler(func)
         else:
-            logging.error("No '%s' is found in %s.", RUN_FUNCTION, m)
+            logging.error(f'No "{RUN_FUNCTION}" is found in "{m}".')
 
 if __name__ == '__main__':
     main()
-
-# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :

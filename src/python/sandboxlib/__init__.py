@@ -30,17 +30,15 @@ class ArgumentError(Exception):
     pass
 
 
-def parse_args(doc=None, nargs="*", prefook=None, postfook=None) -> argparse.Namespace:
+def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
     """Generic command line argument parser.
     * Handle configuration file and base directory.
     * Handle input and output encoding.
     * Sets up logging verbosity.
 
     :param doc string:
-    :param minargc int:
-    :param maxargc int:
-    :param prefook function:
-    :param postfook function:
+    :param prehook function:
+    :param posthook function:
     :rtype: normal arguments except options.
     """
     parser = argparse.ArgumentParser(description=doc)
@@ -48,25 +46,8 @@ def parse_args(doc=None, nargs="*", prefook=None, postfook=None) -> argparse.Nam
         "-f", "--file", dest="filename", help="setting file", metavar="FILE"
     )
     parser.add_argument(
-        "-o", "--out", dest="output", help="output file", metavar="FILE"
-    )
-    parser.add_argument(
         "--basedir", dest="basedir", help="base directory", default=os.getcwd()
     )
-    parser.add_argument(
-        "--input-encoding",
-        dest="enc_in",
-        help="encoding of input source",
-        default=DEFAULT_ENCODING,
-    )
-    parser.add_argument(
-        "--output-encoding",
-        dest="enc_out",
-        help="encoding of output destination",
-        default=DEFAULT_ENCODING,
-    )
-
-    parser.add_argument("files", nargs=nargs, help="input files", metavar="FILE")
 
     loglevel = parser.add_mutually_exclusive_group()
 
@@ -88,21 +69,19 @@ def parse_args(doc=None, nargs="*", prefook=None, postfook=None) -> argparse.Nam
         help="set logging to quiet mode",
     )
 
-    if prefook:
-        prefook(parser)
+    if prehook:
+        prehook(parser)
 
     args = parser.parse_args()
 
-    if postfook:
+    if posthook:
         try:
-            postfook(args)
+            posthook(args)
         except ArgumentError as e:
             parser.error(e)
 
     if args.filename and not os.path.exists(args.filename):
         parser.error("Configuration file was not found.")
-    if args.output and os.path.exists(args.output):
-        logger.warn('"%s" already exists.', args.output)
 
     if args.quiet:
         logger.setLevel(logging.CRITICAL)
@@ -118,7 +97,30 @@ def parse_args(doc=None, nargs="*", prefook=None, postfook=None) -> argparse.Nam
     return args
 
 
+def setup_fileio(parser: argparse.ArgumentParser):
+    parser.add_argument(
+        "-o", "--out", dest="output", help="output file", metavar="FILE"
+    )
+    parser.add_argument(
+        "--input-encoding",
+        dest="enc_in",
+        help="encoding of input source",
+        default=DEFAULT_ENCODING,
+    )
+    parser.add_argument(
+        "--output-encoding",
+        dest="enc_out",
+        help="encoding of output destination",
+        default=DEFAULT_ENCODING,
+    )
+
+    parser.add_argument("files", nargs="*", help="input files", metavar="FILE")
+
+
 def check_file_path(args):
+    if args.output and os.path.exists(args.output):
+        logger.warn('"%s" already exists.', args.output)
+
     files = args.files
     if not files:
         raise ArgumentError("No input file.")
@@ -157,7 +159,7 @@ Description is here.
 import logging
 import sys
 
-from sandboxlib import parse_args, check_file_path
+from sandboxlib import parse_args, setup_fileio, check_file_path
 
 
 class Processor(object):
@@ -178,7 +180,7 @@ class Processor(object):
 
 
 def main():
-    args = parse_args(doc=__doc__, postfook=check_file_path)
+    args = parse_args(doc=__doc__, prehook=setup_fileio, posthook=check_file_path)
     files = args.files
     writer = None
     if args.output:
