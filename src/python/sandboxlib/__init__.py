@@ -87,15 +87,15 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
         parser.error("Configuration file was not found.")
 
     if args.quiet:
-        logger.setLevel(logging.CRITICAL)
+        logging.basicConfig(level=logging.CRITICAL)
     elif args.verbose >= 3:
-        logger.setLevel(logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG)
     elif args.verbose >= 2:
-        logger.setLevel(logging.ERROR)
+        logging.basicConfig(level=logging.ERROR)
     elif args.verbose >= 1:
-        logger.setLevel(logging.WARN)
+        logging.basicConfig(level=logging.WARN)
     else:
-        logger.setLevel(logging.INFO)
+        logging.basicConfig(level=logging.INFO)
 
     return args
 
@@ -114,12 +114,14 @@ def setup_fileio(parser: argparse.ArgumentParser):
         default=DEFAULT_ENCODING,
         dest="enc_in",
         help="encoding of input source",
+        metavar="ENCODING",
     )
     parser.add_argument(
         "--output-encoding",
         default=DEFAULT_ENCODING,
         dest="enc_out",
         help="encoding of output destination",
+        metavar="ENCODING",
     )
 
     parser.add_argument(
