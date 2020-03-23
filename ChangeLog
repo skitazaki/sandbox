@@ -38,7 +38,7 @@
 
 	* Simple document search with Solr on DotCloud
 
-2013-04-12: tabular-simple.py
+2013-04-12: tabular-simple.py [deleted]
 
 	* 行形式のデータを表形式に変換する。
 
@@ -107,7 +107,8 @@
 2011-08-09: solr-show-fields.py
 	* Solr のスキーマの XML から表を作成する。
 
-2011-07-22: doc-wrapper.py
+2011-07-22: doc-wrapper.py [deleted]
+
 	* rst2html で生成した HTML の中身を他のテンプレートシステムにポーティング。
 
 2011-07-20: solr-document-indexer.py
@@ -138,13 +139,15 @@
 2011-03-16: conv-jleague-stadium-name.hs
 	* CSV のフィールドの文字列を書き換える。
 
-2011-03-14: convert-jleague-club-name.py
+2011-03-14: convert-jleague-club-name.py,calendar-J1.txt,calendar-J2.txt
+
 	* J リーグのクラブ名を変換する。
 
 2011-03-13: cat.hs
 	* Haskell で cat コマンド。
 
-2011-03-12: convert-jleague-calendar.py,calendar-J1.txt,calendar-J2.txt
+2011-03-12: convert-jleague-calendar.py [deleted]
+
 	* J リーグの日程表を CSV に変換する。
 
 2011-03-11: simple-usage-twisted-dbapi.py
@@ -177,13 +180,15 @@
 2011-01-20: simple-usage-jinja2-extends.py,base.html,page1.html,page2.html
 	* jinja2 の extends を使ってみる。
 
-2011-01-09: peg-game.py,peg-game-1.txt,peg-game-2.txt [facebook hackers cup]
+2011-01-09: peg-game.py,peg-game-1.txt,peg-game-2.txt [deleted]
+
 	* Peg Game を表示する。
 
 2011-01-09: solve-double-square.py [facebook hackers cup]
 	* Double Square を解く。
 
-2011-01-07: newprj-python.py [project]
+2011-01-07: newprj-python.py [deleted]
+
 	* virtualenv+buildout で開発環境を構築する。
 
 2010-12-24: rst2html-custom-tpl.py,rst2html-custom-tpl.tpl
@@ -298,7 +303,8 @@
 2010-06-25: simple-usage-zope-interface.py
 	* `zope.interface` モジュールを使う。
 
-2010-06-25: loop-test.py
+2010-06-25: loop-test.py [deleted]
+
 	* ループ処理を計測する。
 
 2010-06-19: try-inspect.py
@@ -358,7 +364,8 @@
 2010-05-17: extract-events-from-icalendar.py,extract-events-from-icalendar.ics
 	* iCalendar から指定した期間のイベントを抽出する。
 
-2010-05-10: csv2htmllist.py
+2010-05-10: csv2htmllist.py [deleted]
+
 	* CSV ファイルから Web サイト用のメニューを作る。
 
 2010-05-06: patch-split.sh
@@ -397,7 +404,8 @@
 2010-04-14: setup-sshkey.sh
 	* ssh のクライアント側の設定をする。
 
-2010-04-13: clean-source-expand-tab.py
+2010-04-13: clean-source-expand-tab.py [deleted]
+
 	* タブを空白４つに変換して末尾の空白文字を取り除く。
 
 2010-04-12: setup-gitconfig.sh [setup]
@@ -431,7 +439,8 @@
 2010-03-27: build-python-reportlab.sh [setup]
 	* ReportLab をインストールする。
 
-2010-03-26: setup-sitecustomize.py [setup]
+2010-03-26: setup-sitecustomize.py [deleted]
+
 	* Python の sitecustomize.py を置く。
 
 2010-03-25: build-php.sh [setup]
