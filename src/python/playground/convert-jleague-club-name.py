@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-Converter script to rename J-League club name.
+"""Rename J-League club name.
 
-shell> python d106.py d104.J1.txt >J1.txt
-shell> python d106.py d104.J2.txt >J2.txt
+$ python3 playground/convert-jleague-club-name.py testdata/calendar-J1.txt
 """
 
-import os.path
+import logging
 import sys
+from pathlib import Path
 
-_MAPPER = u'''
+from sandboxlib import parse_args
+
+
+_MAPPER = """
 ベガルタ仙台,仙台
 モンテディオ山形,山形
 鹿島アントラーズ,鹿島
@@ -50,17 +52,17 @@ FC岐阜,岐阜
 サガン鳥栖,鳥栖
 ロアッソ熊本,熊本
 大分トリニータ,大分
-'''
+"""
 
 MAPPER = {}
-for line in _MAPPER.strip().split('\n'):
-    ret, candidates = line.split(',')
+for line in _MAPPER.strip().split("\n"):
+    ret, candidates = line.split(",")
     MAPPER[ret] = candidates
 
 
 def mapper(line):
     s = line
-    for ret, candidates in MAPPER.iteritems():
+    for ret, candidates in MAPPER.items():
         s = s.replace(candidates, ret)
     return s
 
@@ -70,20 +72,38 @@ def converter(f, stream, writer):
         writer.write(f(line))
 
 
+def setup_arguments(parser):
+    parser.add_argument(
+        "-o",
+        "--output",
+        dest="output",
+        help="path to output file",
+        metavar="FILE",
+        type=Path,
+    )
+    parser.add_argument(
+        "files", nargs=1, type=Path, help="path to input file", metavar="FILE"
+    )
+
+
 def main():
-    if len(sys.argv) != 2:
-        print >>sys.stderr, "Give me file name from argument."
-        sys.exit(1)
-    fname = sys.argv[1]
-    if not os.path.exists(fname):
-        print >>sys.stderr, fname, "is not found."
-        sys.exit(1)
+    args = parse_args(doc=__doc__, prehook=setup_arguments)
+    fpath = args.files[0]
+    if not fpath.exists():
+        logging.fatal(f"file not found: {fpath}")
+        exit(1)
+    output = None
+    if args.output:
+        output = args.output
+        if output.exists():
+            logging.info(f"overwrite output file: {output}")
+    with open(fpath, "r") as fin:
+        if output:
+            with open(output, "w") as fout:
+                converter(mapper, fin, fout)
+        else:
+            converter(mapper, fin, sys.stdout)
 
-    input = open(fname, 'rb')
-    output = sys.stdout
-    converter(mapper, input, output)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
-# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
