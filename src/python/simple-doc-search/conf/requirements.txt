@@ -1,8 +1,0 @@
-dotcloud
-yuicompressor
-pyyaml
-nose
-twisted
-solrpy
-
-# pysolr cannot manage BASIC authentication, but solrpy can.

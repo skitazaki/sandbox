@@ -1,5 +1,0 @@
-*.sqlite3
-data/
-bower_components/
-sshkey.pub
-secret_key.txt

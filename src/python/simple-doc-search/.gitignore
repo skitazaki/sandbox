@@ -1,4 +1,0 @@
-conf/dotcloud-info.yml
-solr/*/data/
-apache-solr-*/
-.lock-waf*

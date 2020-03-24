@@ -22,7 +22,7 @@
 
 	* IPython Docker image on top of Python 3.4
 
-2014-10-11: django-access-dashboard
+2014-10-11: django-access-dashboard [deleted]
 
 	* Dashboard for Apache Access Log based on Django
 
@@ -34,7 +34,7 @@
 
 	* HTTP request parameter composer
 
-2013-06-17: simple-doc-search
+2013-06-17: simple-doc-search [deleted]
 
 	* Simple document search with Solr on DotCloud
 
@@ -120,7 +120,7 @@
 2011-06-17: compare-linkage.cpp,compare-linkage.makefile,helloworld.cpp,helloworld.h
 	* 共有ライブラリと静的リンクの違いを確認する。
 
-2011-06-15: oauth-client
+2011-06-15: oauth-client [deleted]
 
 	* OAuth 1.0 Client Samples by Python and JavaScript
 
