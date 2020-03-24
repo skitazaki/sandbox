@@ -177,7 +177,8 @@
 2011-01-26: remove-pyc-files.sh
 	* .pyc ファイルを掃除する。
 
-2011-01-20: simple-usage-jinja2-extends.py,base.html,page1.html,page2.html
+2011-01-20: use-jinja2.py,jinja2-base.j2,jinja2-page1.j2,jinja2-page2.j2
+
 	* jinja2 の extends を使ってみる。
 
 2011-01-09: peg-game.py,peg-game-1.txt,peg-game-2.txt [deleted]
