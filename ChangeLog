@@ -241,7 +241,8 @@
 2010-10-25: newprj-adobe-air.py [deleted]
 	* Adobe AIR SDK のプロジェクトを生成する。
 
-2010-10-23: simple-usage-jinja2.py,simple-usage-jinja2.txt
+2010-10-23: use-jinja2.py,jinja2-example.j2,jinja2-example.txt
+
 	* `jinja2` で if 文と for 文を使ってみる。
 
 2010-10-16: load-mysql-connection-info.py

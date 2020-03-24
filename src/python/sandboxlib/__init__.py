@@ -10,6 +10,7 @@ __author__ = "Shigeru Kitazaki"
 import argparse
 import datetime
 import logging
+import logging.config
 from pathlib import Path
 
 DEFAULT_ENCODING = "utf-8"
@@ -17,14 +18,56 @@ DEFAULT_ENCODING = "utf-8"
 logger = logging.getLogger("sandbox")
 
 
-def _init_logger():
-    s = logging.StreamHandler()
-    s.setFormatter(logging.Formatter("%(asctime)-15s %(levelname)-8s %(message)s"))
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(s)
+DEFAULT_LOGGING_DIRECTORY = Path.cwd()
+DEFAULT_LOGGING_FILENAME = "sandbox.log"
+
+DEFAULT_LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        },
+        "detailed": {
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+            "format": "%(asctime)s [%(levelname)s] %(name)s "
+            "%(filename)s:L%(lineno)-4d: %(message)s",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "stream": "ext://sys.stderr",
+            "formatter": "standard",
+        },
+        "file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "detailed",
+            "filename": str(DEFAULT_LOGGING_DIRECTORY / DEFAULT_LOGGING_FILENAME),
+            "mode": "a",
+            "maxBytes": 10485760,
+            "backupCount": 5,
+            "encoding": "utf8",
+        },
+    },
+    "loggers": {
+        "": {"handlers": ["console"], "level": "ERROR", "propagate": True},
+        "sandbox": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
 
 
-_init_logger()
+def configure_logging(logging_settings: dict = None):
+    logging.config.dictConfig(DEFAULT_LOGGING)
+    if logging_settings:
+        logging.config.dictConfig(logging_settings)
 
 
 class ArgumentError(Exception):
@@ -52,9 +95,9 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
         type=Path,
     )
 
-    loglevel = parser.add_mutually_exclusive_group()
+    loglevel_option = parser.add_mutually_exclusive_group()
 
-    loglevel.add_argument(
+    loglevel_option.add_argument(
         "-v",
         "--verbose",
         action="count",
@@ -63,7 +106,7 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
         help="increase logging verbosity",
     )
 
-    loglevel.add_argument(
+    loglevel_option.add_argument(
         "-q",
         "--quiet",
         action="store_true",
@@ -86,16 +129,21 @@ def parse_args(doc=None, prehook=None, posthook=None) -> argparse.Namespace:
     if args.config and not args.config.exists():
         parser.error("Configuration file was not found.")
 
+    loglevel = None
     if args.quiet:
-        logging.basicConfig(level=logging.CRITICAL)
+        loglevel = "CRITICAL"
     elif args.verbose >= 3:
-        logging.basicConfig(level=logging.DEBUG)
+        loglevel = "DEBUG"
     elif args.verbose >= 2:
-        logging.basicConfig(level=logging.ERROR)
+        loglevel = "INFO"
     elif args.verbose >= 1:
-        logging.basicConfig(level=logging.WARN)
-    else:
-        logging.basicConfig(level=logging.INFO)
+        loglevel = "WARN"
+
+    logging_settings = None
+    if loglevel:
+        logging_settings = DEFAULT_LOGGING.copy()
+        logging_settings["loggers"][""]["level"] = loglevel
+    configure_logging(logging_settings)
 
     return args
 
@@ -163,6 +211,9 @@ class UTC(datetime.tzinfo):
 
 
 NOW = datetime.datetime.now(UTC())
+
+logging.getLogger(__name__).addHandler(logging.NullHandler())
+
 
 if __name__ == "__main__":
     boilerplate = '''#!/usr/bin/env python
