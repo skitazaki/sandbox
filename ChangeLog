@@ -111,7 +111,8 @@
 
 	* rst2html で生成した HTML の中身を他のテンプレートシステムにポーティング。
 
-2011-07-20: solr-document-indexer.py
+2011-07-20: solr-document-indexer.py [deleted]
+
 	* Solr にインデクス生成リクエストを投げる。
 
 2011-06-26: mysql-schema-dumper.py,config.ini
@@ -153,7 +154,8 @@
 2011-03-11: simple-usage-twisted-dbapi.py
 	* Twisted の dbapi を使ってみる。
 
-2011-02-22: csv2icalendar.py
+2011-02-22: csv2icalendar.py [deleted]
+
 	* CSV の予定を iCalendar に変換する。
 
 2011-02-16: simple-usage-jqueryui-datepicker.js,simple-usage-jqueryui-datepicker.html
@@ -185,7 +187,8 @@
 
 	* Peg Game を表示する。
 
-2011-01-09: solve-double-square.py [facebook hackers cup]
+2011-01-09: solve-double-square.py [deleted]
+
 	* Double Square を解く。
 
 2011-01-07: newprj-python.py [deleted]
@@ -233,7 +236,8 @@
 2010-11-14: find-biggest-files.sh
 	* 指定したディレクトリ配下にある大きなファイルを10個まで表示する。
 
-2010-11-11: process-wikipedia-abstract.py
+2010-11-11: process-wikipedia-abstract.py [deleted]
+
 	* Wikipedia のダンプデータ (abstract) を処理する。
 
 2010-11-06: remove-deadlinks.sh
@@ -347,7 +351,8 @@
 2010-05-30: color-console.cpp
 	* コンソールに色づけする。
 
-2010-05-25: icalendar2hcalendar.py
+2010-05-25: icalendar2hcalendar.py [deleted]
+
 	* iCalendar を hCalendar に変換してみる。
 
 2010-05-24: simple-usage-reportlab-table.py
@@ -363,7 +368,8 @@
 2010-05-18: simple-usage-reportlab-template.py,simple-usage-reportlab-template.txt
 	* 差し込み印刷のように PDF を生成する。
 
-2010-05-17: extract-events-from-icalendar.py,extract-events-from-icalendar.ics
+2010-05-17: extract-events-from-icalendar.py,extract-events-from-icalendar.ics [deleted]
+
 	* iCalendar から指定した期間のイベントを抽出する。
 
 2010-05-10: csv2htmllist.py [deleted]

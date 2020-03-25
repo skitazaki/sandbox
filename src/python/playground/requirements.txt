@@ -1,7 +1,0 @@
-docutils
-SQLAlchemy
-twisted
-python-dateutil==1.5
-#icalendar
-PIL
-BeautifulSoup
