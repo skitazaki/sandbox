@@ -224,7 +224,8 @@
 2010-12-06: simple-usage-selenium.py
 	* Python で Selenium を操作してみる。
 
-2010-12-05: simple-usage-mongodb.py
+2010-12-05: simple-usage-mongodb.py [deleted]
+
 	* `pymongo` で MongoDB に接続してみる。
 
 2010-11-28: simple-usage-twisted-web-html.py
@@ -286,7 +287,8 @@
 2010-08-31: simple-usage-twisted-process.py
 	* Twisted の spawnProcess を使ってみる。
 
-2010-08-19: simple-usage-mysqldb.py
+2010-08-19: simple-usage-mysqldb.py [deleted]
+
 	* `MySQLdb` を使ってみる。
 
 2010-07-20: color-console-with-curses.cpp
