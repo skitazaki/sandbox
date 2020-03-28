@@ -9,7 +9,7 @@ import cProfile
 
 from sandboxlib import parse_args
 
-RUN_FUNCTION = 'test'
+RUN_FUNCTION = "test"
 
 
 def run_profiler(func):
@@ -33,5 +33,6 @@ def main():
         else:
             logging.error(f'No "{RUN_FUNCTION}" is found in "{m}".')
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
