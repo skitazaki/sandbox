@@ -5,7 +5,7 @@
 Set up your virtual environment and install dependencies.
 
 ```
-$ pyvenv_dir=$HOME/.local/share/virtualenvs/python-sandbox
+$ pyvenv_dir=venv
 $ python3 -m venv $pyvenv_dir --prompt python-sandbox
 $ source $pyvenv_dir/bin/activate
 $ python3 -m pip install -U pip
