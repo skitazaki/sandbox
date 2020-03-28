@@ -119,7 +119,8 @@
 
 	* Solr にインデクス生成リクエストを投げる。
 
-2011-06-26: mysql-schema-dumper.py,config.ini
+2011-06-26: mysql-schema-dumper.py,config.ini [deleted]
+
 	* MySQL のテーブル情報を HTML に書き出す。
 
 2011-06-17: compare-linkage.cpp,compare-linkage.makefile,helloworld.cpp,helloworld.h
@@ -132,7 +133,8 @@
 2011-06-13: sandboxlib.py
 	* Utility script, argument parser and timezone config.
 
-2011-05-06: yaml2config.py,config.yaml
+2011-05-06: yaml2config.py,config.yaml [deleted]
+
 	* YAML の設定ファイルから指定されたセクションを抜き出す。
 
 2011-05-01: encoding_sample.py
@@ -254,7 +256,8 @@
 
 	* `jinja2` で if 文と for 文を使ってみる。
 
-2010-10-16: load-mysql-connection-info.py
+2010-10-16: load-mysql-connection-info.py [deleted]
+
 	* `MySQLdb` の接続情報を JSON から取得する。
 
 2010-10-15: toggle-contents.html
