@@ -1,0 +1,29 @@
+---
+
+version: "3"
+
+services:
+
+  neo4j:
+    image: neo4j:4.0
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    networks:
+      - frontend
+
+  postgis:
+    image: postgis/postgis:12-3.0
+    ports:
+      - "$SANDBOX_POSTGRES_PORT:5432"
+    networks:
+      - backend
+    # Assume a variable POSTGRES_PASSWORD is defined.
+    env_file:
+      - .env
+    volumes:
+      - ./etc:/data:ro
+
+networks:
+  frontend:
+  backend:
