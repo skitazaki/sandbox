@@ -64,10 +64,26 @@ DEFAULT_LOGGING = {
 }
 
 
-def configure_logging(logging_settings: dict = None):
+def configure_logging(
+    logging_settings: dict = None,
+    verbose: int = 0,
+    quiet: bool = False,
+    logger: str = "sandbox",
+):
     logging.config.dictConfig(DEFAULT_LOGGING)
     if logging_settings:
         logging.config.dictConfig(logging_settings)
+    if quiet or verbose > 0:
+        if isinstance(logger, str):
+            logger = logging.getLogger(logger)
+        if quiet:
+            logger.setLevel(logging.CRITICAL)
+        elif verbose >= 3:
+            logger.setLevel(logging.DEBUG)
+        elif verbose >= 2:
+            logger.setLevel(logging.INFO)
+        elif verbose >= 1:
+            logger.setLevel(logging.WARN)
 
 
 class ArgumentError(Exception):

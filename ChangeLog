@@ -1,3 +1,7 @@
+2020-03-29: pg-tablestats.py
+
+	* Simple stats of PostgreSQL tables.
+
 2020-03-28: use-psycopg2.py
 
 	* Check connection with PostgreSQL on Docker
