@@ -10,12 +10,11 @@ import click
 import jinja2
 import psycopg2
 import yaml
-from dotenv import load_dotenv, find_dotenv
 
 import sandboxlib
 
 
-template_00 = """/**
+query_template_00 = """/**
  * Show tables in the given schema.
  *
  * @query: schemaname
@@ -26,7 +25,7 @@ SELECT relname
 ORDER BY relname ;
 """
 
-template_01_j2 = """/**
+query_template_01_j2 = """/**
  * Show table name and number of columns and records.
  *
  * @query: schemaname
@@ -58,7 +57,7 @@ SELECT ROW_NUMBER() OVER (ORDER BY c.table_name) AS "number",
 ORDER BY "number" ;
 """
 
-template_02 = """/**
+query_template_02 = """/**
  * Show column information in the given table.
  *
  * @query: schemaname
@@ -81,12 +80,12 @@ SELECT column_name,
 ORDER BY ordinal_position ;
 """
 
-template_03_j2 = """/**
+query_template_03_j2 = """/**
  * Calculate field summary.
  *
- * @template param: schemaname
- * @template param: tablename
- * @template param: columns
+ * @template: schemaname
+ * @template: tablename
+ * @template: columns
  */
 WITH t AS (
 {% for column in columns -%}
@@ -101,6 +100,98 @@ SELECT column_name,
        n_records,
        n_patterns
   FROM t ;
+"""
+
+output_template_html = """<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<title>Table stats on {{ _metadata.dbname }}.{{ _metadata.schema }}</title>
+</head>
+<body>
+<header>
+<div class="container">
+</div>  <!-- /container -->
+</header>
+<main role="main">
+<div class="container">
+<h1>Table stats on {{ _metadata.dbname }}.{{ _metadata.schema }}</h1>
+<table class="table table-striped table-condensed table-hover">
+<thead>
+<tr>
+  <th>Table name</th>
+  <th>Number of columns</th>
+  <th>Number of columns with not null</th>
+  <th>Number of records</th>
+</th>
+</thead>
+<tbody>
+{%- for table in tables -%}
+<tr>
+  <th><a href="#{{ _metadata.schema }}.{{ table.name }}">{{ table.name }}</a></th>
+  <td>{{ table.n_columns }}</td>
+  <td>{{ table.n_columns_notnull }}</td>
+  <td>{{ "{:,}".format(table.n_records) }}</td>
+</tr>
+{%- endfor -%}
+</tbody>
+</table>
+{%- for table in tables -%}
+<a name="{{ _metadata.schema }}.{{ table.name }}"><h2>{{ table.name }}</h2></a>
+<table class="table table-striped table-condensed table-hover">
+<thead>
+<tr>
+  <th>Column name</th>
+  <td>Is Nullable</td>
+  <td>Data type</td>
+  <td>Character maximum length</td>
+  <td>Numeric precision</td>
+  <td>Numeric precision radix</td>
+  <td>Numeric scale</td>
+  <td>Datetime precision</td>
+  <td>Interval type</td>
+  <td>Interval precision</td>
+  <td>Udt name</td>
+  <td>Column default</td>
+  <td>Number of records</td>
+  <td>Number of patterns</td>
+</th>
+</thead>
+<tbody>
+{%- for column in table.columns -%}
+<tr>
+  <th>{{ column.column_name }}</th>
+  <td>{{ column.is_nullable }}</td>
+  <td>{{ column.data_type }}</td>
+  <td>{{ column.character_maximum_length or '' }}</td>
+  <td>{{ column.numeric_precision or '' }}</td>
+  <td>{{ column.numeric_precision_radix or '' }}</td>
+  <td>{{ column.numeric_scale or '' }}</td>
+  <td>{{ column.datetime_precision or '' }}</td>
+  <td>{{ column.interval_type or '' }}</td>
+  <td>{{ column.interval_precision or '' }}</td>
+  <td>{{ column.udt_name or '' }}</td>
+  <td>{{ column.column_default or '' }}</td>
+  <td>{{ "{:,}".format(column.n_records) }}</td>
+  <td>{{ "{:,}".format(column.n_patterns) }}</td>
+</tr>
+{%- endfor -%}
+</tbody>
+</table>
+{%- endfor -%}
+</div>  <!-- /container -->
+</main>
+<footer class="text-muted">
+<div class="container">
+<p class="float-right">
+generated at {{ _metadata.generated_at }}
+</p>
+</div>  <!-- /container -->
+</footer>
+</body>
+</html>
 """
 
 
@@ -120,11 +211,13 @@ def fetch_as_dict_records(cursor, query: str, params: dict = None, logger="") ->
 def tablestats(cursor, schema: str, logger="") -> list:
     if isinstance(logger, str):
         logger = logging.getLogger(logger)
-    cursor.execute(template_00, {"schemaname": schema})
+    cursor.execute(query_template_00, {"schemaname": schema})
     tables = [r[0] for r in cursor]
     n_tables = len(tables)
     logger.info(f'schema "{schema}" has {n_tables} table(s)')
-    template = jinja2.Template(template_01_j2)
+    if n_tables == 0:
+        return
+    template = jinja2.Template(query_template_01_j2)
     q = template.render(schemaname=schema, tables=tables)
     table_results = fetch_as_dict_records(cursor, q, {"schemaname": schema}, logger)
     results = []
@@ -138,11 +231,11 @@ def tablestats(cursor, schema: str, logger="") -> list:
             "n_records": table["n_records"],
         }
         columns = fetch_as_dict_records(
-            cursor, template_02, {"schemaname": schema, "tablename": name}, logger
+            cursor, query_template_02, {"schemaname": schema, "tablename": name}, logger
         )
         logger.info(f"- collected {len(columns)} column(s)")
         logger.info(f'- calculate stats over {table["n_columns"]} record(s)')
-        template = jinja2.Template(template_03_j2)
+        template = jinja2.Template(query_template_03_j2)
         q = template.render(schemaname=schema, tablename=name, columns=columns)
         columns_stats = fetch_as_dict_records(cursor, q, logger=logger)
         for s in columns_stats:
@@ -155,17 +248,42 @@ def tablestats(cursor, schema: str, logger="") -> list:
     return results
 
 
+def write_as_yaml(data, output):
+    yaml.safe_dump(data, output)
+
+
+def write_as_html(data, output):
+    template = jinja2.Template(output_template_html)
+    template.stream(data).dump(output)
+
+
 @click.command()
 @click.option("--host", envvar="SANDBOX_POSTGRES_HOST")
-@click.option("--port", envvar="SANDBOX_POSTGRES_PORT")
+@click.option("--port", envvar="SANDBOX_POSTGRES_PORT", type=int)
 @click.option("--dbname", envvar="SANDBOX_POSTGRES_DBNAME")
 @click.option("--username", envvar="SANDBOX_POSTGRES_USERNAME")
 @click.option("--password", envvar="SANDBOX_POSTGRES_PASSWORD", prompt=True)
-@click.option("--schema", default="public")
-@click.option("-v", "--verbose", count=True)
-@click.option("-q", "--quiet/--no-quiet", is_flag=True)
+@click.option(
+    "--schema",
+    default="public",
+    show_default=True,
+    help="name of schema you want to see",
+)
+@click.option(
+    "--format",
+    help="output format",
+    default="yaml",
+    show_default=True,
+    type=click.Choice(["yaml", "html"], case_sensitive=False),
+)
+@click.option("-v", "--verbose", count=True, help="increase logging verbosity")
+@click.option(
+    "-q", "--quiet/--no-quiet", is_flag=True, help="set logging to quiet mode"
+)
 @click.argument("output", type=click.File("w"))
-def main(host, port, dbname, username, password, schema, output, verbose, quiet):
+def main(
+    host, port, dbname, username, password, schema, output, format, verbose, quiet
+):
     sandboxlib.configure_logging(verbose=verbose, quiet=quiet)
     conn_spec = (
         f"host={host} port={port} dbname={dbname} user={username} password={password}"
@@ -173,23 +291,31 @@ def main(host, port, dbname, username, password, schema, output, verbose, quiet)
     with psycopg2.connect(conn_spec) as conn:
         with conn.cursor() as cur:
             stats = tablestats(cur, schema, logger="sandbox")
+    if stats is None:
+        return
     with output:
         now = datetime.datetime.now()
-        yaml.safe_dump(
-            {
-                "_metadata": {
-                    "host": host,
-                    "port": port,
-                    "dbname": dbname,
-                    "schema": schema,
-                    "generated_at": now.strftime("%Y-%m-%dT%H:%M:%S"),
-                },
-                "tables": stats,
+        data = {
+            "_metadata": {
+                "host": host,
+                "port": port,
+                "dbname": dbname,
+                "schema": schema,
+                "generated_at": now.strftime("%Y-%m-%dT%H:%M:%S"),
             },
-            output,
-        )
+            "tables": stats,
+        }
+        if format == "yaml":
+            write_as_yaml(data, output)
+        elif format == "html":
+            write_as_html(data, output)
 
 
 if __name__ == "__main__":
-    load_dotenv(find_dotenv())  # Load an upper level file
+    try:
+        from dotenv import load_dotenv, find_dotenv
+
+        load_dotenv(find_dotenv())  # Load an upper level file as well
+    except ImportError:
+        pass
     main()
