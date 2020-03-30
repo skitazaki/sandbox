@@ -392,7 +392,8 @@
 2010-05-06: patch-split.sh
 	* パッチファイルを分割する。
 
-2010-05-01: gdata-spredsheets-list.py
+2010-05-01: gdata-spredsheets-list.py [deleted]
+
 	* Google Spreadsheets のファイル一覧を取得する。
 
 2010-04-29: count-files-per-suffix.py
@@ -407,7 +408,8 @@
 2010-04-22: build-python-mysqldb.sh [setup]
 	* MySQLdb をインストールする。
 
-2010-04-21: gdata-client-login.py
+2010-04-21: gdata-client-login.py [deleted]
+
 	* Google Data API のクライアントライブラリでログインする。
 
 2010-04-20: gmail-messages-and-labels.py,gmail-messages-and-labels.json
