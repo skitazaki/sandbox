@@ -372,7 +372,8 @@
 2010-05-24: simple-usage-reportlab-table.py
 	* ReportLab で表を生成する。
 
-2010-05-22: csv2html.py
+2010-05-22: csv2html.py [deleted]
+
 	* CSV から HTML の <ul> と <table> を作る。
 
 2010-05-21: try-sqlite.py
