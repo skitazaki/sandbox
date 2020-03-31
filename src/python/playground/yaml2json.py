@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 
-"""Convert data from YAML to JSON.
+"""Convert data format from YAML to JSON.
 """
 
 import logging
 import json
 
+import click
 import yaml
+import yaml.scanner
 
-from sandboxlib import parse_args, setup_fileio, check_file_path
-
-
-def yaml2json(fname):
-    try:
-        cfg = yaml.safe_load(open(fname))
-        print(json.dumps(cfg, indent=2))
-    except Exception:
-        logging.error(f"Invalid YAML file: {fname}")
+from sandboxlib import main
 
 
-def main():
-    args = parse_args(doc=__doc__, prehook=setup_fileio, posthook=check_file_path)
-    files = args.files
-    for fname in files:
-        yaml2json(fname)
+@main.command("run")
+@click.argument("file", type=click.File("r"), nargs=-1)
+def yaml2json(file):
+    logger = logging.getLogger("")
+    for fh in file:
+        try:
+            cfg = yaml.safe_load(fh)
+        except yaml.scanner.ScannerError as e:
+            logger.error(f"Invalid YAML file: {e}")
+            continue
+        click.echo(json.dumps(cfg, indent=2))
 
 
 if __name__ == "__main__":

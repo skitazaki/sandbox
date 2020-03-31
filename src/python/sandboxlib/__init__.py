@@ -13,6 +13,8 @@ import logging
 import logging.config
 from pathlib import Path
 
+import click
+
 DEFAULT_ENCODING = "utf-8"
 
 logger = logging.getLogger("sandbox")
@@ -208,6 +210,19 @@ def check_file_path(args):
     if notfound:
         lst = list(map(str, notfound))
         raise ArgumentError("File not found: " + ",".join(lst))
+
+
+@click.group()
+@click.option(
+    "-c", "--config", help="Path to configuration file", type=click.Path(exists=True),
+)
+@click.option("-v", "--verbose", count=True, help="Increase logging verbosity")
+@click.option(
+    "-q", "--quiet/--no-quiet", is_flag=True, help="Set logging to quiet mode"
+)
+@click.pass_context
+def main(ctx, config, verbose, quiet):
+    configure_logging(verbose=verbose, quiet=quiet)
 
 
 ZERO = datetime.timedelta(0)
