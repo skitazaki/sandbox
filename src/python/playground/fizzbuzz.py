@@ -3,7 +3,9 @@
 """FizzBuzz impl.
 """
 
-from sandboxlib import parse_args
+import click
+
+from sandboxlib import main
 
 
 def fizzbuzz(i):
@@ -45,27 +47,25 @@ def fizzbuzz_list(n):
     return ret
 
 
-def setup_arguments(parser):
-    parser.add_argument("number", nargs=1, type=int, help="positive integer")
-
-
-def main():
-    args = parse_args(doc=__doc__, prehook=setup_arguments)
-    n = args.number[0]
+@main.command("run")
+@click.argument("number", type=int)
+def run(number):
+    n = number
 
     if n <= 0:
-        raise SystemError("Invalid input, positive NUMBER is required.")
+        click.echo("Invalid input, positive NUMBER is required.")
+        return
 
-    print("=" * 78)
+    click.echo("=" * 78)
     for i in range(1, n + 1):
         fizzbuzz(i)
 
-    print("=" * 78)
+    click.echo("=" * 78)
     for i in fizzbuzz_iter(n):
-        print(i)
+        click.echo(i)
 
-    print("=" * 78)
-    print("\n".join(fizzbuzz_list(n)))
+    click.echo("=" * 78)
+    click.echo("\n".join(fizzbuzz_list(n)))
 
 
 def test():

@@ -9,7 +9,9 @@ import collections
 import os
 from pathlib import Path
 
-from sandboxlib import parse_args
+import click
+
+from sandboxlib import main
 
 IGNORE_LIST = [".svn", ".git"]
 
@@ -29,19 +31,11 @@ def filetypes(proj: Path):
             print(f"{t:>16}: {types.get(t)}")
 
 
-def setup_arguments(parser):
-    parser.add_argument(
-        "dirs", nargs="*", type=Path, help="directories", metavar="DIRECTORY"
-    )
-
-
-def main():
-    args = parse_args(doc=__doc__, prehook=setup_arguments)
-    dirs = args.dirs
-    if dirs:
-        [filetypes(d) for d in dirs]
-    else:
-        filetypes(Path.cwd())
+@main.command("run")
+@click.argument("directory", type=click.Path(exists=True), nargs=-1)
+def run(directory):
+    for d in directory:
+        filetypes(Path(d))
 
 
 if __name__ == "__main__":

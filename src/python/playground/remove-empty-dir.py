@@ -6,13 +6,16 @@ Removes all empty directories.
 
 import logging
 import os
-from pathlib import Path
 
-from sandboxlib import parse_args
+import click
+
+from sandboxlib import main
 
 
-def removeemptydir(root):
-    """removes directory which is empty or has only one hidden file."""
+def removeemptydir(root) -> int:
+    """Removes directory which is empty or has only one hidden file."""
+    logger = logging.getLogger("")
+    removed = 0
     for dirname, dirs, files in os.walk(root):
         if len(dirs) == 0 and (
             len(files) == 0 or (len(files) == 1 and files[0].startswith("."))
@@ -21,22 +24,21 @@ def removeemptydir(root):
             if answer == "y":
                 [os.unlink(os.path.join(dirname, f)) for f in files]
                 os.rmdir(dirname)
-                logging.info(f"removed {dirname}")
+                removed += 1
+                logger.info(f"removed {dirname}")
+    if removed > 0:
+        logger.info(f"removed {removed} directories under {root}")
+    return removed
 
 
-def setup_arguments(parser):
-    parser.add_argument(
-        "dirs", nargs="*", type=Path, help="directories", metavar="DIRECTORY"
-    )
-
-
-def main():
-    args = parse_args(doc=__doc__, prehook=setup_arguments)
-    dirs = args.dirs
-    if dirs:
-        [removeemptydir(d) for d in dirs]
-    else:
-        removeemptydir(Path.cwd())
+@main.command("run")
+@click.argument("directory", type=click.Path(exists=True), nargs=-1)
+def run(directory):
+    removed = 0
+    for d in directory:
+        removed += removeemptydir(d)
+    if removed > 0:
+        click.echo(f"removed {removed} directories")
 
 
 if __name__ == "__main__":

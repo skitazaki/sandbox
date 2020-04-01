@@ -9,7 +9,9 @@ import logging
 import random
 import sqlite3
 
-from sandboxlib import parse_args
+import click
+
+from sandboxlib import main
 
 # enumeration for generating sample data
 TRANS_TYPE = ("BUY", "SELL")
@@ -54,24 +56,12 @@ def showrecords(cur):
         print("%s %-5s %-10s %5d %8d" % r)
 
 
-def setup_arguments(parser):
-    parser.add_argument(
-        "-n",
-        "--number",
-        default=50,
-        dest="number",
-        help="number to geterate mock records",
-        type=int,
-    )
-    parser.add_argument(
-        "-o", "--output", dest="output", help="path to output file", metavar="FILE",
-    )
-
-
-def main():
-    args = parse_args(doc=__doc__, prehook=setup_arguments)
-    n_records = args.number
-    fname = args.output or ":memory:"
+@main.command("run")
+@click.option("-o", "--output", help="path to output file")
+@click.argument("number", type=int, default=50)
+def run(number, output):
+    n_records = number
+    fname = output or ":memory:"
     database = sqlite3.connect(fname)
     cur = database.cursor()
     createtable(cur)

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """Expand date string
@@ -50,39 +49,37 @@ Examples::
     20121105
 """
 
-import argparse
 import datetime
 import logging
-import sys
 
-from sandboxlib import parse_args
+import click
+
+from sandboxlib import main
 
 TODAY = datetime.date.today()
 
 
-def setup_arguments(parser):
-    parser.add_argument("--year", type=int, default=TODAY.year)
-    parser.add_argument("--month", type=int, default=TODAY.month)
-    parser.add_argument("--day", type=int, default=TODAY.day)
-    parser.add_argument("--format", default="%Y%m%d")
-    parser.add_argument("--days", type=int, default=1)
-    parser.add_argument("--reverse", default=False, action="store_true")
-    parser.add_argument(
-        "-o", "--output", type=argparse.FileType("w"), default=sys.stdout
-    )
-
-
-def main():
-    args = parse_args(doc=__doc__, prehook=setup_arguments)
-    s = datetime.date(args.year, args.month, args.day)
+@main.command("run")
+@click.option("--year", type=int, default=TODAY.year)
+@click.option("--month", type=int, default=TODAY.month)
+@click.option("--day", type=int, default=TODAY.day)
+@click.option("--format", default="%Y%m%d")
+@click.option("--days", type=int, default=1)
+@click.option("--reverse/--no-reverse", default=False)
+@click.option("-o", "--output", help="path to output file", type=click.File("w"))
+def run(year, month, day, format, days, reverse, output):
+    s = datetime.date(year, month, day)
     logging.debug("Start: %s", s)
-    for i in range(args.days):
-        if args.reverse:
+    for i in range(days):
+        if reverse:
             t = s - datetime.timedelta(days=i)
         else:
             t = s + datetime.timedelta(days=i)
-        args.output.write(t.strftime(args.format))
-        args.output.write("\n")
+        if output:
+            output.write(t.strftime(format))
+            output.write("\n")
+        else:
+            click.echo(t.strftime(format))
 
 
 if __name__ == "__main__":

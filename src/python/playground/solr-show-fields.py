@@ -9,7 +9,9 @@ import xml.sax
 from string import Template
 from xml.sax.handler import ContentHandler
 
-from sandboxlib import parse_args, setup_fileio, check_file_path
+import click
+
+from sandboxlib import main
 
 
 # This is a Confuluence table style.
@@ -82,16 +84,15 @@ class Processor(object):
             print(self.style["body"].safe_substitute(doc))
 
 
-def main():
-    args = parse_args(doc=__doc__, prehook=setup_fileio, posthook=check_file_path)
-
+@main.command("run")
+@click.argument("file", type=click.File("r"), nargs=-1)
+def run(file):
     processor = Processor(**STYLE)
     parser = SolrSchemaParser()
     parser.add_callback(processor.process)
     processor.leading()
-    files = args.files
-    for fname in files:
-        xml.sax.parse(fname, parser)
+    for fh in file:
+        xml.sax.parse(fh, parser)
     processor.trailing()
 
 
