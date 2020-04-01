@@ -86,7 +86,7 @@
 
 	* EC2 と Node.JS のアクティベーションスクリプト。
 
-2011-10-17: fnameconv.py
+2011-10-17: fnameconv.py [deleted]
 
 	* ファイル名を日付文字列に変換する。
 
@@ -144,7 +144,8 @@
 2011-05-01: encoding_sample.py
 	* Python で標準出力をリダイレクトした場合のエンコーディングを確認する。
 
-2011-04-29: profiler_sample.py
+2011-04-29: profiler_sample.py [deleted]
+
 	* Python のプロファイラモジュールを使ってみる。
 
 2011-03-16: conv-jleague-stadium-name.hs
