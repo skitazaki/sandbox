@@ -316,7 +316,8 @@
 2010-06-29: simple-usage-jsonp.html
 	* HTTPServer を使って JSONP でデータを送る。
 
-2010-06-28: simple-usage-sqlite.php
+2010-06-28: simple-usage-sqlite.php [deleted]
+
 	* SQLite を使ってみる。
 
 2010-06-27: simple-usage-worker.js,simple-usage-worker.html
