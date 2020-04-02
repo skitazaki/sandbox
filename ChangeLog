@@ -154,6 +154,8 @@
 2011-03-14: convert-jleague-club-name.py,calendar-J1.txt,calendar-J2.txt
 
 	* J リーグのクラブ名を変換する。
+	* Renamed to `str_replace.py` on April 2nd, 2020
+	* Add a testdata file `jleague-clubnames.csv`
 
 2011-03-13: cat.hs
 	* Haskell で cat コマンド。
