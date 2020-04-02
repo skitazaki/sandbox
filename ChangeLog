@@ -220,7 +220,8 @@
 2010-12-22: build-mysql55.sh [setup]
 	* MySQL-5.5 系をソースからビルドする。
 
-2010-12-21: python-httpd.sh
+2010-12-21: python-httpd.sh [deleted]
+
 	* Python に付属する HTTP サーバモジュールを実行する。
 
 2010-12-12: move-images-in-downloaded-html.sh
@@ -303,10 +304,12 @@
 2010-07-20: color-console-with-curses.cpp
 	* コンソールに色を付ける。(requires curses.h)
 
-2010-07-13: newprj-html5widget.sh
+2010-07-13: newprj-html5widget.sh [deleted]
+
 	* HTML5 Widget 用のプロジェクトを作る。
 
-2010-07-05: simple-usage-sqlite.sh
+2010-07-05: simple-usage-sqlite.sh [deleted]
+
 	* SQLite を使ってみる。
 
 2010-07-03: ant-xml2html.xml [deleted]
@@ -338,7 +341,8 @@
 
 	* `inspect` モジュールを使う。
 
-2010-06-18: newprj-autotools.sh
+2010-06-18: newprj-autotools.sh [deleted]
+
 	* autotools でプロジェクトを作成する。
 
 2010-06-17: loop-test.js,loop-test.html,loop-test.css
@@ -424,10 +428,12 @@
 2010-04-20: gmail-messages-and-labels.py,gmail-messages-and-labels.json
 	* Gmail のラベル一覧と INBOX の中身一覧を取得する。設定ファイル必要。
 
-2010-04-18: url-shortener.sh
+2010-04-18: url-shortener.sh [deleted]
+
 	* "goo.gl" で URL を短縮する。
 
-2010-04-16: svncounts-one-month-commits.sh
+2010-04-16: svncounts-one-month-commits.sh [deleted]
+
 	* Subversion の直近一ヶ月のコミッタごとのコミット数を表示する。
 
 2010-04-15: setup-macosx-java-version.sh [setup]
@@ -460,9 +466,10 @@
 	* RFC をページごとに分割する。
 		Split RFC texts page by page
 
-2010-03-29: svnadd-unversioned-files.sh
+2010-03-29: svnadd-unversioned-files.sh [deleted]
+
 	* Subversion で管理されていないファイルを追加する。
-		Add un-versioned files into subversion realm
+	* [In English] Add un-versioned files into subversion realm
 
 2010-03-38: simple-usage-reportlab.py,simple-usage-reportlab.txt
 	* ReportLab を使って PDF を生成する。
@@ -484,7 +491,8 @@
 2010-03-23: extract-archive.sh
 	* tar か unzip でアーカイブを展開する。
 
-2010-03-19: hand-made-ical.sh
+2010-03-19: hand-made-ical.sh [deleted]
+
 	* 引数で指定した CSV ファイルから iCalendar 形式のデータを生成する。
 
 2010-03-18: count-files-in-pathenv.sh
