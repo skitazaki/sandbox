@@ -10,7 +10,8 @@
 Set external port mappings to set environmental variables.
 
 ```bash
-$ source .envrc
+$ cp -pv .env-example .env
+$ vi .env
 ```
 
 Start up PostgreSQL database and Notebook containers.
