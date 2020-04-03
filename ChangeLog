@@ -82,7 +82,7 @@
 
 	* Google Buzz からエクスポートした HTML のスライドショー。
 
-2011-10-21: ec2setenv.sh nodejs-setenv.sh
+2011-10-21: ec2setenv.sh nodejs-setenv.sh [deleted]
 
 	* EC2 と Node.JS のアクティベーションスクリプト。
 
@@ -97,7 +97,8 @@
 2011-10-02: solr-search.html,solr-search.js
 	* Solr の簡易 HTML コンソール。
 
-2011-09-20: javascriptmvc-update.sh
+2011-09-20: javascriptmvc-update.sh [deleted]
+
 	* JavaScriptMVC の submodule を更新する。
 
 2011-08-27: simple-usage-raphael-chart.html,simple-usage-raphael-chart.js
@@ -179,7 +180,8 @@
 2011-02-15: simple-usage-datajs.js,simple-usage-datajs.html,simple-usage-datajs.atom
 	* datajs を使って OData のサンプル。
 
-2011-02-14: http-server.py
+2011-02-14: http-server.py [deleted]
+
 	* テスト用の静的コンテンツ配信 HTTP サーバ。
 
 2011-02-07: simple-usage-selenium-screen-capture.py
@@ -224,7 +226,8 @@
 
 	* Python に付属する HTTP サーバモジュールを実行する。
 
-2010-12-12: move-images-in-downloaded-html.sh
+2010-12-12: move-images-in-downloaded-html.sh [deleted]
+
 	* HTML をダウンロードしたときの画像ファイルをコピーする。
 
 2010-12-06: twitter-user-tl-json.py [deleted]
@@ -355,7 +358,8 @@
 2010-06-12: blogger-feed.js,blogger-feed.html,blogger-feed.css
 	* Blogger のフィードを JSONP を使って表示する。
 
-2010-06-10: xml2html.xsl,xml2html.xml,xml2html.css
+2010-06-10: xml2html.xsl,xml2html.xml,xml2html.css [deleted]
+
 	* XSLT で XML を HTML に整形する。
 
 2010-06-09: slideshow.html
@@ -439,14 +443,16 @@
 2010-04-15: setup-macosx-java-version.sh [setup]
 	* MacOSX の Java のバージョンを変更する。
 
-2010-04-14: setup-sshkey.sh
+2010-04-14: setup-sshkey.sh [deleted]
+
 	* ssh のクライアント側の設定をする。
 
 2010-04-13: clean-source-expand-tab.py [deleted]
 
 	* タブを空白４つに変換して末尾の空白文字を取り除く。
 
-2010-04-12: setup-gitconfig.sh [setup]
+2010-04-12: setup-gitconfig.sh [deleted]
+
 	* git を設定する。
 
 2010-04-08: simple-usage-pil-thumbnail.py
