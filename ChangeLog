@@ -377,8 +377,10 @@
 2010-06-07: eval-input-text.html
 	* textarea に入力したスクリプトを eval する。 (requires jQuery)
 
-2010-06-06: simple-usage-canvas.html
-	* Canvas 要素を使ってみる。
+2010-06-06: try-canvas.html
+
+	* HTML5 の Canvas 要素を使ってみる。
+	* Renamed the file on April 4th, 2020
 
 2010-05-31: simple-usage-function-ptr.cpp
 	* 関数ポインタを使ってみる。

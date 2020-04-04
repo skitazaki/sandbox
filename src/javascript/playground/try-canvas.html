@@ -1,11 +1,9 @@
-<!DOCTYPE HTML>
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Canvas test</title>
-<style type="text/css">
+{% extends "layout.html" %}
+{% block title %}Canvas test{% endblock %}
+{% block style %}
 canvas {border:solid 1px black;}
-</style>
-</head><body>
+{% endblock %}
+{% block content %}
 <canvas id="canvas-example" width="240" height="240">
 Your browser does not support &gt;canvas&lt; element.
 </canvas>
@@ -14,8 +12,10 @@ Your browser does not support &gt;canvas&lt; element.
 <li><a href="http://dev.opera.com/articles/view/html5-canvas-painting/">Creating an HTML 5 canvas painting application - Opera Developer Community</a></li>
 <li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#text-0">4.8.11 The canvas element - HTML5 (including next generation additions still in development)</a></li>
 </ul>
-<script type="text/javascript">
-var canvas = document.getElementById("canvas-example");
+{% endblock %}
+{% block script %}
+const canvas = document.querySelector("#canvas-example"),
+      error = document.querySelector("#error");
 if (canvas.getContext) {
     var context = canvas.getContext("2d");
 
@@ -34,7 +34,8 @@ if (canvas.getContext) {
     context.font = "20px";
     context.strokeText("こんにちは", 95, 120);
 } else {
-    document.write("'canvas.getContext' is not supported");
+    error.innerHTML= "'canvas.getContext' is not supported";
+    error.classList.toggle("d-none");
+    error.classList.toggle("d-display");
 }
-</script>
-</body></html>
+{% endblock %}
