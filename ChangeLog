@@ -98,14 +98,16 @@
 
 	* Python で fizzbuzz
 
-2011-10-02: solr-search.html,solr-search.js
+2011-10-02: solr-search.html,solr-search.js [deleted]
+
 	* Solr の簡易 HTML コンソール。
 
 2011-09-20: javascriptmvc-update.sh [deleted]
 
 	* JavaScriptMVC の submodule を更新する。
 
-2011-08-27: simple-usage-raphael-chart.html,simple-usage-raphael-chart.js
+2011-08-27: simple-usage-raphael-chart.html,simple-usage-raphael-chart.js [deleted]
+
 	* Raphael を使ってチャートを表示する。
 
 2011-08-21: wscript-pep8 [deleted]
@@ -116,7 +118,8 @@
 
 	* Waf から Solr を使ってみる。
 
-2011-08-14: simple-usage-indexeddb.html,simple-usage-indexeddb.js
+2011-08-14: simple-usage-indexeddb.html,simple-usage-indexeddb.js [deleted]
+
 	* IndexedDB を使ってみる。
 
 2011-08-09: solr-show-fields.py
@@ -178,7 +181,8 @@
 
 	* CSV の予定を iCalendar に変換する。
 
-2011-02-16: simple-usage-jqueryui-datepicker.js,simple-usage-jqueryui-datepicker.html
+2011-02-16: simple-usage-jqueryui-datepicker.js,simple-usage-jqueryui-datepicker.html [deleted]
+
 	* jQueryUI の DatePicker のサンプル。
 
 2011-02-15: simple-usage-datajs.js,simple-usage-datajs.html,simple-usage-datajs.atom
