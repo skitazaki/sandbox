@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout.html.j2" %}
 {% block title %}Canvas test{% endblock %}
 {% block style %}
 canvas {border:solid 1px black;}
@@ -15,7 +15,7 @@ Your browser does not support &gt;canvas&lt; element.
 {% endblock %}
 {% block script %}
 const canvas = document.querySelector("#canvas-example"),
-      error = document.querySelector("#error");
+      alertMessage = document.querySelector("#alert");
 if (canvas.getContext) {
     var context = canvas.getContext("2d");
 
@@ -34,8 +34,8 @@ if (canvas.getContext) {
     context.font = "20px";
     context.strokeText("こんにちは", 95, 120);
 } else {
-    error.innerHTML= "'canvas.getContext' is not supported";
-    error.classList.toggle("d-none");
-    error.classList.toggle("d-display");
+    alertMessage.innerHTML= "'canvas.getContext' is not supported";
+    alertMessage.classList.toggle("d-none");
+    alertMessage.classList.toggle("d-display");
 }
 {% endblock %}

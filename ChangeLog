@@ -1,4 +1,4 @@
-2020-04-04: httpsrv.py
+2020-04-04: httpsrv.py, layout.html.j2
 
 	* Simple Flask app to server contents in JavaScript playground.
 
