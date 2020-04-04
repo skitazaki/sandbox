@@ -82,7 +82,7 @@
 
 	* ブラウザの File API を使ってみる。
 
-2011-11-17: buzz-slide.html
+2011-11-17: buzz-slide.html [deleted]
 
 	* Google Buzz からエクスポートした HTML のスライドショー。
 
@@ -292,7 +292,8 @@
 	* スレッドに join しないことでメモリリークを発生させる。
 		use pthread and raise memory leak not to call `pthread_join`
 
-2010-10-08: twitlet.js
+2010-10-08: twitlet.js [deleted]
+
 	* Web ページのタイトルと URL を Twitter にポストするブックマークレット。
 
 2010-10-04: simple-usage-gdbm-key-value.c
@@ -326,7 +327,8 @@
 2010-07-01: simple-usage-twisted-web.py
 	* HTTPServer の代わりに twisted.web を使う。
 
-2010-06-29: simple-usage-jsonp.html
+2010-06-29: simple-usage-jsonp.html [deleted]
+
 	* HTTPServer を使って JSONP でデータを送る。
 
 2010-06-28: simple-usage-sqlite.php [deleted]
