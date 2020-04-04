@@ -251,7 +251,8 @@
 2010-11-25: simple-usage-twisted-web-wsgi.py
 	* Twisted で WSGI アプリケーションを動かす。
 
-2010-11-16: simple-usage-jquery-hover.html,simple-usage-jquery-hover.js
+2010-11-16: simple-usage-jquery-hover.html,simple-usage-jquery-hover.js [deleted]
+
 	* jQuery でアンカータグを扱う。
 
 2010-11-15: simple-usage-curl.c
@@ -368,14 +369,16 @@
 
 	* XSLT で XML を HTML に整形する。
 
-2010-06-09: slideshow.html
+2010-06-09: slideshow.html [deleted]
+
 	* JSON の画像情報でスライドショーをする。 (requires jQuery)
 
 2010-06-08: slideshow-metainfo-generator.py
 	* 画像の情報を JSON 形式で出力する。
 
 2010-06-07: eval-input-text.html
-	* textarea に入力したスクリプトを eval する。 (requires jQuery)
+
+	* textarea に入力したスクリプトを eval する。
 
 2010-06-06: try-canvas.html
 
