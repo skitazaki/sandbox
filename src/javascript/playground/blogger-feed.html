@@ -1,57 +1,19 @@
-<!DOCTYPE HTML>
-<html lang="ja"><head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="content-script-type" content="text/javascript" />
-    <meta http-equiv="content-style-type" content="text/css" />
-    <link rel="stylesheet" type="text/css" href="blogger-feed.css" />
-    <title>Blogger feed reader</title>
-</head><body>
-<div id="wrapper">
-<form method="GET">
-http://<input type="text" name="blog" maxlength="20" />.blogspot.com/
-<input type="submit" name="Get" value="Get" />
-</form>
-<div id="contents" />
-</div>
-<script type="text/javascript" src="blogger-feed.js"></script>
-<script type="text/javascript">
-FeedReader.posts = 10;
-FeedReader.chars = 140;
-FeedReader.callback = function(entries) {
-	var displayElement = document.getElementById("contents");
-	displayElement.innerHTML = "";
-	var fragment = document.createElement("div");
-	for (var i = 0, size = entries.length; i < size; i++) {
-		var entry = entries[i];
-		try { console.log(entry); } catch (ignore) {}
-		var title = document.createElement("h3");
-		title.appendChild(document.createTextNode(entry["title"]));
-		fragment.appendChild(title);
-		var para = document.createElement("p");
-		para.innerHTML = entry["content"] + " ...";
-		var more = document.createElement("a");
-		more.href = entry["url"];
-		more.innerHTML = "More";
-		para.appendChild(more);
-		para.appendChild(document.createTextNode(" (" + entry["date"] + ")"));
-		fragment.appendChild(para);
-	}
-	displayElement.appendChild(fragment);
-}
-var form = document.forms[0];
-form.onsubmit = function() {
-	try {
-		var blog_id = this.blog.value;
-		if (!blog_id) {
-			alert("Enter blog id");
-			return false;
-		}
-		FeedReader.read(blog_id);
-	} catch (e) {
-		try { console.log(e); } catch (ignore) {}
-	}
-	return false;
-}
-</script>
-<!-- vim: set noet sw=2 ts=2 fileencoding=utf-8 : -->
-</body></html>
+{% extends "layout.html.j2" %}
+{% block title %}Blogger feed reader{% endblock %}
+{% block style %}
+#feedreader div.row { margin: 10px; }
+#feedreader p { padding: 10px 10px 10px 30px; border-left: solid 5px #9999FF; }
+#feedreader p span { margin: 3px 5px; }
+#feedreader p a { margin: 3px 5px; }
+{% endblock %}
+{% block content %}
+<div id="feedreader"></div>
+{% endblock %}
+{% block script %}
+const domContainer = document.querySelector('#feedreader');
+ReactDOM.render(e(BloggerFeedReader), domContainer);
+{% endblock %}
+{% block thirdparty_script_tags %}
+<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+{% endblock %}

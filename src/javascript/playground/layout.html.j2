@@ -41,6 +41,7 @@
         </div>
       </div>
     </footer>
+    {% block thirdparty_script_tags %}{% endblock %}
     {% if use_js %}
     <script type="text/javascript" src="{{ url_for('static', filename=name+'.js') }}"></script>
     {% endif %}

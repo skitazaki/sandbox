@@ -362,8 +362,11 @@
 
 	* `doctest` モジュールを使う。
 
-2010-06-12: blogger-feed.js,blogger-feed.html,blogger-feed.css
+2010-06-12: blogger-feed.js,blogger-feed.html
+
 	* Blogger のフィードを JSONP を使って表示する。
+	* Meld `blogger-feed.css` into base html file
+	* Use React 16 without JSX on April 4th, 2020
 
 2010-06-10: xml2html.xsl,xml2html.xml,xml2html.css [deleted]
 
