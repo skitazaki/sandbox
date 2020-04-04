@@ -1,48 +1,31 @@
-<!DOCTYPE HTML>
-<html lang="ja"><head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="content-script-type" content="text/javascript" />
-	<meta http-equiv="content-style-type" content="text/css" />
-	<link rel="stylesheet" type="text/css" href="loop-test.css" />
-	<title>Duff's Device</title>
-</head><body>
-<div id="wrapper">
-<form method="GET">
-Count: <input type="text" name="count" size="8" maxlength="7" value="500000" /><br />
-<input type="radio" name="loop-type" value="naive" checked="checked" />Naive
-<input type="radio" name="loop-type" value="dd" />Duff's Device <br />
-<input type="submit" name="Execute" value="Execute" />
-</form>
-<div id="contents" />
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <form>
+    <div class="form-group row">
+      <label for="loopcount" class="col-sm-2 col-form-label">Count</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="loopcount" size="8" maxlength="7" placeholder="500000">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="looptype" class="col-sm-2 col-form-label">Loop Type</label>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="looptype" id="looptypeNaive" value="naive" checked>
+          <label class="form-check-label" for="looptypeNaive">Naive</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="looptype" id="looptypeDD" value="dd">
+          <label class="form-check-label" for="looptypeDD">Duff's Device</label>
+        </div>
+      </div>
+	  </div>
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  <hr>
+  <div class="row" id="results"></div>
 </div>
-<script type="text/javascript" src="loop-test.js"></script>
-<script type="text/javascript">
-var TestPatterns = {
-	"naive": naiveLoop,
-	"dd":    duffsDevice
-};
-document.forms[0].onsubmit = function() {
-	var elements = this.elements,
-		  count = parseInt(elements["count"].value),
-			loopTypeInput = elements["loop-type"],
-			testType, result;
-	if (isNaN(count)) {
-		alert("Input interger for count value.");
-		return false;
-	}
-	Loopy.count = count;
-	for (var i = 0, len = loopTypeInput.length; i < len; i++) {
-		if (loopTypeInput[i].checked)
-			testType = loopTypeInput[i].value;
-	}
-	if (testType in TestPatterns) {
-		result = Loopy.run(TestPatterns[testType]);
-		document.getElementById("contents").innerHTML += count + " " +
-			testType + " " + result + "<br/>";
-	} else
-		alert("Invalid loop type.");
-	return false;
-};
-</script>
-<!-- vim: set noet sw=2 ts=2 fileencoding=utf-8 : -->
-</body></html>
+{% endblock %}

@@ -1,3 +1,7 @@
+2020-04-04: httpsrv.py
+
+	* Simple Flask app to server contents in JavaScript playground.
+
 2020-03-29: pg-tablestats.py
 
 	* Simple stats of PostgreSQL tables.
