@@ -340,8 +340,9 @@
 
 	* SQLite を使ってみる。
 
-2010-06-27: simple-usage-worker.js,simple-usage-worker.html
-	* Worker を触ってみる。
+2010-06-27: try-webworkers-worker.js,try-webworkers.html
+
+	* Web Workers を触ってみる。
 
 2010-06-25: simple-usage-zope-interface.py [deleted]
 
