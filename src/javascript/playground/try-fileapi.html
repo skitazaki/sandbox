@@ -1,0 +1,23 @@
+{% extends "layout.html.j2" %}
+{% block title %}File API example <small>- read text files</small>{% endblock %}
+{% block style %}
+#dropZone {
+  border: 2px dashed #BBBBBB;
+  border-radius: 5px 5px 5px 5px;
+  color: #BBBBBB;
+  padding: 25px;
+  margin: 20px;
+  text-align: center;
+}
+{% endblock %}
+{% block content %}
+<div id="fileList"></div>
+{% endblock %}
+{% block script %}
+const domContainer = document.querySelector("#fileList");
+ReactDOM.render(e(FileList), domContainer);
+{% endblock %}
+{% block thirdparty_script_tags %}
+<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+{% endblock %}

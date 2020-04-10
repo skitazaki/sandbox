@@ -78,9 +78,11 @@
 
 	* Wikipedia のデータを Solr にインポートする設定ファイル。
 
-2011-12-05: simple-usage-fileapi.html
+2011-12-05: try-fileapi.html,try-fileapi.js
 
 	* ブラウザの File API を使ってみる。
+	* Renamed from `simple-usage-fileapi.html`
+	* Rewrite with React on April 10th, 2020
 
 2011-11-17: buzz-slide.html [deleted]
 
