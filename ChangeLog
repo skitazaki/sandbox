@@ -288,7 +288,8 @@
 
 	* `MySQLdb` の接続情報を JSON から取得する。
 
-2010-10-15: toggle-contents.html
+2010-10-15: toggle-contents.html [deleted]
+
 	* JavaScript でタイトルをクリックすると本文が開閉する処理を実装してみる。
 
 2010-10-14: simple-usage-nose-test.py [deleted]
