@@ -187,8 +187,11 @@
 
 	* jQueryUI の DatePicker のサンプル。
 
-2011-02-15: simple-usage-datajs.js,simple-usage-datajs.html,simple-usage-datajs.atom
+2011-02-15: use-odata.js,use-odata.html
+
 	* datajs を使って OData のサンプル。
+	* Renamed from `simple-usage-datajs` on April 11th, 2020.
+	* Upgrade OData v4 from v1 on April 11th, 2020.
 
 2011-02-14: http-server.py [deleted]
 
