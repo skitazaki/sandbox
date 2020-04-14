@@ -17,7 +17,7 @@
     </style>
 
     {% if use_css %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename=name+'.css') }}?{{ now.strftime('%Y%m%d%H%M%S.%s') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename=name+'.css') }}?ts={{ now.strftime('%s') }}" />
     {% endif %}
   </head>
   <body>
@@ -43,7 +43,7 @@
     </footer>
     {% block thirdparty_script_tags %}{% endblock %}
     {% if use_js %}
-    <script type="text/javascript" src="{{ url_for('static', filename=name+'.js') }}?{{ now.strftime('%Y%m%d%H%M%S.%s') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename=name+'.js') }}?ts={{ now.strftime('%s') }}"></script>
     {% endif %}
     <script type="text/javascript">
     'use strict';

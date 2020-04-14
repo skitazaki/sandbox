@@ -34,6 +34,7 @@ def create_app(test_config=None):
     def inject_now():
         return {"now": datetime.utcnow()}
 
+    @app.route("/", defaults={"name": "index"})
     @app.route("/<name>.html")
     def hello(name):
         static_dir = Path(app.static_folder)
