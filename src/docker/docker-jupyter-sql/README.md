@@ -1,6 +1,6 @@
-# Data Science Notebook plus SQL extension
+# Scipy Notebook plus SQL extension
 
-[jupyter/datascience-notebook/](https://hub.docker.com/r/jupyter/datascience-notebook/) plus following modules.
+[jupyter/scipy-notebook/](https://hub.docker.com/r/jupyter/scipy-notebook) plus following modules.
 
 - [Psycopg - PostgreSQL database adapter for Python](http://pythonhosted.org/psycopg2/index.html)
 - [%%sql magic for IPython, hopefully evolving into full SQL client](https://github.com/catherinedevlin/ipython-sql)
@@ -22,10 +22,10 @@ $ docker-compose up -d
 $ docker-compose ps
 ```
 
-To interact with database on cosole, use *pgcli* service.
+To interact with database on cosole, use *exec* command.
 
 ```bash
-$ docker-compose run --rm pgcli
+$ docker-compose exec -u postgres postgres /bin/bash
 ```
 
 ## Test data

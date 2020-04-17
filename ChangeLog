@@ -26,9 +26,10 @@
 
 	* Ansible Playbook to run Jupyter notebook
 
-2016-07-03: dsnb-sql
+2016-07-03: docker-jupyter-sql
 
 	* Data Science Notebook plus SQL extension
+	* Rename it from "dsnb-sql" on April 17
 
 2014-12-14: docker-python34-ipython
 

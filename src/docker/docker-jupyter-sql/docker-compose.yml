@@ -1,0 +1,29 @@
+---
+
+version: "3"
+
+services:
+
+  notebook:
+    build: .
+    ports:
+      - "$SANDBOX_NOTEBOOK_PORT:8888"
+    environment:
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: "$POSTGRES_DBNAME"
+      PGUSER: "$POSTGRES_USERNAME"
+      PGPASSWORD: "$POSTGRES_PASSWORD"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    volumes:
+      - ./notebook:/home/jovyan/work
+
+  postgres:
+    image: postgres:12.2
+    ports:
+      - "$SANDBOX_POSTGRES_PORT:5432"
+    env_file:
+      - .env
