@@ -31,7 +31,7 @@
 	* Data Science Notebook plus SQL extension
 	* Rename it from "dsnb-sql" on April 17
 
-2014-12-14: docker-python34-ipython
+2014-12-14: docker-python34-ipython [deleted]
 
 	* IPython Docker image on top of Python 3.4
 
