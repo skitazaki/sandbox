@@ -11,19 +11,32 @@ services:
     environment:
       PGHOST: postgres
       PGPORT: 5432
-      PGDATABASE: "$POSTGRES_DBNAME"
-      PGUSER: "$POSTGRES_USERNAME"
-      PGPASSWORD: "$POSTGRES_PASSWORD"
+      PGDATABASE: "$POSTGRES_MASTER_DATABASE"
+      PGUSER: "$POSTGRES_MASTER_USERNAME"
+      PGPASSWORD: "$POSTGRES_MASTER_PASSWORD"
+      PG_APP_DATABASE: "$POSTGRES_APP_DATABASE"
+      PG_APP_USER: "$POSTGRES_APP_USERNAME"
+      PG_APP_PASSWORD: "$POSTGRES_APP_PASSWORD"
+      # Configuration for ipython-sql
+      DATABASE_URL: "postgresql://$POSTGRES_MASTER_USERNAME:$POSTGRES_MASTER_PASSWORD@postgres/$POSTGRES_MASTER_DATABASE"
     links:
       - postgres
     depends_on:
       - postgres
     volumes:
       - ./notebook:/home/jovyan/work
+      - data-volume:/data
 
   postgres:
     image: postgres:12.2
     ports:
       - "$SANDBOX_POSTGRES_PORT:5432"
-    env_file:
-      - .env
+    environment:
+      POSTGRES_DB: "$POSTGRES_MASTER_DATABASE"
+      POSTGRES_USER: "$POSTGRES_MASTER_USERNAME"
+      POSTGRES_PASSWORD: "$POSTGRES_MASTER_PASSWORD"
+    volumes:
+      - data-volume:/data
+
+volumes:
+  data-volume:
