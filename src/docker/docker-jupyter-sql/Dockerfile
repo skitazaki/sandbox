@@ -5,9 +5,11 @@ USER $NB_UID
 
 RUN conda install --yes --quiet \
     'psycopg2=2.8*' \
-    && conda install --yes --quiet -c sodre \
-      'ipython-sql=0.3*' \
-      'pgspecial=1.11*' \
+    'pandas-datareader=0.8.1' \
+    'openpyxl=3.0.3' \
+    'networkx=2.4' \
+    'ipython-sql=0.3*' \
+    'pgspecial=1.11*' \
     && conda clean -tipsy
 
 USER root

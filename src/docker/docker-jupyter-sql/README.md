@@ -28,3 +28,7 @@ To interact with database on cosole, use *exec* command.
 ```bash
 $ docker-compose exec -u postgres postgres /bin/bash
 ```
+
+## Misc resources
+
+* [Ipython-quick-ref-sheets](http://damontallen.github.io/IPython-quick-ref-sheets/)
