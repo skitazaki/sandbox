@@ -1,3 +1,7 @@
+2020-04-25: dataset-address-jp
+
+	* Import "dataset-locref_jp" while updating support scripts
+
 2020-04-04: httpsrv.py, layout.html.j2
 
 	* Simple Flask app to server contents in JavaScript playground.
