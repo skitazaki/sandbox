@@ -4,6 +4,29 @@ version: "3"
 
 services:
 
+  jupyter:
+    build: ./src/docker/docker-jupyter-sql
+    ports:
+      - "$SANDBOX_JUPYTER_PORT:8888"
+    networks:
+      - frontend
+      - backend
+    environment:
+      PGHOST: postgis
+      PGPORT: 5432
+      PGDATABASE: "$SANDBOX_POSTGRES_DBNAME"
+      PGUSER: "$SANDBOX_POSTGRES_USERNAME"
+      PGPASSWORD: "$SANDBOX_POSTGRES_PASSWORD"
+      # Configuration for ipython-sql
+      DATABASE_URL: "postgresql://postgres:$SANDBOX_POSTGRES_MASTER_PASSWORD@postgis/postgres"
+    links:
+      - postgis
+    depends_on:
+      - postgis
+    volumes:
+      - ./notebook:/home/jovyan/work
+      - data-volume:/data
+
   neo4j:
     image: neo4j:4.0
     ports:
@@ -11,18 +34,25 @@ services:
       - "7687:7687"
     networks:
       - frontend
+    volumes:
+      - data-volume:/data
 
   postgis:
-    image: postgis/postgis:12-3.0
+    # Use an alpine image which includes `shp2pgsql` command
+    image: postgis/postgis:12-3.0-alpine
     ports:
       - "$SANDBOX_POSTGRES_PORT:5432"
     networks:
       - backend
-    # Assume a variable POSTGRES_PASSWORD is defined.
-    env_file:
-      - .env
+    environment:
+      POSTGRES_PASSWORD: "$SANDBOX_POSTGRES_MASTER_PASSWORD"
     volumes:
-      - ./etc:/data:ro
+      - data-volume:/data
+      - ./etc:/data/etc:ro
+      - $SANDBOX_DATASET_DIR:/data/datasets
+
+volumes:
+  data-volume:
 
 networks:
   frontend:

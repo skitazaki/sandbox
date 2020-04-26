@@ -1,6 +1,7 @@
 2020-04-25: dataset-address-jp
 
-	* Import "dataset-locref_jp" while updating support scripts
+	* Import "dataset-locref_jp" repository while updating support scripts.
+	* Import "dataset-population_jp" repository.
 
 2020-04-04: httpsrv.py, layout.html.j2
 

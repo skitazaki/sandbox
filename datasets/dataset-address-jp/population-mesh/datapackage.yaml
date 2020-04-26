@@ -1,0 +1,269 @@
+---
+
+name: population-jp
+title: Japanese Population by Mesh
+description: |
+  Japanese Population CSV data from National Land Numerical Information by Ministry of Land, Infrastructure, Transport and Tourism.
+  Original data is Shapefile.
+version: 0.1.0
+sources:
+  - name: mlit-ksj
+    title: National Land Numerical Information 
+    web: 'http://nlftp.mlit.go.jp/ksj/'
+keywords:
+  - Japan
+  - Population
+licenses:
+  - type: ODC-PDDL-1.0
+    url: 'http://opendatacommons.org/licenses/pddl'
+resources:
+  - name: mesh4_population
+    path: data/mesh4-population.csv
+    encoding: UTF-8
+    schema:
+      fields:
+        - name: gid
+          title: ID sequence
+          type: integer
+          constraints:
+            required: yes
+            minimum: 1
+        - name: mesh_id
+          title: Geo mesh code of 500m square
+          type: string
+          constraints:
+            required: yes
+            minLength: 9
+            maxLength: 9
+        - name: city_code
+          title: Address city code
+          type: string
+          constraints:
+            required: yes
+            minLength: 5
+            maxLength: 5
+        - name: pop2010
+          title: Population in 2010
+          type: number
+        - name: pop2020
+          title: Estimated Population in 2020
+          type: number
+        - name: pop2025
+          title: Estimated Population in 2025
+          type: number
+        - name: pop2030
+          title: Estimated Population in 2030
+          type: number
+        - name: pop2035
+          title: Estimated Population in 2030
+          type: number
+        - name: pop2040
+          title: Estimated Population in 2040
+          type: number
+        - name: pop2045
+          title: Estimated Population in 2045
+          type: number
+        - name: pop2050
+          title: Estimated Population in 2050
+          type: number
+        - name: index2020
+          title: Population index compared to 2010 in 2020
+          type: number
+        - name: index2025
+          title: Population index compared to 2010 in 2025
+          type: number
+        - name: index2030
+          title: Population index compared to 2010 in 2030
+          type: number
+        - name: index2035
+          title: Population index compared to 2010 in 2035
+          type: number
+        - name: index2040
+          title: Population index compared to 2010 in 2040
+          type: number
+        - name: index2045
+          title: Population index compared to 2010 in 2045
+          type: number
+        - name: index2050
+          title: Population index compared to 2010 in 2050
+          type: number
+        - name: pop2010a
+          title: Population aged between 0-14 in 2010
+          type: number
+        - name: pop2020a
+          title: Estimated population aged between 0-14 in 2020
+          type: number
+        - name: pop2025a
+          title: Estimated population aged between 0-14 in 2025
+          type: number
+        - name: pop2030a
+          title: Estimated population aged between 0-14 in 2030
+          type: number
+        - name: pop2035a
+          title: Estimated population aged between 0-14 in 2035
+          type: number
+        - name: pop2040a
+          title: Estimated population aged between 0-14 in 2040
+          type: number
+        - name: pop2045a
+          title: Estimated population aged between 0-14 in 2045
+          type: number
+        - name: pop2050a
+          title: Estimated population aged between 0-14 in 2050
+          type: number
+        - name: index2020a
+          title: Index of population aged between 0-14 compared to 2010 in 2020
+          type: number
+        - name: index2025a
+          title: Index of population aged between 0-14 compared to 2010 in 2025
+          type: number
+        - name: index2030a
+          title: Index of population aged between 0-14 compared to 2010 in 2030
+          type: number
+        - name: index2035a
+          title: Index of population aged between 0-14 compared to 2010 in 2035
+          type: number
+        - name: index2040a
+          title: Index of population aged between 0-14 compared to 2010 in 2040
+          type: number
+        - name: index2045a
+          title: Index of population aged between 0-14 compared to 2010 in 2045
+          type: number
+        - name: index2050a
+          title: Index of population aged between 0-14 compared to 2010 in 2050
+          type: number
+        - name: pop2010b
+          title: Population aged between 15-64 in 2010
+          type: number
+        - name: pop2020b
+          title: Estimated population aged between 15-64 in 2020
+          type: number
+        - name: pop2025b
+          title: Estimated population aged between 15-64 in 2025
+          type: number
+        - name: pop2030b
+          title: Estimated population aged between 15-64 in 2030
+          type: number
+        - name: pop2035b
+          title: Estimated population aged between 15-64 in 2035
+          type: number
+        - name: pop2040b
+          title: Estimated population aged between 15-64 in 2040
+          type: number
+        - name: pop2045b
+          title: Estimated population aged between 15-64 in 2045
+          type: number
+        - name: pop2050b
+          title: Estimated population aged between 15-64 in 2050
+          type: number
+        - name: index2020b
+          title: Index of population aged between 15-64 compared to 2010 in 2020
+          type: number
+        - name: index2025b
+          title: Index of population aged between 15-64 compared to 2010 in 2025
+          type: number
+        - name: index2030b
+          title: Index of population aged between 15-64 compared to 2010 in 2030
+          type: number
+        - name: index2035b
+          title: Index of population aged between 15-64 compared to 2010 in 2035
+          type: number
+        - name: index2040b
+          title: Index of population aged between 15-64 compared to 2010 in 2040
+          type: number
+        - name: index2045b
+          title: Index of population aged between 15-64 compared to 2010 in 2045
+          type: number
+        - name: index2050b
+          title: Index of population aged between 15-64 compared to 2010 in 2050
+          type: number
+        - name: pop2010c
+          title: Population aged over 65 in 2010
+          type: number
+        - name: pop2020c
+          title: Estimated population aged over 65 in 2020
+          type: number
+        - name: pop2025c
+          title: Estimated population aged over 65 in 2025
+          type: number
+        - name: pop2030c
+          title: Estimated population aged over 65 in 2030
+          type: number
+        - name: pop2035c
+          title: Estimated population aged over 65 in 2035
+          type: number
+        - name: pop2040c
+          title: Estimated population aged over 65 in 2040
+          type: number
+        - name: pop2045c
+          title: Estimated population aged over 65 in 2045
+          type: number
+        - name: pop2050c
+          title: Estimated population aged over 65 in 2050
+          type: number
+        - name: index2020c
+          title: Index of population aged over 65 compared to 2010 in 2020
+          type: number
+        - name: index2025c
+          title: Index of population aged over 65 compared to 2010 in 2025
+          type: number
+        - name: index2030c
+          title: Index of population aged over 65 compared to 2010 in 2030
+          type: number
+        - name: index2035c
+          title: Index of population aged over 65 compared to 2010 in 2035
+          type: number
+        - name: index2040c
+          title: Index of population aged over 65 compared to 2010 in 2040
+          type: number
+        - name: index2045c
+          title: Index of population aged over 65 compared to 2010 in 2045
+          type: number
+        - name: index2050c
+          title: Index of population aged over 65 compared to 2010 in 2050
+          type: number
+        - name: pop2010d
+          title: Population aged over 75 in 2010
+          type: number
+        - name: pop2020d
+          title: Estimated population aged over 75 in 2020
+          type: number
+        - name: pop2025d
+          title: Estimated population aged over 75 in 2025
+          type: number
+        - name: pop2030d
+          title: Estimated population aged over 75 in 2030
+          type: number
+        - name: pop2035d
+          title: Estimated population aged over 75 in 2035
+          type: number
+        - name: pop2040d
+          title: Estimated population aged over 75 in 2040
+          type: number
+        - name: pop2045d
+          title: Estimated population aged over 75 in 2045
+          type: number
+        - name: pop2050d
+          title: Estimated population aged over 75 in 2050
+          type: number
+        - name: index2020d
+          title: Index of population aged over 75 compared to 2010 in 2020
+          type: number
+        - name: index2025d
+          title: Index of population aged over 75 compared to 2010 in 2025
+          type: number
+        - name: index2030d
+          title: Index of population aged over 75 compared to 2010 in 2030
+          type: number
+        - name: index2035d
+          title: Index of population aged over 75 compared to 2010 in 2035
+          type: number
+        - name: index2040d
+          title: Index of population aged over 75 compared to 2010 in 2040
+          type: number
+        - name: index2045d
+          title: Index of population aged over 75 compared to 2010 in 2045
+          type: number
+        - name: index2050d
+          type: number
+          title: Index of population aged over 75 compared to 2010 in 2050

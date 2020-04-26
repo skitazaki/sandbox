@@ -7,29 +7,35 @@
 import json
 import pathlib
 
+import click
 import yaml
 
 __version__ = "0.4.0"
 
-SCRIPT_PATH = pathlib.Path(__file__)
-BASEDIR = SCRIPT_PATH.parent.parent.resolve()
 
-DATAPACKAGE_NAME = "datapackage.json"
-DATAPACKAGE_PATH = BASEDIR / DATAPACKAGE_NAME
-
-DATAPACKAGE_SOURCE_NAME = "datapackage.yaml"
-DATAPACKAGE_SOURCE_PATH = BASEDIR / DATAPACKAGE_SOURCE_NAME
-
-
-def main():
+@click.command()
+@click.option("--output-file", type=click.Path())
+@click.argument("input_file", type=click.Path(exists=True))
+def main(input_file, output_file):
     """Driver function to dispatch the process."""
-    source = yaml.safe_load(DATAPACKAGE_SOURCE_PATH.open())
-    output = DATAPACKAGE_PATH.open("w")
-    json.dump(source, output, indent=2, sort_keys=True, ensure_ascii=False)
-    output.close()
+    path = pathlib.Path(input_file)
+    if output_file is None:
+        output_path = path.with_suffix(".json")
+    else:
+        output_path = pathlib.Path(click.format_filename(output_file))
+    click.secho(f"Read a YAML file: {path}")
+    try:
+        contents = yaml.safe_load(path.open())
+    except Exception as e:
+        click.secho(f"Invalid YAML file: {e}", fg="red")
+        raise click.Abort()
+    if output_path.exists():
+        click.secho(f"Overwrite a JSON file: {output_path}", fg="magenta")
+    else:
+        click.secho(f"Produce a JSON file: {output_path}", fg="green")
+    with output_path.open("w") as fp:
+        json.dump(contents, fp, indent=2, sort_keys=True, ensure_ascii=False)
 
 
 if __name__ == "__main__":
     main()
-
-# vim: set et ts=4 sw=4 cindent fileencoding=utf-8 :
