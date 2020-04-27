@@ -24,8 +24,8 @@ services:
     depends_on:
       - postgis
     volumes:
-      - ./notebook:/home/jovyan/work
       - data-volume:/data
+      # - $SANDBOX_DATASET_DIR:/data/datasets:ro
 
   neo4j:
     image: neo4j:4.0
@@ -49,7 +49,7 @@ services:
     volumes:
       - data-volume:/data
       - ./etc:/data/etc:ro
-      - $SANDBOX_DATASET_DIR:/data/datasets
+      - $SANDBOX_DATASET_DIR:/data/datasets:ro
 
 volumes:
   data-volume:
