@@ -27,6 +27,10 @@ resources:
       - id: town
         label: 大字・町丁目名 - 町丁目の数字は漢数字
         type: string
+      - id: field
+        label: 小字・通称名
+        type: string
+        ## "field" was added since v11.0a
       - id: city_block
         label: 街区符号・地番 - 原則として半角整数（一部漢字等あり）
         type: string

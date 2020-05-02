@@ -15,8 +15,8 @@
 `datapackage.yaml` を手動で編集し、Python を使って `datapackage.json` に変換します。
 
 ```bash
-$ pipenv run python scripts/yaml2json.py population-mesh/datapackage.yaml
-$ pipenv run python scripts/yaml2json.py location-point/datapackage.yaml
+$ pipenv run python yaml2json.py population-mesh/datapackage.yaml
+$ pipenv run python yaml2json.py location-point/datapackage.yaml
 ```
 
 [goodtables](https://github.com/frictionlessdata/goodtables-py) でデータクオリティを確認します。
