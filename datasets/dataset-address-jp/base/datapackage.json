@@ -1,0 +1,131 @@
+{
+  "description": "Japanese Address base layer",
+  "keywords": [
+    "Japan",
+    "Address"
+  ],
+  "last_updated": "2020-05-03",
+  "licenses": [
+    {
+      "id": "odc-pddl",
+      "url": "http://opendatacommons.org/licenses/pddl/"
+    }
+  ],
+  "name": "address-jp-base",
+  "resources": [
+    {
+      "name": "prefecture",
+      "path": "data/prefecture.csv",
+      "schema": {
+        "fields": [
+          {
+            "description": "都道府県コード",
+            "name": "prefecture_code",
+            "title": "Prefecture code with zero-padding two digits.",
+            "type": "string"
+          },
+          {
+            "description": "都道府県名",
+            "name": "prefecture_name",
+            "title": "Prefecture name in Japanese",
+            "type": "string"
+          },
+          {
+            "description": "都道府県の種類",
+            "name": "prefecture_type",
+            "title": "Prefecture type in Japanese",
+            "type": "string"
+          },
+          {
+            "description": "都道府県名のカナ表記（読み仮名データの促音・拗音を小書きで表記するもの）",
+            "name": "prefecture_name_kana",
+            "title": "Prefecture name in Japanese Katakana",
+            "type": "string"
+          },
+          {
+            "description": "都道府県名のカナ表記（読み仮名データの促音・拗音を小書きで表記しないもの）",
+            "name": "prefecture_name_kana_large",
+            "title": "Prefecture name in Japanese Katakana with all large characters",
+            "type": "string"
+          },
+          {
+            "description": "都道府県名のローマ字表記",
+            "name": "prefecture_name_roman",
+            "title": "Prefecture name in Japanese roman representation",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "city",
+      "path": "data/city.csv",
+      "schema": {
+        "fields": [
+          {
+            "description": "都道府県コード",
+            "name": "prefecture_code",
+            "title": "Prefecture code with zero-padding two digits.",
+            "type": "string"
+          },
+          {
+            "description": "都道府県名",
+            "name": "prefecture_name",
+            "title": "Prefecture name in Japanese",
+            "type": "string"
+          },
+          {
+            "description": "市区町村コード",
+            "name": "city_code",
+            "title": "City code with zero-padding two digits.",
+            "type": "string"
+          },
+          {
+            "description": "市区町村名",
+            "name": "city_name",
+            "title": "City name in Japanese",
+            "type": "string"
+          },
+          {
+            "description": "市区町村名",
+            "name": "city_type",
+            "title": "City type in Japanese",
+            "type": "string"
+          },
+          {
+            "description": "市区町村名の階層レベル",
+            "name": "city_name_level",
+            "title": "Level of city name when it's split",
+            "type": "string"
+          },
+          {
+            "description": "市区町村名の複数階層の空白区切りあり",
+            "name": "city_name_with_space",
+            "title": "City name in Japanese with white space",
+            "type": "string"
+          },
+          {
+            "description": "市区町村名のカナ表記（読み仮名データの促音・拗音を小書きで表記するもの）",
+            "name": "city_name_kana",
+            "title": "City name in Japanese Katakana",
+            "type": "string"
+          },
+          {
+            "description": "市区町村名のカナ表記（読み仮名データの促音・拗音を小書きで表記しないもの）",
+            "name": "city_name_kana_large",
+            "title": "City name in Japanese Katakana with all large characters",
+            "type": "string"
+          },
+          {
+            "description": "市区町村名のローマ字表記",
+            "name": "city_name_roman",
+            "title": "City name in Japanese roman representation",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "title": "Japanese Address",
+  "version": "0.1.0"
+}
