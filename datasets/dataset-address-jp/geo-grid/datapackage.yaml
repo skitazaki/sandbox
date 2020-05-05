@@ -1,0 +1,54 @@
+---
+
+version: '0.1.0'
+name: address-jp-geo-grid
+title: Japanese Grid Code
+description: Grid codes in Japan for national census
+keywords:
+    - Japan
+    - Address
+last_updated: '2020-05-05'
+licenses:
+  - id: odc-pddl
+    url: http://opendatacommons.org/licenses/pddl/
+resources:
+  - name: geo_grid_lv4
+    title: Grid code at level 4 and geometry
+    description: List of grid codes and geometries used the national census.
+    path: data/grid.csv
+    format: csv
+    mediatype: text/csv
+    encoding: utf-8
+    profile: tabular-data-resource
+    schema:
+      fields:
+        - name: gid
+          title: ID sequence
+          type: integer
+          constraints:
+            required: yes
+            unique: yes
+            minimum: 1
+        - name: mesh_level4
+          title: Mesh ID of 500m square
+          type: string
+          constraints:
+            required: yes
+            unique: yes
+            minLength: 9
+            maxLength: 9
+        - name: city_code
+          title: JIS city code
+          type: string
+          constraints:
+            required: yes
+            minLength: 5
+            maxLength: 5
+        - name: geom
+          title: Geometry as GeoJSON
+          description: Square grid by GeoJSON format.
+          type: geojson
+          constraints:
+            required: yes
+            unique: yes
+      primaryKey: gid

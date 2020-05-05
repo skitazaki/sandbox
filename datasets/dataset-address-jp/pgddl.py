@@ -40,8 +40,10 @@ CREATE TABLE IF NOT EXISTS {{ name }} (
     {%- endif -%}
   {%- elif field.type == 'integer' %}INTEGER
   {%- elif field.type == 'boolean' %}BOOLEAN
+  {%- elif field.type == 'geojson' %}GEOGRAPHY(MULTIPOLYGON)
   {%- endif -%}
   {%- if field.required %} NOT NULL{% endif -%}
+  {%- if field.constraints.get('unique') %} UNIQUE{% endif -%}
   {%- if loop.nextitem is defined %},{% endif %}
 {% endfor %}
 ) ;

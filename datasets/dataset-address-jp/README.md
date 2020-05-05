@@ -9,9 +9,20 @@
 
 その他の情報は[住所.jp](http://jusyo.jp/index.html)のデータを参照してください。
 
-## 位置参照情報
+## 地理情報
 
-## メッシュ別将来人口推計
+GeoJSON 形式のデータ項目を PostGIS に読み込むには `ST_GeomFromGeoJSON()` 関数を使って変換してください。
+Postgres の **COPY** を使って読み込むことはできません。
+
+### 統計メッシュ
+
+### 住所境界
+
+### 位置参照情報
+
+## 統計情報
+
+### メッシュ別将来人口推計
 
 ## メタデータ
 
@@ -22,6 +33,7 @@
 
 ```bash
 $ pipenv run python yaml2json.py base/datapackage.yaml
+$ pipenv run python yaml2json.py geo-grid/datapackage.yaml
 $ pipenv run python yaml2json.py population-mesh/datapackage.yaml
 $ pipenv run python yaml2json.py location-point/datapackage.yaml
 ```
