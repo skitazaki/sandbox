@@ -24,7 +24,11 @@ FROM mesh4_pop_00 ORDER BY 1
 @click.option("--dbname", required=True, envvar="SANDBOX_POSTGRES_DBNAME")
 @click.option("--username", required=True, envvar="SANDBOX_POSTGRES_USERNAME")
 @click.option(
-    "--password", required=True, envvar="SANDBOX_POSTGRES_PASSWORD", prompt=True, hide_input=True
+    "--password",
+    required=True,
+    envvar="SANDBOX_POSTGRES_PASSWORD",
+    prompt=True,
+    hide_input=True,
 )
 @click.argument("output", type=click.File("w"))
 def main(host, port, dbname, username, password, output):
@@ -33,7 +37,7 @@ def main(host, port, dbname, username, password, output):
     )
     conn = psycopg2.connect(conn_spec)
     cur = conn.cursor()
-    columns = ["gid", "mesh_level4", "city_code", 'geometry']
+    columns = ["gid", "mesh_level4", "city_code", "geom"]
     click.secho(f"Export {len(columns)} columns", fg="blue")
     cur.execute(EXPORT_QUERY)
     counter = 0
