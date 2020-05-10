@@ -10,6 +10,7 @@ flake8 = "==3.7.9"
 [packages]
 click = "==7.1.1"
 datapackage = "==1.13.0"
+goodtables = "==2.4.16"
 Jinja2 = "==2.11.2"
 requests = "==2.23.0"
 psycopg2-binary = "==2.8.4"

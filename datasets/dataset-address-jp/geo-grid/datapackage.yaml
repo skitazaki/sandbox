@@ -50,5 +50,4 @@ resources:
           type: geojson
           constraints:
             required: yes
-            unique: yes
       primaryKey: gid

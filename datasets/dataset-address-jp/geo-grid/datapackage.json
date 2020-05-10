@@ -56,8 +56,7 @@
           },
           {
             "constraints": {
-              "required": true,
-              "unique": true
+              "required": true
             },
             "description": "Square grid by GeoJSON format.",
             "name": "geom",

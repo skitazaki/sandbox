@@ -7,13 +7,16 @@ description: Japanese address base layer
 keywords:
     - Japan
     - Address
-last_updated: '2020-05-03'
+created: '2020-05-03'
+last_updated: '2020-05-10'
 licenses:
   - id: odc-pddl
     url: http://opendatacommons.org/licenses/pddl/
 resources:
   - name: prefecture
     path: data/prefecture.csv
+    bytes: 3081
+    hash: "sha256:ac4a4571bf418114cef32999d4adfd07d153a0adeeb23cc80ef7abbda0fade5d"
     schema:
       fields:
         - name: prefecture_code
@@ -46,6 +49,8 @@ resources:
         #   description: 都道府県の種類のローマ字表記
   - name: city
     path: data/city.csv
+    bytes: 248468
+    hash: "sha256:33b3c7bba99b7816527c6754e4ed21d3c8d3a692098b1ec6960bfe0f5fec84fb"
     schema:
       fields:
         - name: prefecture_code

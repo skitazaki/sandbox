@@ -41,5 +41,5 @@ $ pipenv run python yaml2json.py location-point/datapackage.yaml
 [goodtables](https://github.com/frictionlessdata/goodtables-py) でデータクオリティを確認します。
 
 ```bash
-$ pipenv run goodtables datapackage.json
+$ pipenv run goodtables base/datapackage.json
 ```
