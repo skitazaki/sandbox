@@ -1,6 +1,6 @@
 ---
 
-version: '0.1.0'
+version: '0.2.0'
 name: address-jp-base
 title: Japanese Address
 description: Japanese address base layer
@@ -8,45 +8,69 @@ keywords:
     - Japan
     - Address
 created: '2020-05-03'
-last_updated: '2020-05-10'
+last_updated: '2020-05-16'
 licenses:
   - id: odc-pddl
     url: http://opendatacommons.org/licenses/pddl/
 resources:
   - name: prefecture
     path: data/prefecture.csv
-    bytes: 3081
-    hash: "sha256:ac4a4571bf418114cef32999d4adfd07d153a0adeeb23cc80ef7abbda0fade5d"
+    bytes: 3458
+    hash: "sha256:b04154e7c45b5e1a3f4a62bb327d82de465d71544a4bfe771a257b946fabd1bc"
     schema:
       fields:
         - name: prefecture_code
           title: Prefecture code with zero-padding two digits.
           type: string
           description: 都道府県コード
+          constraints:
+            required: yes
+            unique: yes
+            minLength: 2
+            maxLength: 2
         - name: prefecture_name
           title: Prefecture name in Japanese
           type: string
           description: 都道府県名
+          constraints:
+            required: yes
+            maxLength: 5
         - name: prefecture_type
           title: Prefecture type in Japanese
           type: string
           description: 都道府県の種類
+          constraints:
+            required: yes
+            minLength: 1
+            maxLength: 1
         - name: prefecture_name_kana
           title: Prefecture name in Japanese Katakana
           type: string
           description: 都道府県名のカナ表記（読み仮名データの促音・拗音を小書きで表記するもの）
+          constraints:
+            required: yes
+            maxLength: 10
         - name: prefecture_name_kana_large
           title: Prefecture name in Japanese Katakana with all large characters
           type: string
           description: 都道府県名のカナ表記（読み仮名データの促音・拗音を小書きで表記しないもの）
+          constraints:
+            required: yes
+            maxLength: 10
+        - name: prefecture_name_roman_full
+          title: Prefecture name in Japanese roman representation with type suffix
+          type: string
+          description: 都道府県名のローマ字表記（都府県付き）
+          constraints:
+            required: yes
+            maxLength: 15
         - name: prefecture_name_roman
-          title: Prefecture name in Japanese roman representation
+          title: Prefecture type in Japanese roman representation
           type: string
           description: 都道府県名のローマ字表記
-        # - name: prefecture_type_roman
-        #   title: Prefecture type in Japanese roman representation
-        #   type: string
-        #   description: 都道府県の種類のローマ字表記
+          constraints:
+            required: yes
+            maxLength: 10
   - name: city
     path: data/city.csv
     bytes: 248468
@@ -57,43 +81,74 @@ resources:
           title: Prefecture code with zero-padding two digits.
           type: string
           description: 都道府県コード
+          constraints:
+            required: yes
+            minLength: 2
+            maxLength: 2
         - name: prefecture_name
           title: Prefecture name in Japanese
           type: string
           description: 都道府県名
+          constraints:
+            required: yes
+            maxLength: 5
         - name: city_code
           title: City code with zero-padding two digits.
           type: string
           description: 市区町村コード
+          constraints:
+            required: yes
+            unique: yes
+            minLength: 5
+            maxLength: 5
         - name: city_name
           title: City name in Japanese
           type: string
           description: 市区町村名
+          constraints:
+            required: yes
+            maxLength: 20
         - name: city_type
           title: City type in Japanese
           type: string
-          description: 市区町村名
+          description: 市区町村の種類
+          constraints:
+            required: yes
+            minLength: 1
+            maxLength: 1
         - name: city_name_level
           title: Level of city name when it's split
-          type: string
+          type: integer
           description: 市区町村名の階層レベル
+          constraints:
+            required: yes
+            minimum: 1
+            maximum: 2
         - name: city_name_with_space
           title: City name in Japanese with white space
           type: string
           description: 市区町村名の複数階層の空白区切りあり
+          constraints:
+            required: yes
+            maxLength: 20
         - name: city_name_kana
           title: City name in Japanese Katakana
           type: string
           description: 市区町村名のカナ表記（読み仮名データの促音・拗音を小書きで表記するもの）
+          constraints:
+            required: yes
+            maxLength: 20
         - name: city_name_kana_large
           title: City name in Japanese Katakana with all large characters
           type: string
           description: 市区町村名のカナ表記（読み仮名データの促音・拗音を小書きで表記しないもの）
+          constraints:
+            required: yes
+            maxLength: 20
         - name: city_name_roman
           title: City name in Japanese roman representation
           type: string
           description: 市区町村名のローマ字表記
-        # - name: city_type_roman
-        #   title: City type in Japanese roman representation
-        #   type: string
-        #   description: 市区町村の種類のローマ字表記
+          constraints:
+            required: yes
+            maxLength: 50
