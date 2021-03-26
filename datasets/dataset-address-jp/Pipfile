@@ -14,7 +14,7 @@ goodtables = "==2.4.16"
 Jinja2 = "==2.11.3"
 requests = "==2.23.0"
 psycopg2-binary = "==2.8.4"
-pyyaml = "==5.3.1"
+pyyaml = "==5.4"
 
 [requires]
 python_version = "3.8"
